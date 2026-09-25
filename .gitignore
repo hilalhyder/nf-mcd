@@ -1,0 +1,27 @@
+# Raw downloaded datasets (large, reproducible via nf_mcd.datasets loaders; see README)
+data/
+
+# Regeneratable fitted-model/dataset caches (large; every number they feed into
+# is also written to the tracked CSVs/logs in experiments/, so these aren't
+# the source of truth)
+experiments/cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Generated Word exports of the manuscript (the manuscript's source of truth
+# is the live Claude Docs document; these are point-in-time exports, and the
+# lock file appears whenever one is open in Word)
+*.docx
+~$*.docx
+
+# OS cruft
+.DS_Store
+Thumbs.db
