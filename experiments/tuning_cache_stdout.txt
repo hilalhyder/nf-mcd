@@ -1,0 +1,25 @@
+﻿py : Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate 
+limits and faster downloads.
+At line:2 char:1
++ py tune_hyperparams.py cache > experiments\tuning_cache_stdout.txt 2> ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: You ar...ster downloads.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 5194.84it/s]
+C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\nf_mcd\encoders.py:68: FutureWarning: The `get_sentence_embedding_dimension` 
+method has been renamed to `get_embedding_dimension`.
+  self.dim = self._model.get_sentence_embedding_dimension()
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 24588.79it/s]
+[cache] crisismmd: 800 nodes, 4889 edges, k=7, text emb=800, image emb=800, 374s
+[cache] pheme: 2000 nodes, 1841 edges, k=9, text emb=2000, image emb=0, 9s
+Fakeddit: image download success rate 0.0% is below min_success_rate_for_images=15%; discarding all downloaded images 
+and falling back to text-only for this run.
+[cache] fakeddit: 1200 nodes, 12529 edges, k=10, text emb=1200, image emb=0, 48s
+[cache] dblp: 435 nodes, 1683 edges, k=8, text emb=0, image emb=0, 1s
+[cache] amazon: 345 nodes, 1190 edges, k=8, text emb=0, image emb=0, 1s
+[cache] total 433s

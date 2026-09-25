@@ -1,0 +1,58 @@
+Equivalence check: vectorized=True vs. original loop (vectorized=False)
+==============================================================================
+[all_paired_aligned] n=60 fill=raw: max|d fused|=2.50e-16 max|d agreement|=5.55e-16 max|d confidence|=6.66e-16 flags_match=True -> PASS
+[mixed_modalities] n=80 fill=raw: max|d fused|=2.22e-16 max|d agreement|=2.22e-16 max|d confidence|=2.78e-16 flags_match=True -> PASS
+[few_paired_unaligned] n=30 fill=raw: max|d fused|=1.11e-16 max|d agreement|=0.00e+00 max|d confidence|=0.00e+00 flags_match=True -> PASS
+[large_common_dim_zero_fill] n=100 fill=zero: max|d fused|=2.22e-16 max|d agreement|=3.89e-16 max|d confidence|=3.33e-16 flags_match=True -> PASS
+[rank_div_16] n=120 fill=raw: max|d fused|=3.89e-16 max|d agreement|=6.66e-16 max|d confidence|=7.22e-16 flags_match=True -> PASS
+[real_crisismmd] n=800 fill=raw: max|d fused|=1.17e-15 max|d agreement|=1.30e-15 max|d confidence|=1.11e-15 flags_match=True -> PASS
+
+OVERALL: ALL CASES PASS
+
+
+Regression check: vectorized_fusion=True vs False, end-to-end
+==============================================================================
+crisismmd    default      onmi=0.590905 modularity=0.519782 f1=0.757263
+crisismmd    vectorized   onmi=0.590905 modularity=0.519782 f1=0.757263
+  -> diffs vs default: onmi=0.00e+00 modularity=0.00e+00 f1=0.00e+00 -> IDENTICAL
+pheme        default      onmi=0.000000 modularity=0.865165 f1=0.249838
+pheme        vectorized   onmi=0.000000 modularity=0.865165 f1=0.249838
+  -> diffs vs default: onmi=0.00e+00 modularity=0.00e+00 f1=0.00e+00 -> IDENTICAL
+dblp         default      onmi=0.670269 modularity=0.847578 f1=0.733100
+dblp         vectorized   onmi=0.670269 modularity=0.847578 f1=0.733100
+  -> diffs vs default: onmi=0.00e+00 modularity=0.00e+00 f1=0.00e+00 -> IDENTICAL
+amazon       default      onmi=0.553549 modularity=0.717235 f1=0.797222
+amazon       vectorized   onmi=0.553549 modularity=0.717235 f1=0.797222
+  -> diffs vs default: onmi=0.00e+00 modularity=0.00e+00 f1=0.00e+00 -> IDENTICAL
+
+vectorized_fusion end-to-end regression: IDENTICAL to default path
+
+
+Speedup: vectorized fusion vs. original loop
+==============================================================================
+       n    fusion_old_s    fusion_new_s   speedup   total_old_s   total_new_s
+    1000          1.3120          1.0310       1.3x        1.3440        1.0630
+    5000          6.0160          4.6560       1.3x        6.1260        4.7660
+   20000         19.7970         14.8750       1.3x       20.9220       16.0000
+
+Per-stage share of total NFMCD.fit() time, OLD vs NEW fusion (n=20000):
+  old: fusion 94.6%  rest(struct+alpha+fcm) 5.4%  total 20.92s
+  new: fusion 93.0%  rest(struct+alpha+fcm) 7.0%  total 16.00s
+
+CORRECTION to scale_summary.log's framing (n=20000, n_paired=20000, dim_t=384, dim_v=512):
+The earlier scaling experiment measured `fusion.fuse()` as one 94%-of-total block and
+attributed it to the per-node loop. Isolating the two pieces inside fuse() directly shows
+that's only partly right:
+  _fit_alignment (PCA+CCA fit, SHARED code, unaffected by vectorization): 14.27s
+  per-node assembly loop (the thing vectorized here):                      5.45s -> 0.27s (20.5x)
+_fit_alignment dominates (14.27 / 19.7 = 72% of old fuse() time) because its PCA rank cap
+(n_paired // pca_rank_div, default pca_rank_div=4) hits the embedding-dimension ceiling
+(384/512) well before n=20000, making it a near-full-rank PCA + CCA fit on a 20000-row
+matrix -- genuine O(n) linear algebra that no amount of loop-vectorization touches.
+The loop vectorization is real and correctly targeted (20.5x speedup, verified in
+isolation above) but was only ~28% of fuse()'s time at this size, not ~94% -- hence the
+modest 1.3x end-to-end speedup rather than something larger. The TRUE bottleneck at large
+n is `_fit_alignment`'s PCA/CCA fit, not the loop. Recommendation: if further speedup is
+wanted, the next target is capping PCA rank more aggressively at large n_paired (e.g. a
+fixed cap independent of n_paired, or a randomized-SVD PCA) rather than further work on
+the assembly step, which is no longer the dominant cost.

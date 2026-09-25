@@ -1,0 +1,27 @@
+Rendered neighbourhood explanations (nf_mcd.explain.explain_node_neighbourhood).
+They restate the neighbourhood and report measured content/structure sensitivity.
+On structure-dominated assignments they mostly restate homophily; they do not say the model is right.
+
+[crisismmd; default; seed 0] consistent: content agrees, strong neighbourhood
+  Node 10 is in community 1 (membership 0.48): 14 of its 18 neighbours (78%) are also in community 1, versus 26% expected by chance. Next strongest neighbourhood: community 0 (11%). Content supports this (content alone also gives community 1). Removing content would keep it in community 1 (lead 0.54); removing structure would keep it in community 1 (lead 0.01).
+
+[crisismmd; default; seed 0] content contradicts the neighbourhood
+  Node 0 is in community 4 (membership 0.64): 16 of its 18 neighbours (89%) are also in community 4, versus 24% expected by chance. Next strongest neighbourhood: community 1 (6%). Content contradicts the neighbourhood: content alone would place it in community 0. Removing content would keep it in community 4 (lead 0.74); removing structure would flip it to community 0.
+
+[crisismmd; robust; seed 0] assignment flips if content is removed
+  Node 6 is in community 4 (membership 0.52): 3 of its 6 neighbours (50%) are also in community 4, versus 11% expected by chance. Next strongest neighbourhood: community 6 (33%). Content supports this (content alone also gives community 4). Removing content would flip its assignment to community 0; removing structure would keep it in community 4 (lead 0.26).
+
+[fakeddit_real_lcc; default; seed 0] real-relations graph, weak neighbourhood (low lift)
+  Node 4 is in community 1 (membership 0.21): 2 of its 19 neighbours (11%) are also in community 1, versus 17% expected by chance. Most of its neighbours are in community 3 (89%) instead. Content contradicts the neighbourhood: content alone would place it in community 0. Removing content would flip its assignment to community 3; removing structure would flip it to community 0.
+
+[pheme; default; seed 0] isolated node (no neighbours)
+  Node 85 is in community 4 (membership 0.28): it has no neighbours in the graph, so the assignment comes from content only. The image was unavailable for this node. Content supports this (content alone also gives community 4). Removing content would leave its assignment undetermined (memberships tie); removing structure would leave it undetermined (memberships tie).
+
+[pheme; default; seed 0] text-only dataset, ordinary node
+  Node 0 is in community 7 (membership 0.47): 9 of its 9 neighbours (100%) are also in community 7, versus 12% expected by chance. The image was unavailable for this node. Content contradicts the neighbourhood: content alone would place it in community 4. Removing content would keep it in community 7 (lead 0.40); removing structure would flip it to community 4.
+
+[crisismmd, both modalities removed with p=0.6; default; seed 0] missing modality (60% of modalities removed): text only
+  Node 7 is in community 1 (membership 0.98): 15 of its 16 neighbours (94%) are also in community 1, versus 24% expected by chance. Next strongest neighbourhood: community 0 (6%). The image was unavailable for this node. Content contradicts the neighbourhood: content alone would place it in community 3. Removing content would keep it in community 1 (lead 0.97); removing structure would flip it to community 3.
+
+[crisismmd, both modalities removed with p=0.6; default; seed 0] missing modality: no content at all
+  Node 0 is in community 0 (membership 1.00): 16 of its 18 neighbours (89%) are also in community 0, versus 24% expected by chance. Next strongest neighbourhood: community 5 (6%). No content (text or image) was available, so the assignment rests on network structure alone.

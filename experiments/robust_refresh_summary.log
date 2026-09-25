@@ -1,0 +1,125 @@
+Robust-preset refresh: NFMCD.robust() now includes pca_rank_div=16.
+This SUPERSEDES robust/fcmad|raw numbers in clusterer_results.csv and rank_results.csv
+(computed before the rank cap was added to the preset) -- those files are unchanged, this
+file is the current source of truth for the robust preset. spectral_graph+content and
+kmeans_content are NOT recomputed here (unchanged protocol); pulled from baselines_results.csv /
+realgraph_results.csv / missing_results.csv / mech_results.csv.
+jobs finished: 258
+
+(1) Original datasets + real Fakeddit graph: LFK ONMI (k = ground truth)
+------------------------------------------------------------------------
+dataset                  nfmcd_default    nfmcd_robust   spectral+content   kmeans_content
+crisismmd                  0.609±0.016     0.707±0.002        0.879±0.000      0.407±0.011
+pheme                      0.005±0.007     0.004±0.006        0.373±0.001      0.109±0.018
+fakeddit                   0.308±0.053     0.836±0.018        0.554±0.004      0.072±0.013
+dblp                       0.670±0.000     0.670±0.000        0.630±0.019              n/a
+amazon                     0.554±0.000     0.554±0.000        0.619±0.000              n/a
+fakeddit_real_full         0.039±0.008     0.029±0.009        0.250±0.000      0.145±0.016
+fakeddit_real_lcc          0.126±0.019     0.195±0.000        0.523±0.000      0.253±0.005
+
+(1b) Original datasets + real Fakeddit graph: modularity (NF-MCD only)
+----------------------------------------------------------------------
+dataset                  nfmcd_default    nfmcd_robust
+crisismmd                  0.520±0.006     0.458±0.001
+pheme                      0.859±0.005     0.844±0.012
+fakeddit                   0.297±0.014     0.367±0.019
+dblp                       0.848±0.000     0.848±0.000
+amazon                     0.717±0.000     0.717±0.000
+fakeddit_real_full         0.201±0.043     0.699±0.031
+fakeddit_real_lcc          0.546±0.005     0.727±0.002
+
+(1b) Original datasets + real Fakeddit graph: membership F1 (NF-MCD only)
+-------------------------------------------------------------------------
+dataset                  nfmcd_default    nfmcd_robust
+crisismmd                  0.667±0.114     0.702±0.003
+pheme                      0.267±0.013     0.289±0.014
+fakeddit                   0.253±0.043     0.845±0.004
+dblp                       0.733±0.000     0.733±0.000
+amazon                     0.797±0.000     0.797±0.000
+fakeddit_real_full         0.150±0.003     0.214±0.033
+fakeddit_real_lcc          0.264±0.032     0.351±0.000
+
+(2) crisismmd: LFK ONMI vs p_out/p_in (homophily sweep)
+-------------------------------------------------------
+method                        r=0.02          r=0.10          r=0.25          r=0.50          r=1.00
+nfmcd_default            0.718±0.023     0.159±0.030     0.079±0.016     0.039±0.017     0.034±0.025
+nfmcd_robust             0.756±0.046     0.626±0.043     0.403±0.025     0.047±0.057     0.107±0.012
+spectral_graph+content     0.901±0.007     0.856±0.009     0.727±0.066     0.563±0.015     0.518±0.006
+kmeans_content           0.407±0.011     0.407±0.011     0.407±0.011     0.407±0.011     0.407±0.011
+
+(2) fakeddit: LFK ONMI vs p_out/p_in (homophily sweep)
+------------------------------------------------------
+method                        r=0.02          r=0.10          r=0.25          r=0.50          r=1.00
+nfmcd_default            0.364±0.081     0.202±0.017     0.130±0.028     0.031±0.008     0.020±0.011
+nfmcd_robust             0.853±0.011     0.602±0.031     0.216±0.022     0.039±0.004     0.026±0.002
+spectral_graph+content     0.716±0.019     0.539±0.008     0.305±0.010     0.102±0.004     0.054±0.005
+kmeans_content           0.072±0.013     0.072±0.013     0.072±0.013     0.072±0.013     0.072±0.013
+
+(3) crisismmd: LFK ONMI vs missing rate p (mode=both)
+-----------------------------------------------------
+method                           p=0.0         p=0.4         p=0.8
+nfmcd_default              0.609±0.016   0.600±0.004   0.602±0.004
+nfmcd_robust               0.707±0.002   0.617±0.002   0.547±0.004
+spectral_graph+content             n/a   0.759±0.012   0.457±0.034
+kmeans_content                     n/a   0.076±0.033   0.001±0.001
+
+(3) fakeddit_real_lcc: LFK ONMI vs missing rate p (mode=both)
+-------------------------------------------------------------
+method                           p=0.0         p=0.4         p=0.8
+nfmcd_default              0.126±0.019   0.203±0.012   0.196±0.021
+nfmcd_robust               0.195±0.000   0.192±0.011   0.197±0.018
+spectral_graph+content             n/a   0.515±0.015   0.347±0.083
+kmeans_content                     n/a   0.069±0.039   0.029±0.008
+
+(4) crisismmd: LFK ONMI vs injected cross-modal mismatch fraction q
+-------------------------------------------------------------------
+method                           q=0.0         q=0.1         q=0.2         q=0.4
+nfmcd_default              0.592±0.026   0.453±0.161   0.596±0.012   0.497±0.101
+nfmcd_robust               0.707±0.001   0.705±0.003   0.690±0.012   0.681±0.014
+spectral_graph+content     0.879±0.000   0.868±0.008   0.865±0.010   0.891±0.012
+kmeans_content             0.405±0.010   0.410±0.010   0.415±0.008   0.417±0.017
+
+(4b) crisismmd: detection AUROC of injected mismatches (score = -agreement / -confidence)
+-----------------------------------------------------------------------------------------
+method                           q=0.1         q=0.2         q=0.4
+nfmcd_default (agreement)   0.644±0.044   0.610±0.019   0.571±0.012
+nfmcd_default (confidence)   0.644±0.044   0.610±0.019   0.571±0.012
+nfmcd_robust (agreement)   0.805±0.033   0.783±0.025   0.726±0.017
+nfmcd_robust (confidence)   0.805±0.033   0.783±0.025   0.726±0.017
+
+(4) fakeddit: LFK ONMI vs injected cross-modal mismatch fraction q
+------------------------------------------------------------------
+method                           q=0.0         q=0.1         q=0.2         q=0.4
+nfmcd_default              0.316±0.045   0.307±0.053   0.267±0.051   0.209±0.035
+nfmcd_robust               0.841±0.015   0.837±0.021   0.845±0.003   0.837±0.002
+spectral_graph+content     0.552±0.005   0.640±0.045   0.644±0.031   0.645±0.009
+kmeans_content             0.088±0.023   0.062±0.022   0.027±0.011   0.009±0.003
+
+(4b) fakeddit: detection AUROC of injected mismatches (score = -agreement / -confidence)
+----------------------------------------------------------------------------------------
+method                           q=0.1         q=0.2         q=0.4
+nfmcd_default (agreement)   0.614±0.023   0.587±0.012   0.554±0.012
+nfmcd_default (confidence)   0.614±0.023   0.587±0.012   0.554±0.012
+nfmcd_robust (agreement)   0.756±0.025   0.725±0.015   0.667±0.009
+nfmcd_robust (confidence)   0.756±0.025   0.725±0.015   0.667±0.009
+
+(4) fakeddit_real_lcc: LFK ONMI vs injected cross-modal mismatch fraction q
+---------------------------------------------------------------------------
+method                           q=0.0         q=0.1         q=0.2         q=0.4
+nfmcd_default              0.119±0.024   0.104±0.028   0.100±0.017   0.095±0.020
+nfmcd_robust               0.194±0.002   0.195±0.002   0.199±0.002   0.200±0.008
+spectral_graph+content     0.523±0.000   0.516±0.006   0.516±0.004   0.503±0.010
+kmeans_content             0.262±0.024   0.187±0.020   0.159±0.026   0.094±0.040
+
+(4b) fakeddit_real_lcc: detection AUROC of injected mismatches (score = -agreement / -confidence)
+-------------------------------------------------------------------------------------------------
+method                           q=0.1         q=0.2         q=0.4
+nfmcd_default (agreement)   0.559±0.028   0.532±0.026   0.535±0.017
+nfmcd_default (confidence)   0.559±0.028   0.532±0.026   0.535±0.017
+nfmcd_robust (agreement)   0.714±0.028   0.682±0.013   0.619±0.027
+nfmcd_robust (confidence)   0.714±0.028   0.682±0.013   0.619±0.027
+
+=== Top-line: mean ONMI over all non-PHEME settings recomputed here ===
+  nfmcd_default    mean over 126 rows: 0.298 (sd 0.221)
+  nfmcd_robust     mean over 126 rows: 0.492 (sd 0.292)
+  spectral+content mean over 148 rows: 0.589 (sd 0.203)

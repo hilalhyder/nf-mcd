@@ -1,0 +1,62 @@
+Significance test: NF-MCD default / robust vs. spectral+content / kmeans_content
+n_seeds=20 (seeds 0-19), datasets=['crisismmd', 'fakeddit', 'dblp']
+
+Note on 'paired': NFMCD's `seed` controls FuzzyCMeans/adaptive-m-FCM init (and, for robust, the raw-PCA solver), all via np.random.default_rng(seed) INSIDE nf_mcd/pipeline.py's own code path. spectral_graph+content's seed feeds sklearn's SpectralClustering(random_state=seed), and kmeans_content's feeds sklearn's KMeans(random_state=seed) -- both INDEPENDENT RNG streams unrelated to NFMCD's. So matching by seed index across DIFFERENT methods (e.g. robust vs spectral+content) does not share a noise source and should NOT be expected to reduce variance the way genuine pairing does; the paired t-test is still a valid test on the matched differences, but its power advantage over an unpaired test is not guaranteed here. For nfmcd_default vs nfmcd_robust specifically, both draw from np.random.default_rng(seed) but through DIFFERENT clusterer code ('fcm' vs 'fcm_adaptive_m', different draw counts/branches), so even this comparison's pairing is nominal (index-matched), not a shared-random-stream design.
+
+====================================================================================================
+DATASET: crisismmd  (methods: ['nfmcd_default', 'nfmcd_robust', 'spectral_graph+content', 'kmeans_content'])
+====================================================================================================
+
+method                       n     mean       sd                95% CI
+nfmcd_default               20   0.5806   0.0296   [0.5674, 0.5929]
+nfmcd_robust                20   0.7070   0.0027   [0.7059, 0.7082]
+spectral_graph+content      20   0.8788   0.0000   [0.8788, 0.8788]
+kmeans_content              20   0.4049   0.0194   [0.3956, 0.4121]
+
+comparison (A vs B)                      n   mean(A-B)  sd(diff)       d       t_p  wilcox_p  n_req(d80)
+nfmcd_robust vs nfmcd_default           20      0.1264    0.0298    4.25   0.0000***    0.0000         2.7
+spectral_graph+content vs nfmcd_robust  20      0.1718    0.0027   63.27   0.0000***    0.0001         3.1
+nfmcd_robust vs kmeans_content          20      0.3021    0.0189   15.97   0.0000***    0.0000         6.1
+
+====================================================================================================
+DATASET: fakeddit  (methods: ['nfmcd_default', 'nfmcd_robust', 'spectral_graph+content', 'kmeans_content'])
+====================================================================================================
+
+method                       n     mean       sd                95% CI
+nfmcd_default               20   0.3212   0.0412   [0.3028, 0.3376]
+nfmcd_robust                20   0.8436   0.0148   [0.8366, 0.8486]
+spectral_graph+content      20   0.5519   0.0042   [0.5501, 0.5536]
+kmeans_content              20   0.0935   0.0329   [0.0797, 0.1075]
+
+comparison (A vs B)                      n   mean(A-B)  sd(diff)       d       t_p  wilcox_p  n_req(d80)
+nfmcd_robust vs nfmcd_default           20      0.5224    0.0466   11.21   0.0000***    0.0000        14.8
+spectral_graph+content vs nfmcd_robust  20     -0.2917    0.0149  -19.53   0.0000***    0.0000         7.2
+nfmcd_robust vs kmeans_content          20      0.7501    0.0310   24.20   0.0000***    0.0000         3.8
+
+====================================================================================================
+DATASET: dblp  (methods: ['nfmcd_default', 'nfmcd_robust', 'spectral_graph+content'])
+====================================================================================================
+
+method                       n     mean       sd                95% CI
+nfmcd_default               20   0.6299   0.0639   [0.6002, 0.6543]
+nfmcd_robust                20   0.6703   0.0000   [0.6703, 0.6703]
+spectral_graph+content      20   0.6548   0.0284   [0.6428, 0.6674]
+
+comparison (A vs B)                      n   mean(A-B)  sd(diff)       d       t_p  wilcox_p  n_req(d80)
+nfmcd_robust vs nfmcd_default           20      0.0404    0.0639    0.63   0.0108*    0.0042        21.7
+spectral_graph+content vs nfmcd_robust  20     -0.0154    0.0284   -0.54   0.0253*    0.0119        28.6
+
+====================================================================================================
+POWER ANALYSIS: sample size that WOULD have been needed to detect the observed
+effect (from this n=20 run) at alpha=0.05, power=0.8, vs. this project's usual n=3
+====================================================================================================
+
+dataset     comparison                                 |d|  n_required   n=3 adequate?
+crisismmd   nfmcd_robust vs nfmcd_default             4.25         2.7             yes
+crisismmd   spectral_graph+content vs nfmcd_robust   63.27         3.1              no
+crisismmd   nfmcd_robust vs kmeans_content           15.97         6.1              no
+fakeddit    nfmcd_robust vs nfmcd_default            11.21        14.8              no
+fakeddit    spectral_graph+content vs nfmcd_robust   19.53         7.2              no
+fakeddit    nfmcd_robust vs kmeans_content           24.20         3.8              no
+dblp        nfmcd_robust vs nfmcd_default             0.63        21.7              no
+dblp        spectral_graph+content vs nfmcd_robust    0.54        28.6              no

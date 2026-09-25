@@ -1,0 +1,141 @@
+Cross-file consistency audit of nfmcd_impl/experiments/*.csv and *.log
+Read-only audit, no models fitted, no nf_mcd/* touched. Scope excludes
+compound_results.csv, sigtest_results.csv, and anything under a
+data/<newdataset>/ dir, which were owned by other jobs running at audit time.
+
+=====================================================================
+(A) CONFIRMED CONSISTENT
+=====================================================================
+
+A1. Plain-default NFMCD() results (crisismmd, fakeddit, dblp, amazon; seeds
+    0-2) agree to 6 decimal places on onmi/modularity/f1 across every file
+    that reports them:
+      baselines_results.csv (method=nfmcd_full)
+      clusterer_results.csv (method=default)
+      variant_results.csv   (variant=default, graph=orig)
+      robust_refresh_results.csv (method=nfmcd_default, group=orig)
+      mnar_results.csv      (method=nfmcd_full, scheme=mcar_control, p=0.00)
+      missing_results.csv   (method=nfmcd_full, mode=none, p=0.00)
+    21 (dataset, seed) groups checked across >=2 sources each, 0 mismatches.
+    Example (crisismmd, seed 0): onmi=0.590905, modularity=0.519782,
+    f1=0.757263 in all six files.
+
+    Note: variant_results.csv also stores a 'rewired50' graph variant under
+    the SAME variant='default' label, disambiguated by its 'graph' column.
+    An audit query that forgets to filter graph=='orig' will see large
+    apparent "mismatches" (e.g. onmi 0.591 vs 0.289) -- these are not a bug,
+    they're the documented edge-rewiring robustness check from earlier in
+    the project. Filtering correctly resolves it. (I hit this myself on the
+    first pass -- noting it in case anyone else audits this data later.)
+
+A2. fakeddit_real_lcc's community count (k_used=6) agrees across
+    missing_results.csv, mnar_results.csv, realgraph_results.csv,
+    robust_refresh_results.csv for every k-taking method. The k_used=21
+    values that also appear in these files belong exclusively to Louvain
+    (base:louvain / louvain rows), which picks its own community count --
+    already documented project-wide as expected behavior for
+    Louvain/DEMON/SLPA. Confirmed by direct row inspection, not just
+    inference.
+
+A3. DBLP/Amazon overlap ground truth is cited identically everywhere it
+    appears: DBLP 1072 nodes, 11/1072 (1.03%) true overlap; Amazon 146
+    nodes, 68/146 (46.58%) true overlap (overlap_results.csv, part B rows).
+
+A4. kselect_results.csv's claimed ONMI-vs-k peaks were independently
+    recomputed from the raw data and match exactly: crisismmd peaks at
+    k=7 (0.609), fakeddit at k=6 (0.423, not k_true=10), fakeddit_real_lcc
+    still rising at k=13 (0.145) at the edge of the search window, dblp at
+    k=8 (0.670), amazon at k=2 (0.839, not k_true=4).
+
+A5. rank_results.csv's claimed "ONMI rises with pca_rank_div, flattening
+    around 16-32" was independently recomputed (common_dim=8, crisismmd +
+    fakeddit only -- PHEME is text-only and correctly excluded, since the
+    CCA rank cap cannot affect a dataset with no image modality to align):
+    div2=0.168, div4=0.459, div8=0.576, div16=0.735, div32=0.734, div64=0.755.
+    Exact match to the previously reported table. Monotonic apart from the
+    div16->div32 dip of 0.001, which is noise, not a violation.
+
+A6. overlap2_results.csv's blend_strength=0.0 "sanity check" rows were
+    independently compared against the original overlap_results.csv Part A
+    run (a separate experiment, run earlier, using different code paths for
+    the same underlying computation). Mean AUROC by overlap rate matches
+    exactly: r0.1=0.483, r0.2=0.503, r0.3=0.530, r0.4=0.498 in both files.
+    This is a strong independent confirmation, not just a self-reported claim.
+
+A7. The documented CCA-overfit/rank-cap relationship between
+    experiments/rank_summary.log and CLAUDE.md's "robust preset" section is
+    substantively correct: clusterer_results.csv's fcmad|raw rows (the
+    pre-rank16 preset) really do differ from current NFMCD.robust() output
+    by a real, non-trivial margin -- e.g. crisismmd seed 0: 0.6735 (stale)
+    vs 0.7067 (current robust_refresh_results.csv) -- consistent with the
+    ~0.03-0.13 gap already reported to the user.
+
+=====================================================================
+(B) EXPECTED DIVERGENCE (differs, but for a known/documented reason)
+=====================================================================
+
+B1. clusterer_results.csv's fcmad|raw rows vs. current NFMCD.robust()
+    output differ because NFMCD.robust() gained pca_rank_div=16 (and later
+    vectorized_fusion=True, verified bit-identical so it does not
+    contribute to this gap) after clusterer_results.csv was generated.
+    Documented in CLAUDE.md ("fcmad|raw rows ... used the default cap, so
+    they no longer match the preset"). Confirmed real and correctly flagged
+    -- see C1 below for one inaccuracy in exactly how CLAUDE.md describes
+    which files this applies to.
+
+B2. tuning_results.csv vs. tuning_results_v1.csv, explain_results.csv vs.
+    explain_results_v1.csv, nbr_explain_results.csv vs.
+    nbr_explain_results_v1_tv_only.csv are each pairs of a superseded run
+    and its replacement, already disambiguated by an explicit _v1 suffix at
+    creation time (not something later re-labeled) -- no reader could
+    mistake one for the other. No action needed.
+
+=====================================================================
+(C) UNEXPLAINED DISCREPANCIES / DOCUMENTATION ERRORS
+=====================================================================
+
+ONE finding, minor, documentation-only (not a numeric bug in any result):
+
+C1. CLAUDE.md (the "robust preset" note) states: "The fcmad|raw rows in
+    clusterer_results.csv and rank_results.csv predate pca_rank_div=16 and
+    are stale for the preset." This is only half true. clusterer_results.csv
+    genuinely contains fcmad|raw rows (confirmed stale, see B1/A7).
+    rank_results.csv does NOT contain any method matching "fcmad" or a raw-
+    content label at all -- I enumerated its 53 unique method values
+    directly and none contain "fcmad" or "raw". rank_results.csv uses an
+    entirely different, already-current naming scheme (nf|r<div>|c<dim>)
+    introduced fresh for that experiment; it was never stale in the first
+    place, so there is nothing in it to discount. This doesn't invalidate
+    any reported number (rank_results.csv's own numbers are fine and
+    already independently re-verified in A5/A7), but CLAUDE.md's file
+    reference is factually wrong and could send someone hunting for a
+    "stale" row in rank_results.csv that isn't there. Low severity --
+    recommend just dropping "and rank_results.csv" from that CLAUDE.md
+    sentence.
+
+No other unexplained discrepancies were found across ~24 cross-file
+comparisons, 3 independent recomputations of summarized claims, and one
+independent re-derivation of a headline number (overlap2's blend=0 check).
+
+=====================================================================
+(D) STALE FILES
+=====================================================================
+
+D1. clusterer_results.csv's fcmad|raw rows -- stale, documented (B1/C1).
+D2. tuning_results_v1.csv, explain_results_v1.csv,
+    nbr_explain_results_v1_tv_only.csv -- superseded, self-evidently
+    labeled by filename, no separate warning needed.
+D3. Nothing else found stale. rank_results.csv is NOT stale (see C1) --
+    correcting the implication in CLAUDE.md's current wording.
+
+Could not verify from this machine whether the published results webpage
+(an HTML artifact in Claude's scratchpad, not part of this repo) reflects
+the current robust-preset numbers or an earlier snapshot -- that file isn't
+reachable from this filesystem audit.
+
+=====================================================================
+Comparisons made: ~24 cross-file numeric matches (21 default-config groups
++ k_used check + overlap ground truth + 3 recomputed summary claims +
+1 independent re-derivation). Passed: all of them, after one self-corrected
+query bug (A1 note). Findings: 1 minor documentation inaccuracy (C1), no
+numeric bugs found.

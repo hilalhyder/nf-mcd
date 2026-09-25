@@ -1,0 +1,78 @@
+Compound-stressor experiment: k=32 (n=8000, ~250 nodes/community) plus a
+second stressor layered on top. 'collapsed' flags mean_umax within
+[1/32=0.0312, 0.0813] (uniform-membership degeneracy).
+============================================================================================
+
+Anchor: k=32 alone, no additional stressor (pulled from qualityscale_results.csv Part B)
+--------------------------------------------------------------------------------------------
+  nfmcd_default            onmi=0.0233  modularity=0.0581  (n=2 seeds)
+  nfmcd_robust             onmi=0.7161  modularity=0.1707  (n=2 seeds)
+  louvain                  onmi=0.0000  modularity=0.0661  (n=2 seeds)
+  spectral_graph_content   onmi=0.7559  modularity=0.1583  (n=2 seeds)
+
+Condition: noise (severity = ratio_mult)
+--------------------------------------------------------------------------------------------
+method                    ratio_mult      onmi  modularity        f1   mean_umax   collapsed
+nfmcd_default                    1.0    0.0219      0.0603    0.0342      0.0313         yes
+nfmcd_default                    2.0    0.0216      0.0289    0.0304      0.0313         yes
+nfmcd_default                    4.0    0.0219      0.0115    0.0310      0.0313         yes
+nfmcd_default                    8.0    0.0352      0.0007    0.0396      0.0313         yes
+  -> nfmcd_default: ONMI at severity=1.0: 0.0219, at severity=8.0: 0.0352, delta=+0.0133
+nfmcd_robust                     1.0    0.7280      0.1711    0.8306      0.5145          no
+nfmcd_robust                     2.0    0.5980      0.0786    0.6700      0.4000          no
+nfmcd_robust                     4.0    0.5992      0.0288    0.6514      0.3913          no
+nfmcd_robust                     8.0    0.5939      0.0026    0.6497      0.3901          no
+  -> nfmcd_robust: ONMI at severity=1.0: 0.7280, at severity=8.0: 0.5939, delta=-0.1341
+louvain                          1.0    0.0000      0.0658    0.0839          --          --
+louvain                          2.0    0.0000      0.0591    0.0700          --          --
+louvain                          4.0    0.0000      0.0555    0.0666          --          --
+louvain                          8.0    0.0000      0.0533    0.0651          --          --
+  -> louvain: ONMI at severity=1.0: 0.0000, at severity=8.0: 0.0000, delta=+0.0000
+spectral_graph_content           1.0    0.7619      0.1593    0.8770          --          --
+spectral_graph_content           2.0    0.7328      0.0753    0.8635          --          --
+spectral_graph_content           4.0    0.7260      0.0281    0.8588          --          --
+spectral_graph_content           8.0    0.7205      0.0030    0.8551          --          --
+  -> spectral_graph_content: ONMI at severity=1.0: 0.7619, at severity=8.0: 0.7205, delta=-0.0415
+  robust-minus-default ONMI gap by severity: 1.0: +0.7061, 2.0: +0.5764, 4.0: +0.5773, 8.0: +0.5587
+
+Condition: missing (severity = p)
+--------------------------------------------------------------------------------------------
+method                             p      onmi  modularity        f1   mean_umax   collapsed
+nfmcd_default                    0.0    0.0219      0.0603    0.0342      0.0313         yes
+nfmcd_default                    0.4    0.0024      0.0835    0.0593      0.0313         yes
+nfmcd_default                    0.8    0.0000      0.1268    0.0896      0.0313         yes
+  -> nfmcd_default: ONMI at severity=0.0: 0.0219, at severity=0.8: 0.0000, delta=-0.0219
+nfmcd_robust                     0.0    0.7320      0.1711    0.8307      0.5145          no
+nfmcd_robust                     0.4    0.3449      0.1134    0.5028      0.3548          no
+nfmcd_robust                     0.8    0.0000      0.1491    0.0930      0.0313         yes
+  -> nfmcd_robust: ONMI at severity=0.0: 0.7320, at severity=0.8: 0.0000, delta=-0.7320
+louvain                          0.0    0.0000      0.0658    0.0839          --          --
+louvain                          0.4    0.0000      0.0658    0.0839          --          --
+louvain                          0.8    0.0000      0.0658    0.0839          --          --
+  -> louvain: ONMI at severity=0.0: 0.0000, at severity=0.8: 0.0000, delta=+0.0000
+spectral_graph_content           0.0    0.7619      0.1593    0.8770          --          --
+spectral_graph_content           0.4    0.6010      0.1054    0.7582          --          --
+spectral_graph_content           0.8    0.0012      0.0180    0.4225          --          --
+  -> spectral_graph_content: ONMI at severity=0.0: 0.7619, at severity=0.8: 0.0012, delta=-0.7607
+  robust-minus-default ONMI gap by severity: 0.0: +0.7101, 0.4: +0.3425, 0.8: +0.0000
+
+Condition: mismatch (severity = q)
+--------------------------------------------------------------------------------------------
+method                             q      onmi  modularity        f1   mean_umax   collapsed
+nfmcd_default                    0.0    0.0219      0.0603    0.0342      0.0313         yes
+nfmcd_default                    0.2    0.0219      0.0595    0.0406      0.0313         yes
+nfmcd_default                    0.4    0.0020      0.0526    0.0825      0.0313         yes
+  -> nfmcd_default: ONMI at severity=0.0: 0.0219, at severity=0.4: 0.0020, delta=-0.0199
+nfmcd_robust                     0.0    0.7280      0.1711    0.8306      0.5145          no
+nfmcd_robust                     0.2    0.5929      0.1530    0.7167      0.5128          no
+nfmcd_robust                     0.4    0.6459      0.1558    0.8084      0.7044          no
+  -> nfmcd_robust: ONMI at severity=0.0: 0.7280, at severity=0.4: 0.6459, delta=-0.0821
+louvain                          0.0    0.0000      0.0658    0.0839          --          --
+louvain                          0.2    0.0000      0.0658    0.0839          --          --
+louvain                          0.4    0.0000      0.0658    0.0839          --          --
+  -> louvain: ONMI at severity=0.0: 0.0000, at severity=0.4: 0.0000, delta=+0.0000
+spectral_graph_content           0.0    0.7619      0.1593    0.8770          --          --
+spectral_graph_content           0.2    0.6544      0.1169    0.7898          --          --
+spectral_graph_content           0.4    0.5788      0.0868    0.7055          --          --
+  -> spectral_graph_content: ONMI at severity=0.0: 0.7619, at severity=0.4: 0.5788, delta=-0.1831
+  robust-minus-default ONMI gap by severity: 0.0: +0.7061, 0.2: +0.5710, 0.4: +0.6440

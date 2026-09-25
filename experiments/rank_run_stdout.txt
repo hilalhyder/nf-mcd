@@ -1,0 +1,17 @@
+﻿141 jobs pending (of 141); workers=4
+  10/141 jobs  errors=0  120s
+  20/141 jobs  errors=0  204s
+  30/141 jobs  errors=0  272s
+  40/141 jobs  errors=0  450s
+  50/141 jobs  errors=0  517s
+  60/141 jobs  errors=0  535s
+  70/141 jobs  errors=0  599s
+  80/141 jobs  errors=0  684s
+  90/141 jobs  errors=0  819s
+  100/141 jobs  errors=0  995s
+  110/141 jobs  errors=0  1037s
+  120/141 jobs  errors=0  1074s
+  130/141 jobs  errors=0  1230s
+  140/141 jobs  errors=0  1345s
+  141/141 jobs  errors=0  1350s
+done: 0 error rows

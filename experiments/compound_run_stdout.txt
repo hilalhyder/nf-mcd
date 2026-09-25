@@ -1,0 +1,121 @@
+﻿[noise] nfmcd_default severity=1.0 seed=0: ok onmi=0.023 umax=0.031
+[noise] nfmcd_default severity=1.0 seed=1: ok onmi=0.024 umax=0.031
+[noise] nfmcd_default severity=1.0 seed=2: ok onmi=0.019 umax=0.031
+[noise] nfmcd_default severity=2.0 seed=0: ok onmi=0.023 umax=0.031
+[noise] nfmcd_default severity=2.0 seed=1: ok onmi=0.022 umax=0.031
+[noise] nfmcd_default severity=2.0 seed=2: ok onmi=0.019 umax=0.031
+[noise] nfmcd_default severity=4.0 seed=0: ok onmi=0.024 umax=0.031
+[noise] nfmcd_default severity=4.0 seed=1: ok onmi=0.023 umax=0.031
+[noise] nfmcd_default severity=4.0 seed=2: ok onmi=0.019 umax=0.031
+[noise] nfmcd_default severity=8.0 seed=0: ok onmi=0.022 umax=0.031
+[noise] nfmcd_default severity=8.0 seed=1: ok onmi=0.024 umax=0.031
+[noise] nfmcd_default severity=8.0 seed=2: ok onmi=0.060 umax=0.031
+[noise] nfmcd_robust severity=1.0 seed=0: ok onmi=0.756 umax=0.527
+[noise] nfmcd_robust severity=1.0 seed=1: ok onmi=0.664 umax=0.469
+[noise] nfmcd_robust severity=1.0 seed=2: ok onmi=0.764 umax=0.548
+[noise] nfmcd_robust severity=2.0 seed=0: ok onmi=0.606 umax=0.437
+[noise] nfmcd_robust severity=2.0 seed=1: ok onmi=0.540 umax=0.309
+[noise] nfmcd_robust severity=2.0 seed=2: ok onmi=0.647 umax=0.455
+[noise] nfmcd_robust severity=4.0 seed=0: ok onmi=0.658 umax=0.432
+[noise] nfmcd_robust severity=4.0 seed=1: ok onmi=0.482 umax=0.291
+[noise] nfmcd_robust severity=4.0 seed=2: ok onmi=0.658 umax=0.451
+[noise] nfmcd_robust severity=8.0 seed=0: ok onmi=0.657 umax=0.430
+[noise] nfmcd_robust severity=8.0 seed=1: ok onmi=0.469 umax=0.291
+[noise] nfmcd_robust severity=8.0 seed=2: ok onmi=0.656 umax=0.450
+[noise] louvain severity=1.0 seed=0: ok onmi=0.000
+[noise] louvain severity=1.0 seed=1: ok onmi=0.000
+[noise] louvain severity=1.0 seed=2: ok onmi=0.000
+[noise] louvain severity=2.0 seed=0: ok onmi=0.000
+[noise] louvain severity=2.0 seed=1: ok onmi=0.000
+[noise] louvain severity=2.0 seed=2: ok onmi=0.000
+[noise] louvain severity=4.0 seed=0: ok onmi=0.000
+[noise] louvain severity=4.0 seed=1: ok onmi=0.000
+[noise] louvain severity=4.0 seed=2: ok onmi=0.000
+[noise] louvain severity=8.0 seed=0: ok onmi=0.000
+[noise] louvain severity=8.0 seed=1: ok onmi=0.000
+[noise] louvain severity=8.0 seed=2: ok onmi=0.000
+[noise] spectral_graph_content severity=1.0 seed=0: ok onmi=0.750
+[noise] spectral_graph_content severity=1.0 seed=1: ok onmi=0.762
+[noise] spectral_graph_content severity=1.0 seed=2: ok onmi=0.774
+[noise] spectral_graph_content severity=2.0 seed=0: ok onmi=0.723
+[noise] spectral_graph_content severity=2.0 seed=1: ok onmi=0.733
+[noise] spectral_graph_content severity=2.0 seed=2: ok onmi=0.742
+[noise] spectral_graph_content severity=4.0 seed=0: ok onmi=0.716
+[noise] spectral_graph_content severity=4.0 seed=1: ok onmi=0.728
+[noise] spectral_graph_content severity=4.0 seed=2: ok onmi=0.735
+[noise] spectral_graph_content severity=8.0 seed=0: ok onmi=0.710
+[noise] spectral_graph_content severity=8.0 seed=1: ok onmi=0.721
+[noise] spectral_graph_content severity=8.0 seed=2: ok onmi=0.730
+[missing] nfmcd_default severity=0.0 seed=0: ok onmi=0.023 umax=0.031
+[missing] nfmcd_default severity=0.0 seed=1: ok onmi=0.024 umax=0.031
+[missing] nfmcd_default severity=0.0 seed=2: ok onmi=0.019 umax=0.031
+[missing] nfmcd_default severity=0.4 seed=0: ok onmi=0.003 umax=0.031
+[missing] nfmcd_default severity=0.4 seed=1: ok onmi=0.004 umax=0.031
+[missing] nfmcd_default severity=0.4 seed=2: ok onmi=0.000 umax=0.031
+[missing] nfmcd_default severity=0.8 seed=0: ok onmi=0.000 umax=0.031
+[missing] nfmcd_default severity=0.8 seed=1: ok onmi=0.000 umax=0.031
+[missing] nfmcd_default severity=0.8 seed=2: ok onmi=0.000 umax=0.031
+[missing] nfmcd_robust severity=0.0 seed=0: ok onmi=0.756 umax=0.527
+[missing] nfmcd_robust severity=0.0 seed=1: ok onmi=0.676 umax=0.469
+[missing] nfmcd_robust severity=0.0 seed=2: ok onmi=0.764 umax=0.548
+[missing] nfmcd_robust severity=0.4 seed=0: ok onmi=0.350 umax=0.341
+[missing] nfmcd_robust severity=0.4 seed=1: ok onmi=0.339 umax=0.375
+[missing] nfmcd_robust severity=0.4 seed=2: ok onmi=0.346 umax=0.349
+[missing] nfmcd_robust severity=0.8 seed=0: ok onmi=0.000 umax=0.031
+[missing] nfmcd_robust severity=0.8 seed=1: ok onmi=0.000 umax=0.031
+[missing] nfmcd_robust severity=0.8 seed=2: ok onmi=0.000 umax=0.031
+[missing] louvain severity=0.0 seed=0: ok onmi=0.000
+[missing] louvain severity=0.0 seed=1: ok onmi=0.000
+[missing] louvain severity=0.0 seed=2: ok onmi=0.000
+[missing] louvain severity=0.4 seed=0: ok onmi=0.000
+[missing] louvain severity=0.4 seed=1: ok onmi=0.000
+[missing] louvain severity=0.4 seed=2: ok onmi=0.000
+[missing] louvain severity=0.8 seed=0: ok onmi=0.000
+[missing] louvain severity=0.8 seed=1: ok onmi=0.000
+[missing] louvain severity=0.8 seed=2: ok onmi=0.000
+[missing] spectral_graph_content severity=0.0 seed=0: ok onmi=0.750
+[missing] spectral_graph_content severity=0.0 seed=1: ok onmi=0.762
+[missing] spectral_graph_content severity=0.0 seed=2: ok onmi=0.774
+[missing] spectral_graph_content severity=0.4 seed=0: ok onmi=0.604
+[missing] spectral_graph_content severity=0.4 seed=1: ok onmi=0.603
+[missing] spectral_graph_content severity=0.4 seed=2: ok onmi=0.596
+[missing] spectral_graph_content severity=0.8 seed=0: ok onmi=0.001
+[missing] spectral_graph_content severity=0.8 seed=1: ok onmi=0.001
+[missing] spectral_graph_content severity=0.8 seed=2: ok onmi=0.001
+[mismatch] nfmcd_default severity=0.0 seed=0: ok onmi=0.023 umax=0.031
+[mismatch] nfmcd_default severity=0.0 seed=1: ok onmi=0.024 umax=0.031
+[mismatch] nfmcd_default severity=0.0 seed=2: ok onmi=0.019 umax=0.031
+[mismatch] nfmcd_default severity=0.2 seed=0: ok onmi=0.024 umax=0.031
+[mismatch] nfmcd_default severity=0.2 seed=1: ok onmi=0.026 umax=0.031
+[mismatch] nfmcd_default severity=0.2 seed=2: ok onmi=0.015 umax=0.031
+[mismatch] nfmcd_default severity=0.4 seed=0: ok onmi=0.006 umax=0.031
+[mismatch] nfmcd_default severity=0.4 seed=1: ok onmi=0.000 umax=0.031
+[mismatch] nfmcd_default severity=0.4 seed=2: ok onmi=0.000 umax=0.031
+[mismatch] nfmcd_robust severity=0.0 seed=0: ok onmi=0.756 umax=0.527
+[mismatch] nfmcd_robust severity=0.0 seed=1: ok onmi=0.664 umax=0.469
+[mismatch] nfmcd_robust severity=0.0 seed=2: ok onmi=0.764 umax=0.548
+[mismatch] nfmcd_robust severity=0.2 seed=0: ok onmi=0.640 umax=0.539
+[mismatch] nfmcd_robust severity=0.2 seed=1: ok onmi=0.586 umax=0.522
+[mismatch] nfmcd_robust severity=0.2 seed=2: ok onmi=0.553 umax=0.478
+[mismatch] nfmcd_robust severity=0.4 seed=0: ok onmi=0.645 umax=0.718
+[mismatch] nfmcd_robust severity=0.4 seed=1: ok onmi=0.658 umax=0.712
+[mismatch] nfmcd_robust severity=0.4 seed=2: ok onmi=0.634 umax=0.683
+[mismatch] louvain severity=0.0 seed=0: ok onmi=0.000
+[mismatch] louvain severity=0.0 seed=1: ok onmi=0.000
+[mismatch] louvain severity=0.0 seed=2: ok onmi=0.000
+[mismatch] louvain severity=0.2 seed=0: ok onmi=0.000
+[mismatch] louvain severity=0.2 seed=1: ok onmi=0.000
+[mismatch] louvain severity=0.2 seed=2: ok onmi=0.000
+[mismatch] louvain severity=0.4 seed=0: ok onmi=0.000
+[mismatch] louvain severity=0.4 seed=1: ok onmi=0.000
+[mismatch] louvain severity=0.4 seed=2: ok onmi=0.000
+[mismatch] spectral_graph_content severity=0.0 seed=0: ok onmi=0.750
+[mismatch] spectral_graph_content severity=0.0 seed=1: ok onmi=0.762
+[mismatch] spectral_graph_content severity=0.0 seed=2: ok onmi=0.774
+[mismatch] spectral_graph_content severity=0.2 seed=0: ok onmi=0.638
+[mismatch] spectral_graph_content severity=0.2 seed=1: ok onmi=0.660
+[mismatch] spectral_graph_content severity=0.2 seed=2: ok onmi=0.665
+[mismatch] spectral_graph_content severity=0.4 seed=0: ok onmi=0.560
+[mismatch] spectral_graph_content severity=0.4 seed=1: ok onmi=0.586
+[mismatch] spectral_graph_content severity=0.4 seed=2: ok onmi=0.591
+Run complete.

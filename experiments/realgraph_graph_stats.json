@@ -1,0 +1,40 @@
+{
+  "nodes_sampled": 1385,
+  "edges": 13108,
+  "components": 362,
+  "lcc_nodes": 618,
+  "edges_author": 12945,
+  "homophily_author": 0.8965623792970259,
+  "edges_domain": 118,
+  "homophily_domain": 0.2288135593220339,
+  "edges_linked": 62,
+  "homophily_linked": 0.24193548387096775,
+  "homophily_all": 0.8873970094598719,
+  "homophily_random_baseline": 0.30367501205541575,
+  "images_available": 1353,
+  "n_communities_full": 9,
+  "community_sizes_full": {
+    "fakealbumcovers": 65,
+    "fakehistoryporn": 105,
+    "mildlyinteresting": 80,
+    "nottheonion": 40,
+    "pareidolia": 74,
+    "photoshopbattles": 127,
+    "propagandaposters": 98,
+    "psbattle_artwork": 723,
+    "upliftingnews": 73
+  },
+  "lcc_nodes_kept": 592,
+  "lcc_edges": 9261,
+  "lcc_components": 1,
+  "lcc_n_communities": 6,
+  "lcc_community_sizes": {
+    "fakealbumcovers": 39,
+    "fakehistoryporn": 42,
+    "photoshopbattles": 36,
+    "propagandaposters": 47,
+    "psbattle_artwork": 387,
+    "upliftingnews": 41
+  },
+  "lcc_homophily": 0.9072454378576827
+}

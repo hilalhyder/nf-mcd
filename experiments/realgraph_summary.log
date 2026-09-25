@@ -1,0 +1,106 @@
+Fakeddit real-relations graph (label-independent sampling; label used only as ground truth)
+------------------------------------------------------------------------------------------
+  nodes_sampled               1385
+  edges                       13108
+  components                  362
+  lcc_nodes                   618
+  images_available            1353
+  edges_author                12945
+  homophily_author            0.897
+  edges_domain                118
+  homophily_domain            0.229
+  edges_linked                62
+  homophily_linked            0.242
+  homophily_all               0.887
+  homophily_random_baseline   0.304
+  community sizes (full)       {'fakealbumcovers': 65, 'fakehistoryporn': 105, 'mildlyinteresting': 80, 'nottheonion': 40, 'pareidolia': 74, 'photoshopbattles': 127, 'propagandaposters': 98, 'psbattle_artwork': 723, 'upliftingnews': 73}
+  LCC subset: nodes=592 edges=9261 components=1 communities=6 homophily=0.907
+  community sizes (LCC)        {'fakealbumcovers': 39, 'fakehistoryporn': 42, 'photoshopbattles': 36, 'propagandaposters': 47, 'psbattle_artwork': 387, 'upliftingnews': 41}
+
+(a) Fakeddit real-relations graph: LFK ONMI
+-------------------------------------------
+method                        fakeddit_real_full   fakeddit_real_lcc
+var:default                         0.039Â±0.008        0.126Â±0.019
+var:cons_a60                        0.029Â±0.014        0.183Â±0.026
+var:agree_a50                       0.030Â±0.006        0.197Â±0.023
+var:default_rank16                  0.042Â±0.008        0.188Â±0.001
+var:all_changes                     0.043Â±0.012        0.187Â±0.023
+base:louvain                        0.101Â±0.000        0.313Â±0.000
+base:spectral_graph+content         0.250Â±0.000        0.523Â±0.000
+base:kmeans_content                 0.145Â±0.016        0.253Â±0.005
+base:nfmcd_text_only                0.023Â±0.016        0.211Â±0.000
+base:nfmcd_structure_only           0.027Â±0.012        0.215Â±0.003
+
+(a) Fakeddit real-relations graph: modularity
+---------------------------------------------
+method                        fakeddit_real_full   fakeddit_real_lcc
+var:default                         0.201Â±0.043        0.546Â±0.005
+var:cons_a60                        0.581Â±0.048        0.740Â±0.021
+var:agree_a50                       0.632Â±0.044        0.729Â±0.015
+var:default_rank16                  0.574Â±0.030        0.711Â±0.001
+var:all_changes                     0.611Â±0.040        0.759Â±0.019
+base:louvain                        0.941Â±0.000        0.911Â±0.000
+base:spectral_graph+content         0.629Â±0.000        0.619Â±0.000
+base:kmeans_content                 0.269Â±0.012        0.360Â±0.025
+base:nfmcd_text_only                0.799Â±0.032        0.768Â±0.000
+base:nfmcd_structure_only           0.844Â±0.005        0.768Â±0.001
+
+(a) Fakeddit real-relations graph: membership F1
+------------------------------------------------
+method                        fakeddit_real_full   fakeddit_real_lcc
+var:default                         0.150Â±0.003        0.264Â±0.032
+var:cons_a60                        0.163Â±0.036        0.340Â±0.025
+var:agree_a50                       0.115Â±0.012        0.357Â±0.023
+var:default_rank16                  0.123Â±0.011        0.340Â±0.001
+var:all_changes                     0.161Â±0.041        0.344Â±0.028
+base:louvain                        0.305Â±0.001        0.628Â±0.000
+base:spectral_graph+content         0.298Â±0.000        0.619Â±0.000
+base:kmeans_content                 0.330Â±0.030        0.361Â±0.012
+base:nfmcd_text_only                0.277Â±0.019        0.373Â±0.000
+base:nfmcd_structure_only           0.213Â±0.023        0.362Â±0.016
+
+(b) Homophily sweep (synthetic SBM over ground-truth groups, equal expected edge count)
+    realised edge homophily per ratio (mean over seeds):
+    crisismmd: r=0.02:0.93  r=0.1:0.72  r=0.25:0.50  r=0.5:0.33  r=1.0:0.20
+    fakeddit: r=0.02:0.91  r=0.1:0.68  r=0.25:0.46  r=0.5:0.30  r=1.0:0.18
+(b) crisismmd: LFK ONMI vs p_out/p_in (1.0 = structure carries no label information)
+------------------------------------------------------------------------------------
+method                           crisismmd@r0.02      crisismmd@r0.1     crisismmd@r0.25      crisismmd@r0.5      crisismmd@r1.0
+var:default                         0.718Â±0.023        0.159Â±0.030        0.079Â±0.016        0.039Â±0.017        0.034Â±0.025
+var:cons_a60                        0.797Â±0.029        0.631Â±0.037        0.151Â±0.024        0.000Â±0.000        0.000Â±0.000
+var:agree_a50                       0.788Â±0.042        0.621Â±0.027        0.123Â±0.028        0.000Â±0.000        0.000Â±0.000
+var:default_rank16                  0.697Â±0.039        0.610Â±0.066        0.201Â±0.039        0.000Â±0.000        0.000Â±0.000
+var:all_changes                     0.698Â±0.028        0.679Â±0.014        0.185Â±0.021        0.000Â±0.000        0.000Â±0.000
+base:louvain                        0.675Â±0.070        0.530Â±0.101        0.052Â±0.015        0.000Â±0.000        0.000Â±0.000
+base:spectral_graph+content         0.901Â±0.007        0.856Â±0.009        0.727Â±0.066        0.563Â±0.015        0.518Â±0.006
+base:kmeans_content                 0.407Â±0.011        0.407Â±0.011        0.407Â±0.011        0.407Â±0.011        0.407Â±0.011
+base:nfmcd_text_only                0.845Â±0.024        0.545Â±0.064        0.164Â±0.076        0.000Â±0.000        0.000Â±0.000
+base:nfmcd_structure_only           0.873Â±0.011        0.467Â±0.014        0.141Â±0.015        0.001Â±0.001        0.002Â±0.002
+
+(b) fakeddit: LFK ONMI vs p_out/p_in (1.0 = structure carries no label information)
+-----------------------------------------------------------------------------------
+method                            fakeddit@r0.02       fakeddit@r0.1      fakeddit@r0.25       fakeddit@r0.5       fakeddit@r1.0
+var:default                         0.364Â±0.081        0.202Â±0.017        0.130Â±0.028        0.031Â±0.008        0.020Â±0.011
+var:cons_a60                        0.793Â±0.033        0.317Â±0.046        0.187Â±0.053        0.007Â±0.005        0.000Â±0.000
+var:agree_a50                       0.784Â±0.019        0.321Â±0.059        0.167Â±0.023        0.007Â±0.002        0.000Â±0.000
+var:default_rank16                  0.781Â±0.040        0.381Â±0.029        0.216Â±0.054        0.027Â±0.011        0.005Â±0.004
+var:all_changes                     0.793Â±0.063        0.470Â±0.069        0.285Â±0.007        0.023Â±0.002        0.000Â±0.000
+base:louvain                        0.787Â±0.090        0.502Â±0.014        0.042Â±0.013        0.000Â±0.000        0.000Â±0.000
+base:spectral_graph+content         0.716Â±0.019        0.539Â±0.008        0.305Â±0.010        0.102Â±0.004        0.054Â±0.005
+base:kmeans_content                 0.072Â±0.013        0.072Â±0.013        0.072Â±0.013        0.072Â±0.013        0.072Â±0.013
+base:nfmcd_text_only                0.811Â±0.013        0.401Â±0.058        0.167Â±0.006        0.000Â±0.000        0.000Â±0.000
+base:nfmcd_structure_only           0.948Â±0.011        0.602Â±0.036        0.188Â±0.009        0.000Â±0.000        0.000Â±0.000
+
+(c) Best method per dataset by ONMI, and where full NF-MCD (var:default) ranks
+  fakeddit_real_full     best=base:spectral_graph+content (0.250)  var:default rank 6/10 (0.039)
+  fakeddit_real_lcc      best=base:spectral_graph+content (0.523)  var:default rank 10/10 (0.126)
+  crisismmd@r0.02        best=base:spectral_graph+content (0.901)  var:default rank 6/10 (0.718)
+  crisismmd@r0.1         best=base:spectral_graph+content (0.856)  var:default rank 10/10 (0.159)
+  crisismmd@r0.25        best=base:spectral_graph+content (0.727)  var:default rank 9/10 (0.079)
+  crisismmd@r0.5         best=base:spectral_graph+content (0.563)  var:default rank 3/10 (0.039)
+  crisismmd@r1.0         best=base:spectral_graph+content (0.518)  var:default rank 3/10 (0.034)
+  fakeddit@r0.02         best=base:nfmcd_structure_only (0.948)  var:default rank 9/10 (0.364)
+  fakeddit@r0.1          best=base:nfmcd_structure_only (0.602)  var:default rank 9/10 (0.202)
+  fakeddit@r0.25         best=base:spectral_graph+content (0.305)  var:default rank 8/10 (0.130)
+  fakeddit@r0.5          best=base:spectral_graph+content (0.102)  var:default rank 3/10 (0.031)
+  fakeddit@r1.0          best=base:kmeans_content (0.072)  var:default rank 3/10 (0.020)

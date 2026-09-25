@@ -1,0 +1,39 @@
+Loading dblp...
+Loaded dblp in 0.8s
+==============================================================================
+NF-MCD real-data experiment: dblp
+==============================================================================
+
+Graph: 1072 nodes, 2766 edges, 1 connected components
+Communities (proxy groups: snap_dblp): 8 -> ['community_0', 'community_1', 'community_2', 'community_3', 'community_4', 'community_5', 'community_6', 'community_7']
+Nodes with text: 0/1072  |  Nodes with image: 0/1072
+
+Encoding real text/image content via nf_mcd.encoders.MultimodalEncoder (sentence-transformers + CLIP)...
+Encoding done in 14.0s (text backend=sentence-transformers, image backend=clip)
+
+Scanning k in [7, 8, 9] (selecting by modularity of the hard partition)...
+  k=7: modularity=0.8207, fcm_iters=11, final_obj=135.643
+  k=8: modularity=0.8476, fcm_iters=10, final_obj=96.357
+  k=9: modularity=0.8520, fcm_iters=12, final_obj=103.188
+
+Selected k=9 (modularity=0.8520)
+
+Evaluation:
+          modularity: 0.8520
+     overlapping_nmi: 0.6155
+       membership_f1: 0.6334
+       rule_fidelity: 0.1688
+
+------------------------------------------------------------------------------
+Example per-node explanations
+------------------------------------------------------------------------------
+
+[none]
+  Node 0: assigned to community 8 with membership 1.00 (secondary memberships: community 1 (0.00), community 2 (0.00)). No content (text or image) was available for this node; the assignment is driven entirely by network structure.
+
+------------------------------------------------------------------------------
+Extracted global fuzzy rules
+------------------------------------------------------------------------------
+  IF cross-modal confidence is Low AND content-trust (alpha) is Low THEN dominant community is 0 (support=1072 nodes, purity=17%)
+
+Saved visualization to C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\dblp_output.png

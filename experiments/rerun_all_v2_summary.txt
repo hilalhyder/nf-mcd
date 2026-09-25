@@ -1,0 +1,34 @@
+﻿
+INFO nf_mcd.datasets: CrisisMMD: downloaded 800/800 images (0 failed)
+Selected k=6 (modularity=0.5288)
+          modularity: 0.5288
+     overlapping_nmi: 0.5987
+       membership_f1: 0.6895
+       rule_fidelity: 0.3050
+[crisismmd] done, log at C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\crisismmd_run.log
+Selected k=10 (modularity=0.8908)
+          modularity: 0.8908
+     overlapping_nmi: 0.0000
+       membership_f1: 0.2218
+       rule_fidelity: 0.1270
+[pheme] done, log at C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\pheme_run.log
+Selected k=11 (modularity=0.3123)
+          modularity: 0.3123
+     overlapping_nmi: 0.3029
+       membership_f1: 0.2663
+       rule_fidelity: 0.3925
+[fakeddit] done, log at C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\fakeddit_run.log
+Selected k=9 (modularity=0.8520)
+          modularity: 0.8520
+     overlapping_nmi: 0.6155
+       membership_f1: 0.6334
+       rule_fidelity: 0.1688
+[dblp] done, log at C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\dblp_run.log
+Selected k=5 (modularity=0.7340)
+          modularity: 0.7340
+     overlapping_nmi: 0.3570
+       membership_f1: 0.5522
+       rule_fidelity: 0.3493
+[amazon] done, log at C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\amazon_run.log
+
+

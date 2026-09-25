@@ -1,0 +1,78 @@
+==============================================================================
+Scenario: synthetic demo.py setup
+==============================================================================
+Refit modularity=0.4698 (expected ~0.47 from README)
+
+[demo_synthetic] own=0.7004  LFK=0.7005 (diff -0.0001)  MGH=0.6969 (diff +0.0035)  pred_comms=4 (empty=0)  true_comms=4 (empty=0)
+
+==============================================================================
+Scenario: crisismmd
+==============================================================================
+Loaded crisismmd in 292.6s (800 nodes, 4889 edges)
+  k=6: modularity=0.5189
+  k=7: modularity=0.5145
+  k=8: modularity=0.4781
+Selected k=6 (modularity=0.5189)
+
+[crisismmd] own=0.6489  LFK=0.6540 (diff -0.0050)  MGH=0.6105 (diff +0.0385)  pred_comms=6 (empty=0)  true_comms=6 (empty=0)
+
+==============================================================================
+Scenario: pheme
+==============================================================================
+Loaded pheme in 1.0s (2000 nodes, 1841 edges)
+  k=8: modularity=0.8671
+  k=9: modularity=0.7969
+  k=10: modularity=0.8693
+Selected k=10 (modularity=0.8693)
+
+[pheme] own=0.0808  LFK=0.0000 (diff +0.0808)  MGH=0.0000 (diff +0.0808)  pred_comms=10 (empty=0)  true_comms=10 (empty=1)
+
+==============================================================================
+Scenario: fakeddit
+==============================================================================
+Loaded fakeddit in 53.2s (1200 nodes, 12529 edges)
+  k=9: modularity=0.3777
+  k=10: modularity=0.3395
+  k=11: modularity=0.3293
+Selected k=9 (modularity=0.3777)
+
+[fakeddit] own=0.7295  LFK=0.7808 (diff -0.0513)  MGH=0.7995 (diff -0.0700)  pred_comms=9 (empty=0)  true_comms=9 (empty=0)
+
+==============================================================================
+Scenario: dblp
+==============================================================================
+Loaded dblp in 0.6s (435 nodes, 1683 edges)
+  k=7: modularity=0.7091
+  k=8: modularity=0.7706
+  k=9: modularity=0.7868
+Selected k=9 (modularity=0.7868)
+
+[dblp] own=0.6368  LFK=0.7500 (diff -0.1131)  MGH=0.6897 (diff -0.0529)  pred_comms=9 (empty=0)  true_comms=9 (empty=1)
+
+==============================================================================
+Scenario: amazon
+==============================================================================
+Loaded amazon in 0.5s (345 nodes, 1190 edges)
+  k=7: modularity=0.8412
+  k=8: modularity=0.7627
+  k=9: modularity=0.8628
+Selected k=9 (modularity=0.8628)
+
+[amazon] own=0.8037  LFK=0.8877 (diff -0.0840)  MGH=0.8876 (diff -0.0839)  pred_comms=9 (empty=0)  true_comms=9 (empty=1)
+
+====================================================================================================
+COMPARISON: own overlapping_nmi() vs. reference implementations (cdlib)
+====================================================================================================
+dataset            own     LFK  diff_LFK     MGH  diff_MGH
+----------------------------------------------------------
+demo_synthetic  0.7004  0.7005   -0.0001  0.6969   +0.0035
+crisismmd       0.6489  0.6540   -0.0050  0.6105   +0.0385
+pheme           0.0808  0.0000   +0.0808  0.0000   +0.0808
+fakeddit        0.7295  0.7808   -0.0513  0.7995   -0.0700
+dblp            0.6368  0.7500   -0.1131  0.6897   -0.0529
+amazon          0.8037  0.8877   -0.0840  0.8876   -0.0839
+
+Mean signed diff vs LFK: -0.0288   Mean abs diff vs LFK: 0.0557
+Mean signed diff vs MGH: -0.0140   Mean abs diff vs MGH: 0.0549
+Max abs diff vs LFK: 0.1131 (dblp)
+Max abs diff vs MGH: 0.0839 (amazon)

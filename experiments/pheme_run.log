@@ -1,0 +1,39 @@
+Loading pheme...
+Loaded pheme in 13.8s
+==============================================================================
+NF-MCD real-data experiment: pheme
+==============================================================================
+
+Graph: 2000 nodes, 1841 edges, 159 connected components
+Communities (proxy groups: pheme): 9 -> ['charliehebdo-all-rnr-threads', 'ebola-essien-all-rnr-threads', 'ferguson-all-rnr-threads', 'germanwings-crash-all-rnr-threads', 'gurlitt-all-rnr-threads', 'ottawashooting-all-rnr-threads', 'prince-toronto-all-rnr-threads', 'putinmissing-all-rnr-threads', 'sydneysiege-all-rnr-threads']
+Nodes with text: 2000/2000  |  Nodes with image: 0/2000
+
+Encoding real text/image content via nf_mcd.encoders.MultimodalEncoder (sentence-transformers + CLIP)...
+Encoding done in 22.6s (text backend=sentence-transformers, image backend=clip)
+
+Scanning k in [8, 9, 10] (selecting by modularity of the hard partition)...
+  k=8: modularity=0.8484, fcm_iters=42, final_obj=570.885
+  k=9: modularity=0.8652, fcm_iters=47, final_obj=584.721
+  k=10: modularity=0.8908, fcm_iters=107, final_obj=566.041
+
+Selected k=10 (modularity=0.8908)
+
+Evaluation:
+          modularity: 0.8908
+     overlapping_nmi: 0.0000
+       membership_f1: 0.2218
+       rule_fidelity: 0.1270
+
+------------------------------------------------------------------------------
+Example per-node explanations
+------------------------------------------------------------------------------
+
+[text_only]
+  Node 0: assigned to community 9 with membership 0.56 (secondary memberships: community 2 (0.10), community 4 (0.08)). Image was unavailable for this node; assignment relies mainly on text content and structure (alpha=0.15, trust in content is low).
+
+------------------------------------------------------------------------------
+Extracted global fuzzy rules
+------------------------------------------------------------------------------
+  IF cross-modal confidence is Low AND content-trust (alpha) is Low THEN dominant community is 3 (support=2000 nodes, purity=13%)
+
+Saved visualization to C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\pheme_output.png

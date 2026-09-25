@@ -1,0 +1,6 @@
+crisismmd agreement     n=  800 mean_conf=0.643 content-cluster accuracy=0.362 spearman(conf, correct)=+0.050
+crisismmd consistency   n=  800 mean_conf=0.499 content-cluster accuracy=0.362 spearman(conf, correct)=+0.388
+fakeddit  agreement     n= 1200 mean_conf=0.614 content-cluster accuracy=0.293 spearman(conf, correct)=-0.011
+fakeddit  consistency   n= 1200 mean_conf=0.476 content-cluster accuracy=0.293 spearman(conf, correct)=+0.356
+pheme     agreement     n= 2000 mean_conf=0.000 content-cluster accuracy=0.336 spearman(conf, correct)=+nan
+pheme     consistency   n= 2000 mean_conf=0.489 content-cluster accuracy=0.336 spearman(conf, correct)=+0.215

@@ -1,0 +1,46 @@
+Loading fakeddit...
+Loaded fakeddit in 46.3s
+==============================================================================
+NF-MCD real-data experiment: fakeddit
+==============================================================================
+
+Graph: 1200 nodes, 12529 edges, 1 connected components
+Communities (proxy groups: fakeddit): 10 -> ['fakealbumcovers', 'fakehistoryporn', 'mildlyinteresting', 'misleadingthumbnails', 'nottheonion', 'pareidolia', 'photoshopbattles', 'propagandaposters', 'psbattle_artwork', 'upliftingnews']
+Nodes with text: 1200/1200  |  Nodes with image: 1143/1200
+
+Encoding real text/image content via nf_mcd.encoders.MultimodalEncoder (sentence-transformers + CLIP)...
+Encoding done in 54.7s (text backend=sentence-transformers, image backend=clip)
+
+Scanning k in [9, 10, 11] (selecting by modularity of the hard partition)...
+  k=9: modularity=0.2912, fcm_iters=18, final_obj=372.602
+  k=10: modularity=0.2840, fcm_iters=34, final_obj=354.792
+  k=11: modularity=0.3123, fcm_iters=64, final_obj=339.295
+
+Selected k=11 (modularity=0.3123)
+
+Evaluation:
+          modularity: 0.3123
+     overlapping_nmi: 0.3029
+       membership_f1: 0.2663
+       rule_fidelity: 0.3925
+
+------------------------------------------------------------------------------
+Example per-node explanations
+------------------------------------------------------------------------------
+
+[both]
+  Node 0: assigned to community 4 with membership 0.12 (secondary memberships: community 8 (0.12), community 10 (0.12)). IF cross-modal agreement is High (similarity 0.96, membership 0.85) THEN fusion confidence is ~0.90. Because agreement confidence is 0.74, the fusion trusts content highly (alpha=0.67) relative to structure.
+
+[text_only]
+  Node 32: assigned to community 3 with membership 0.11 (secondary memberships: community 2 (0.11), community 0 (0.11)). Image was unavailable for this node; assignment relies mainly on text content and structure (alpha=0.15, trust in content is low).
+
+------------------------------------------------------------------------------
+Extracted global fuzzy rules
+------------------------------------------------------------------------------
+  IF cross-modal confidence is High AND content-trust (alpha) is Medium THEN dominant community is 9 (support=541 nodes, purity=39%)
+  IF cross-modal confidence is Medium AND content-trust (alpha) is Medium THEN dominant community is 9 (support=382 nodes, purity=35%)
+  IF cross-modal confidence is High AND content-trust (alpha) is High THEN dominant community is 9 (support=172 nodes, purity=46%)
+  IF cross-modal confidence is Low AND content-trust (alpha) is Low THEN dominant community is 3 (support=89 nodes, purity=37%)
+  IF cross-modal confidence is Low AND content-trust (alpha) is Medium THEN dominant community is 10 (support=16 nodes, purity=75%)
+
+Saved visualization to C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\fakeddit_output.png

@@ -1,0 +1,231 @@
+Structured (MAR/MNAR) missing-modality test. mean+-sd over 3 seeds per cell (p=0 shared across schemes).
+k = ground-truth community count; metrics on ALL nodes; LFK ONMI unless stated.
+'affected' group definition per scheme: mcar_control=n/a; by_community=target community's members;
+rank-based schemes=top 25% by susceptibility weight (see module docstring for direction per scheme).
+jobs finished: 909
+
+Realised no-content fraction (mean over seeds) vs nominal p, by scheme (crisismmd/both-equivalent 'both' mode)
+  crisismmd         mcar_control    p=0.2:0.04 p=0.4:0.16 p=0.6:0.37 p=0.8:0.64
+  crisismmd         by_community    p=0.2:0.06 p=0.4:0.25 p=0.6:0.35 p=0.8:0.42
+  crisismmd         by_degree_low   p=0.2:0.06 p=0.4:0.23 p=0.6:0.44 p=0.8:0.58
+  crisismmd         by_degree_high  p=0.2:0.05 p=0.4:0.21 p=0.6:0.44 p=0.8:0.59
+  crisismmd         by_typical      p=0.2:0.05 p=0.4:0.22 p=0.6:0.44 p=0.8:0.58
+  crisismmd         by_atypical     p=0.2:0.06 p=0.4:0.22 p=0.6:0.45 p=0.8:0.58
+  fakeddit          mcar_control    p=0.2:0.05 p=0.4:0.17 p=0.6:0.37 p=0.8:0.64
+  fakeddit          by_community    p=0.2:0.06 p=0.4:0.25 p=0.6:0.40 p=0.8:0.45
+  fakeddit          by_degree_low   p=0.2:0.06 p=0.4:0.22 p=0.6:0.45 p=0.8:0.59
+  fakeddit          by_degree_high  p=0.2:0.06 p=0.4:0.22 p=0.6:0.45 p=0.8:0.59
+  fakeddit          by_typical      p=0.2:0.06 p=0.4:0.21 p=0.6:0.45 p=0.8:0.58
+  fakeddit          by_atypical     p=0.2:0.06 p=0.4:0.22 p=0.6:0.44 p=0.8:0.58
+  fakeddit_real_lcc mcar_control    p=0.2:0.05 p=0.4:0.18 p=0.6:0.38 p=0.8:0.64
+  fakeddit_real_lcc by_community    p=0.2:0.05 p=0.4:0.22 p=0.6:0.45 p=0.8:0.69
+  fakeddit_real_lcc by_degree_low   p=0.2:0.05 p=0.4:0.23 p=0.6:0.46 p=0.8:0.59
+  fakeddit_real_lcc by_degree_high  p=0.2:0.06 p=0.4:0.23 p=0.6:0.45 p=0.8:0.60
+  fakeddit_real_lcc by_typical      p=0.2:0.06 p=0.4:0.22 p=0.6:0.45 p=0.8:0.58
+  fakeddit_real_lcc by_atypical     p=0.2:0.06 p=0.4:0.24 p=0.6:0.46 p=0.8:0.58
+
+=== crisismmd: LFK ONMI vs p, by scheme (MCAR reference from run_missing.py in brackets) ===
+method/scheme                            p=0.0         p=0.2         p=0.4         p=0.6         p=0.8
+nfmcd_full  [MCAR ref]                 [0.610]                     [0.600]                     [0.597]
+  mcar_control                    0.609+-0.016  0.574+-0.016  0.605+-0.017  0.548+-0.003  0.568+-0.026
+  by_community                    0.609+-0.016  0.640+-0.007  0.613+-0.014  0.612+-0.007  0.600+-0.002
+  by_degree_low                   0.609+-0.016  0.556+-0.014  0.580+-0.009  0.608+-0.014  0.549+-0.002
+  by_degree_high                  0.609+-0.016  0.619+-0.022  0.626+-0.005  0.618+-0.003  0.617+-0.003
+  by_typical                      0.609+-0.016  0.573+-0.026  0.588+-0.011  0.595+-0.003  0.550+-0.003
+  by_atypical                     0.609+-0.016  0.621+-0.023  0.623+-0.012  0.616+-0.006  0.601+-0.003
+nfmcd_robust  [MCAR ref]                                                                              
+  mcar_control                    0.707+-0.002  0.681+-0.002  0.627+-0.008  0.551+-0.002  0.550+-0.001
+  by_community                    0.707+-0.002  0.690+-0.002  0.646+-0.021  0.665+-0.025  0.635+-0.060
+  by_degree_low                   0.707+-0.002  0.640+-0.023  0.623+-0.033  0.588+-0.054  0.549+-0.001
+  by_degree_high                  0.707+-0.002  0.669+-0.016  0.639+-0.005  0.628+-0.007  0.622+-0.003
+  by_typical                      0.707+-0.002  0.657+-0.026  0.603+-0.007  0.592+-0.059  0.549+-0.001
+  by_atypical                     0.707+-0.002  0.675+-0.006  0.626+-0.017  0.617+-0.003  0.561+-0.003
+spectral_graph+content  [MCAR ref]       [0.879]                     [0.759]                     [0.457]
+  mcar_control                    0.879+-0.000  0.813+-0.005  0.711+-0.053  0.532+-0.050  0.461+-0.042
+  by_community                    0.879+-0.000  0.841+-0.015  0.835+-0.008  0.784+-0.023  0.706+-0.065
+  by_degree_low                   0.879+-0.000  0.682+-0.067  0.523+-0.076  0.506+-0.007  0.552+-0.029
+  by_degree_high                  0.879+-0.000  0.871+-0.006  0.888+-0.018  0.899+-0.024  0.889+-0.009
+  by_typical                      0.879+-0.000  0.789+-0.017  0.563+-0.011  0.490+-0.038  0.491+-0.053
+  by_atypical                     0.879+-0.000  0.846+-0.009  0.722+-0.077  0.737+-0.043  0.778+-0.055
+kmeans_content  [MCAR ref]             [0.400]                     [0.076]                     [0.001]
+  mcar_control                    0.407+-0.011  0.169+-0.007  0.047+-0.035  0.018+-0.026  0.013+-0.015
+  by_community                    0.407+-0.011  0.264+-0.021  0.242+-0.028  0.175+-0.053  0.131+-0.025
+  by_degree_low                   0.407+-0.011  0.120+-0.010  0.069+-0.025  0.071+-0.015  0.053+-0.011
+  by_degree_high                  0.407+-0.011  0.229+-0.012  0.155+-0.018  0.184+-0.072  0.209+-0.057
+  by_typical                      0.407+-0.011  0.114+-0.021  0.046+-0.027  0.012+-0.001  0.015+-0.002
+  by_atypical                     0.407+-0.011  0.229+-0.003  0.188+-0.006  0.112+-0.034  0.082+-0.015
+louvain  [MCAR ref]                    [0.555]                     [0.555]                     [0.555]
+  mcar_control                    0.556+-0.018             -             -             -             -
+  by_community                    0.556+-0.018             -             -             -             -
+  by_degree_low                   0.556+-0.018             -             -             -             -
+  by_degree_high                  0.556+-0.018             -             -             -             -
+  by_typical                      0.556+-0.018             -             -             -             -
+  by_atypical                     0.556+-0.018             -             -             -             -
+
+=== fakeddit: LFK ONMI vs p, by scheme (MCAR reference from run_missing.py in brackets) ===
+method/scheme                            p=0.0         p=0.2         p=0.4         p=0.6         p=0.8
+nfmcd_full  [MCAR ref]                 [0.344]                     [0.674]                     [0.815]
+  mcar_control                    0.308+-0.053  0.496+-0.064  0.696+-0.012  0.811+-0.007  0.798+-0.030
+  by_community                    0.308+-0.053  0.358+-0.070  0.614+-0.110  0.699+-0.014  0.711+-0.009
+  by_degree_low                   0.308+-0.053  0.640+-0.106  0.726+-0.013  0.757+-0.003  0.754+-0.001
+  by_degree_high                  0.308+-0.053  0.409+-0.086  0.634+-0.017  0.728+-0.007  0.724+-0.008
+  by_typical                      0.308+-0.053  0.458+-0.031  0.672+-0.031  0.731+-0.055  0.812+-0.007
+  by_atypical                     0.308+-0.053  0.562+-0.046  0.676+-0.004  0.775+-0.044  0.796+-0.012
+nfmcd_robust  [MCAR ref]                                                                              
+  mcar_control                    0.836+-0.018  0.682+-0.016  0.719+-0.003  0.819+-0.004  0.825+-0.005
+  by_community                    0.836+-0.018  0.783+-0.015  0.690+-0.013  0.740+-0.046  0.701+-0.009
+  by_degree_low                   0.836+-0.018  0.735+-0.007  0.812+-0.001  0.822+-0.001  0.820+-0.001
+  by_degree_high                  0.836+-0.018  0.753+-0.025  0.671+-0.026  0.760+-0.005  0.735+-0.004
+  by_typical                      0.836+-0.018  0.717+-0.050  0.731+-0.017  0.818+-0.002  0.819+-0.004
+  by_atypical                     0.836+-0.018  0.694+-0.022  0.727+-0.012  0.812+-0.003  0.811+-0.002
+spectral_graph+content  [MCAR ref]       [0.557]                     [0.694]                     [0.672]
+  mcar_control                    0.554+-0.004  0.588+-0.062  0.633+-0.059  0.677+-0.016  0.678+-0.026
+  by_community                    0.554+-0.004  0.538+-0.002  0.548+-0.018  0.558+-0.013  0.579+-0.010
+  by_degree_low                   0.554+-0.004  0.606+-0.053  0.702+-0.044  0.787+-0.015  0.834+-0.004
+  by_degree_high                  0.554+-0.004  0.549+-0.016  0.614+-0.037  0.623+-0.048  0.695+-0.073
+  by_typical                      0.554+-0.004  0.592+-0.049  0.616+-0.052  0.645+-0.026  0.658+-0.020
+  by_atypical                     0.554+-0.004  0.581+-0.048  0.698+-0.019  0.711+-0.014  0.736+-0.012
+kmeans_content  [MCAR ref]             [0.067]                     [0.015]                     [0.002]
+  mcar_control                    0.072+-0.013  0.042+-0.014  0.008+-0.002  0.001+-0.001  0.001+-0.000
+  by_community                    0.072+-0.013  0.011+-0.007  0.044+-0.029  0.074+-0.048  0.060+-0.024
+  by_degree_low                   0.072+-0.013  0.054+-0.009  0.049+-0.010  0.069+-0.008  0.089+-0.015
+  by_degree_high                  0.072+-0.013  0.031+-0.009  0.025+-0.025  0.092+-0.004  0.135+-0.020
+  by_typical                      0.072+-0.013  0.025+-0.005  0.004+-0.005  0.008+-0.001  0.009+-0.001
+  by_atypical                     0.072+-0.013  0.046+-0.013  0.052+-0.032  0.048+-0.030  0.048+-0.021
+louvain  [MCAR ref]                    [0.650]                     [0.650]                     [0.650]
+  mcar_control                    0.665+-0.026             -             -             -             -
+  by_community                    0.665+-0.026             -             -             -             -
+  by_degree_low                   0.665+-0.026             -             -             -             -
+  by_degree_high                  0.665+-0.026             -             -             -             -
+  by_typical                      0.665+-0.026             -             -             -             -
+  by_atypical                     0.665+-0.026             -             -             -             -
+
+=== fakeddit_real_lcc: LFK ONMI vs p, by scheme (MCAR reference from run_missing.py in brackets) ===
+method/scheme                            p=0.0         p=0.2         p=0.4         p=0.6         p=0.8
+nfmcd_full  [MCAR ref]                 [0.139]                     [0.192]                     [0.196]
+  mcar_control                    0.126+-0.019  0.194+-0.010  0.171+-0.003  0.177+-0.024  0.199+-0.022
+  by_community                    0.126+-0.019  0.158+-0.005  0.165+-0.004  0.172+-0.016  0.160+-0.003
+  by_degree_low                   0.126+-0.019  0.203+-0.002  0.204+-0.001  0.208+-0.002  0.207+-0.003
+  by_degree_high                  0.126+-0.019  0.157+-0.008  0.150+-0.007  0.167+-0.000  0.168+-0.001
+  by_typical                      0.126+-0.019  0.190+-0.033  0.212+-0.002  0.209+-0.001  0.213+-0.009
+  by_atypical                     0.126+-0.019  0.166+-0.005  0.186+-0.023  0.177+-0.023  0.204+-0.014
+nfmcd_robust  [MCAR ref]                                                                              
+  mcar_control                    0.195+-0.000  0.192+-0.006  0.180+-0.012  0.201+-0.008  0.206+-0.006
+  by_community                    0.195+-0.000  0.177+-0.003  0.167+-0.002  0.169+-0.002  0.166+-0.000
+  by_degree_low                   0.195+-0.000  0.203+-0.000  0.204+-0.000  0.204+-0.000  0.206+-0.001
+  by_degree_high                  0.195+-0.000  0.178+-0.008  0.170+-0.003  0.166+-0.001  0.166+-0.000
+  by_typical                      0.195+-0.000  0.201+-0.009  0.198+-0.011  0.200+-0.008  0.200+-0.007
+  by_atypical                     0.195+-0.000  0.180+-0.006  0.171+-0.002  0.200+-0.005  0.207+-0.004
+spectral_graph+content  [MCAR ref]       [0.523]                     [0.515]                     [0.347]
+  mcar_control                    0.523+-0.000  0.520+-0.003  0.517+-0.007  0.516+-0.013  0.396+-0.074
+  by_community                    0.523+-0.000  0.519+-0.007  0.398+-0.023  0.180+-0.060  0.115+-0.003
+  by_degree_low                   0.523+-0.000  0.516+-0.004  0.460+-0.076  0.053+-0.004  0.132+-0.000
+  by_degree_high                  0.523+-0.000  0.521+-0.002  0.355+-0.011  0.268+-0.055  0.306+-0.041
+  by_typical                      0.523+-0.000  0.520+-0.003  0.505+-0.005  0.499+-0.006  0.323+-0.003
+  by_atypical                     0.523+-0.000  0.520+-0.001  0.517+-0.007  0.422+-0.062  0.520+-0.003
+kmeans_content  [MCAR ref]             [0.250]                     [0.069]                     [0.029]
+  mcar_control                    0.253+-0.005  0.128+-0.004  0.072+-0.040  0.073+-0.038  0.021+-0.002
+  by_community                    0.253+-0.005  0.184+-0.014  0.154+-0.023  0.169+-0.025  0.265+-0.039
+  by_degree_low                   0.253+-0.005  0.168+-0.014  0.137+-0.001  0.132+-0.001  0.110+-0.040
+  by_degree_high                  0.253+-0.005  0.111+-0.008  0.023+-0.003  0.031+-0.004  0.040+-0.007
+  by_typical                      0.253+-0.005  0.059+-0.023  0.016+-0.002  0.030+-0.003  0.033+-0.010
+  by_atypical                     0.253+-0.005  0.172+-0.007  0.157+-0.005  0.149+-0.011  0.140+-0.006
+louvain  [MCAR ref]                    [0.313]                     [0.313]                     [0.313]
+  mcar_control                    0.313+-0.000             -             -             -             -
+  by_community                    0.313+-0.000             -             -             -             -
+  by_degree_low                   0.313+-0.000             -             -             -             -
+  by_degree_high                  0.313+-0.000             -             -             -             -
+  by_typical                      0.313+-0.000             -             -             -             -
+  by_atypical                     0.313+-0.000             -             -             -             -
+
+=== Bias check: affected-group vs background-group strict accuracy (Hungarian-aligned), p=0.8 ===
+A scheme is biased if acc_affected << acc_background AND that gap exceeds mcar_control's gap at the same p.
+dataset           scheme          method                 acc_bg  acc_aff      gap  mcar_gap   excess
+crisismmd         by_community    nfmcd_full              0.879    0.957   -0.078     0.875   -0.082
+crisismmd         by_degree_low   nfmcd_full              0.956    0.695    0.261     0.875    0.180
+crisismmd         by_degree_high  nfmcd_full              0.892    0.987   -0.094     0.875   -0.111
+crisismmd         by_typical      nfmcd_full              0.901    0.843    0.057     0.875    0.032
+crisismmd         by_atypical     nfmcd_full              0.895    0.922   -0.027     0.875   -0.046
+crisismmd         by_community    nfmcd_robust            0.799    0.953   -0.154     0.892   -0.061
+crisismmd         by_degree_low   nfmcd_robust            0.957    0.695    0.262     0.892    0.197
+crisismmd         by_degree_high  nfmcd_robust            0.876    0.980   -0.104     0.892   -0.088
+crisismmd         by_typical      nfmcd_robust            0.904    0.847    0.058     0.892    0.045
+crisismmd         by_atypical     nfmcd_robust            0.904    0.895    0.009     0.892   -0.003
+crisismmd         by_community    spectral_graph+content    0.877    1.000   -0.123     0.844   -0.156
+crisismmd         by_degree_low   spectral_graph+content    0.983    0.630    0.353     0.844    0.214
+crisismmd         by_degree_high  spectral_graph+content    0.968    1.000   -0.032     0.844   -0.156
+crisismmd         by_typical      spectral_graph+content    0.870    0.835    0.035     0.844    0.009
+crisismmd         by_atypical     spectral_graph+content    0.958    0.918    0.039     0.844   -0.075
+crisismmd         by_community    kmeans_content          0.268    1.000   -0.732     0.269   -0.731
+crisismmd         by_degree_low   kmeans_content          0.206    0.295   -0.089     0.269   -0.026
+crisismmd         by_degree_high  kmeans_content          0.376    0.460   -0.084     0.269   -0.191
+crisismmd         by_typical      kmeans_content          0.272    0.212    0.060     0.269    0.057
+crisismmd         by_atypical     kmeans_content          0.338    0.283    0.054     0.269   -0.015
+fakeddit          by_community    nfmcd_full              0.895    0.591    0.304     0.789    0.198
+fakeddit          by_degree_low   nfmcd_full              0.757    0.792   -0.035     0.789   -0.003
+fakeddit          by_degree_high  nfmcd_full              0.881    0.736    0.146     0.789    0.054
+fakeddit          by_typical      nfmcd_full              0.815    0.808    0.007     0.789   -0.018
+fakeddit          by_atypical     nfmcd_full              0.776    0.877   -0.101     0.789   -0.087
+fakeddit          by_community    nfmcd_robust            0.924    0.987   -0.062     0.959   -0.028
+fakeddit          by_degree_low   nfmcd_robust            0.828    0.853   -0.026     0.959    0.106
+fakeddit          by_degree_high  nfmcd_robust            0.937    0.984   -0.048     0.959   -0.026
+fakeddit          by_typical      nfmcd_robust            0.865    0.850    0.015     0.959    0.109
+fakeddit          by_atypical     nfmcd_robust            0.771    0.867   -0.096     0.959    0.092
+fakeddit          by_community    spectral_graph+content    0.760    1.000   -0.240     0.885   -0.115
+fakeddit          by_degree_low   spectral_graph+content    0.984    0.867    0.117     0.885    0.018
+fakeddit          by_degree_high  spectral_graph+content    0.860    1.000   -0.140     0.885   -0.115
+fakeddit          by_typical      spectral_graph+content    0.883    0.949   -0.066     0.885   -0.064
+fakeddit          by_atypical     spectral_graph+content    0.919    0.927   -0.008     0.885   -0.042
+fakeddit          by_community    kmeans_content          0.229    1.000   -0.771     0.314   -0.686
+fakeddit          by_degree_low   kmeans_content          0.286    0.103    0.183     0.314    0.211
+fakeddit          by_degree_high  kmeans_content          0.281    1.000   -0.719     0.314   -0.686
+fakeddit          by_typical      kmeans_content          0.307    0.343   -0.036     0.314   -0.029
+fakeddit          by_atypical     kmeans_content          0.350    0.217    0.134     0.314    0.097
+fakeddit_real_lcc by_community    nfmcd_full              0.439    0.335    0.104     0.393    0.058
+fakeddit_real_lcc by_degree_low   nfmcd_full              0.408    0.351    0.056     0.393    0.042
+fakeddit_real_lcc by_degree_high  nfmcd_full              0.426    0.297    0.128     0.393    0.096
+fakeddit_real_lcc by_typical      nfmcd_full              0.441    0.333    0.107     0.393    0.060
+fakeddit_real_lcc by_atypical     nfmcd_full              0.402    0.363    0.040     0.393    0.030
+fakeddit_real_lcc by_community    nfmcd_robust            0.439    0.370    0.070     0.394    0.024
+fakeddit_real_lcc by_degree_low   nfmcd_robust            0.408    0.351    0.056     0.394    0.042
+fakeddit_real_lcc by_degree_high  nfmcd_robust            0.426    0.297    0.128     0.394    0.096
+fakeddit_real_lcc by_typical      nfmcd_robust            0.435    0.270    0.164     0.394    0.123
+fakeddit_real_lcc by_atypical     nfmcd_robust            0.396    0.385    0.011     0.394    0.008
+fakeddit_real_lcc by_community    spectral_graph+content    0.003    0.432   -0.429     0.686    0.254
+fakeddit_real_lcc by_degree_low   spectral_graph+content    0.745    0.203    0.543     0.686    0.484
+fakeddit_real_lcc by_degree_high  spectral_graph+content    0.574    0.574   -0.001     0.686    0.112
+fakeddit_real_lcc by_typical      spectral_graph+content    0.664    0.577    0.087     0.686    0.110
+fakeddit_real_lcc by_atypical     spectral_graph+content    0.791    0.601    0.190     0.686    0.085
+fakeddit_real_lcc by_community    kmeans_content          0.354    1.000   -0.646     0.543   -0.457
+fakeddit_real_lcc by_degree_low   kmeans_content          0.443    0.635   -0.192     0.543   -0.092
+fakeddit_real_lcc by_degree_high  kmeans_content          0.495    0.608   -0.113     0.543   -0.065
+fakeddit_real_lcc by_typical      kmeans_content          0.456    0.547   -0.091     0.543   -0.004
+fakeddit_real_lcc by_atypical     kmeans_content          0.507    0.676   -0.169     0.543   -0.132
+
+(gap = acc_background - acc_affected at p=0.8; mcar_gap column actually shows mcar_control's overall
+ accuracy at p=0.8 as the unbiased reference level, since mcar_control has no natural affected group;
+ 'excess' = mcar_control_overall - acc_affected: how much worse the affected group does vs the MCAR
+ baseline level at the same overall missing rate. Large positive excess = real bias beyond MCAR.)
+
+=== NF-MCD's fuzzy layer: mean confidence / alpha at p=0.8, by scheme (nfmcd_full) ===
+(flag='none' is a structural guarantee from fuzzy_fusion.py, not scheme-dependent: it always fires
+ exactly when a node has neither modality, regardless of WHY that node lost content.)
+dataset           scheme             conf  alpha  frac_nocontent
+crisismmd         mcar_control       0.02   0.16            0.64
+crisismmd         by_community       0.14   0.24            0.42
+crisismmd         by_degree_low      0.12   0.24            0.58
+crisismmd         by_degree_high     0.13   0.24            0.59
+crisismmd         by_typical         0.12   0.24            0.58
+crisismmd         by_atypical        0.14   0.24            0.58
+fakeddit          mcar_control       0.01   0.16            0.64
+fakeddit          by_community       0.14   0.25            0.45
+fakeddit          by_degree_low      0.12   0.23            0.59
+fakeddit          by_degree_high     0.13   0.24            0.59
+fakeddit          by_typical         0.10   0.22            0.58
+fakeddit          by_atypical        0.13   0.24            0.58
+fakeddit_real_lcc mcar_control       0.01   0.16            0.64
+fakeddit_real_lcc by_community       0.10   0.22            0.69
+fakeddit_real_lcc by_degree_low      0.12   0.24            0.59
+fakeddit_real_lcc by_degree_high     0.11   0.23            0.60
+fakeddit_real_lcc by_typical         0.09   0.22            0.58
+fakeddit_real_lcc by_atypical        0.11   0.23            0.58

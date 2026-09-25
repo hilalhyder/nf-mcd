@@ -1,0 +1,16 @@
+# Core (required)
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3   # CCA + PCA (cross-modal alignment) and Hungarian matching (metrics)
+networkx>=3.0
+matplotlib>=3.7
+cdlib>=0.4        # reference LFK overlapping NMI (nf_mcd.metrics.overlapping_nmi)
+
+# Optional, for real multimodal encoders (nf_mcd.encoders).
+# Without these installed (and network access to download pretrained
+# weights), NFMCD automatically falls back to deterministic pseudo-random
+# embeddings, which is fine for development/testing but NOT for real
+# experiments.
+sentence-transformers>=2.2
+transformers>=4.30
+torch>=2.0

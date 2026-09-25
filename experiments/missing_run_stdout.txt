@@ -1,0 +1,358 @@
+﻿0/2556 jobs already in CSV; running 2556
+done: 2556/2556 jobs, 0 errors, 418s
+Missing-modality robustness sweep (MCAR). mean±sd over mask seeds x method seeds (n=10 per cell; p=0 and constant methods n=2).
+k = ground-truth community count; metrics on ALL nodes; LFK ONMI unless stated.
+louvain and nfmcd_structure_only ignore content: run once, replicated across p (constant).
+jobs finished: 2556
+
+Share of nodes with NO content (mean over mask seeds; includes nodes already lacking modalities in the cache)
+  crisismmd         image  p=0.0:0.00 0.1:0.00 0.2:0.00 0.4:0.00 0.6:0.00 0.8:0.00
+  crisismmd         text   p=0.0:0.00 0.1:0.00 0.2:0.00 0.4:0.00 0.6:0.00 0.8:0.00
+  crisismmd         both   p=0.0:0.00 0.1:0.01 0.2:0.04 0.4:0.16 0.6:0.37 0.8:0.64
+  fakeddit          image  p=0.0:0.00 0.1:0.00 0.2:0.00 0.4:0.00 0.6:0.00 0.8:0.00
+  fakeddit          text   p=0.0:0.00 0.1:0.01 0.2:0.01 0.4:0.02 0.6:0.03 0.8:0.04
+  fakeddit          both   p=0.0:0.00 0.1:0.01 0.2:0.05 0.4:0.18 0.6:0.39 0.8:0.65
+  fakeddit_real_lcc image  p=0.0:0.00 0.1:0.00 0.2:0.00 0.4:0.00 0.6:0.00 0.8:0.00
+  fakeddit_real_lcc text   p=0.0:0.00 0.1:0.00 0.2:0.00 0.4:0.00 0.6:0.01 0.8:0.01
+  fakeddit_real_lcc both   p=0.0:0.00 0.1:0.01 0.2:0.04 0.4:0.18 0.6:0.38 0.8:0.64
+  pheme             text   p=0.0:0.00 0.1:0.10 0.2:0.20 0.4:0.40 0.6:0.61 0.8:0.80
+
+=== crisismmd | removal mode: image | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.610±0.019    0.570±0.052    0.578±0.040    0.589±0.025    0.604±0.011    0.560±0.021
+nfmcd_all_changes           0.724±0.023    0.716±0.031    0.696±0.032    0.663±0.012    0.641±0.030    0.587±0.039
+nfmcd_rank16                0.727±0.032    0.717±0.032    0.703±0.018    0.645±0.014    0.621±0.032    0.591±0.041
+spectral_graph+content      0.879±0.000    0.886±0.009    0.897±0.016    0.906±0.008    0.899±0.018    0.910±0.014
+kmeans_content              0.400±0.006    0.300±0.035    0.265±0.013    0.202±0.033    0.292±0.076    0.356±0.030
+louvain                     0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021
+nfmcd_structure_only        0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025
+
+=== crisismmd | removal mode: text | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.610±0.019    0.611±0.036    0.586±0.049    0.579±0.009    0.594±0.008    0.563±0.023
+nfmcd_all_changes           0.724±0.023    0.712±0.028    0.696±0.032    0.662±0.023    0.640±0.029    0.607±0.032
+nfmcd_rank16                0.727±0.032    0.725±0.026    0.701±0.031    0.625±0.019    0.619±0.025    0.598±0.035
+spectral_graph+content      0.879±0.000    0.838±0.015    0.806±0.013    0.675±0.065    0.433±0.064    0.295±0.061
+kmeans_content              0.400±0.006    0.328±0.036    0.278±0.023    0.144±0.031    0.035±0.026    0.007±0.021
+louvain                     0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021
+nfmcd_structure_only        0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025
+
+=== crisismmd | removal mode: both | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.610±0.019    0.545±0.043    0.590±0.013    0.600±0.011    0.557±0.020    0.597±0.021
+nfmcd_all_changes           0.724±0.023    0.697±0.022    0.675±0.010    0.616±0.043    0.600±0.024    0.601±0.020
+nfmcd_rank16                0.727±0.032    0.700±0.026    0.648±0.018    0.601±0.048    0.588±0.031    0.600±0.008
+spectral_graph+content      0.879±0.000    0.846±0.011    0.840±0.008    0.759±0.012    0.526±0.089    0.457±0.034
+kmeans_content              0.400±0.006    0.230±0.023    0.156±0.042    0.076±0.033    0.035±0.030    0.001±0.001
+louvain                     0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021    0.555±0.021
+nfmcd_structure_only        0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025    0.574±0.025
+
+=== fakeddit | removal mode: image | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.344±0.020    0.330±0.036    0.342±0.056    0.578±0.067    0.670±0.021    0.804±0.031
+nfmcd_all_changes           0.759±0.031    0.745±0.031    0.737±0.020    0.695±0.018    0.773±0.032    0.800±0.026
+nfmcd_rank16                0.734±0.001    0.707±0.040    0.714±0.044    0.712±0.005    0.784±0.034    0.810±0.021
+spectral_graph+content      0.557±0.002    0.570±0.038    0.609±0.046    0.661±0.037    0.655±0.014    0.566±0.034
+kmeans_content              0.067±0.014    0.050±0.022    0.027±0.013    0.016±0.008    0.015±0.006    0.021±0.011
+louvain                     0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019
+nfmcd_structure_only        0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008
+
+=== fakeddit | removal mode: text | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.344±0.020    0.354±0.045    0.300±0.034    0.530±0.104    0.651±0.057    0.804±0.032
+nfmcd_all_changes           0.759±0.031    0.745±0.020    0.730±0.012    0.712±0.030    0.785±0.042    0.814±0.019
+nfmcd_rank16                0.734±0.001    0.731±0.053    0.708±0.059    0.709±0.006    0.775±0.045    0.813±0.019
+spectral_graph+content      0.557±0.002    0.548±0.012    0.549±0.010    0.545±0.020    0.543±0.023    0.524±0.022
+kmeans_content              0.067±0.014    0.068±0.024    0.075±0.023    0.043±0.014    0.046±0.036    0.062±0.040
+louvain                     0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019
+nfmcd_structure_only        0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008
+
+=== fakeddit | removal mode: both | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.344±0.020    0.326±0.044    0.516±0.089    0.674±0.009    0.818±0.002    0.815±0.020
+nfmcd_all_changes           0.759±0.031    0.738±0.017    0.709±0.030    0.789±0.035    0.809±0.019    0.812±0.026
+nfmcd_rank16                0.734±0.001    0.702±0.073    0.721±0.017    0.749±0.041    0.820±0.003    0.825±0.006
+spectral_graph+content      0.557±0.002    0.566±0.035    0.584±0.037    0.694±0.016    0.698±0.019    0.672±0.023
+kmeans_content              0.067±0.014    0.063±0.028    0.030±0.011    0.015±0.019    0.004±0.004    0.002±0.001
+louvain                     0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019    0.650±0.019
+nfmcd_structure_only        0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008    0.825±0.008
+
+=== fakeddit_real_lcc | removal mode: image | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.139±0.003    0.147±0.006    0.148±0.004    0.176±0.018    0.175±0.019    0.194±0.022
+nfmcd_all_changes           0.183±0.027    0.177±0.023    0.172±0.018    0.181±0.022    0.203±0.022    0.202±0.026
+nfmcd_rank16                0.189±0.000    0.182±0.004    0.183±0.008    0.183±0.016    0.195±0.022    0.181±0.022
+spectral_graph+content      0.523±0.000    0.519±0.004    0.518±0.010    0.513±0.010    0.505±0.016    0.499±0.009
+kmeans_content              0.250±0.003    0.196±0.014    0.155±0.011    0.139±0.018    0.130±0.041    0.166±0.021
+louvain                     0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000
+nfmcd_structure_only        0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000
+
+=== fakeddit_real_lcc | removal mode: text | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.139±0.003    0.149±0.010    0.148±0.002    0.185±0.012    0.182±0.024    0.188±0.022
+nfmcd_all_changes           0.183±0.027    0.181±0.026    0.186±0.026    0.205±0.017    0.192±0.024    0.189±0.026
+nfmcd_rank16                0.189±0.000    0.183±0.007    0.186±0.007    0.179±0.018    0.194±0.024    0.186±0.023
+spectral_graph+content      0.523±0.000    0.524±0.002    0.525±0.002    0.523±0.005    0.522±0.006    0.515±0.004
+kmeans_content              0.250±0.003    0.201±0.017    0.173±0.034    0.165±0.020    0.169±0.023    0.180±0.041
+louvain                     0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000
+nfmcd_structure_only        0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000
+
+=== fakeddit_real_lcc | removal mode: both | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.139±0.003    0.149±0.002    0.174±0.016    0.192±0.017    0.190±0.024    0.196±0.024
+nfmcd_all_changes           0.183±0.027    0.179±0.025    0.209±0.013    0.198±0.021    0.185±0.023    0.199±0.025
+nfmcd_rank16                0.189±0.000    0.179±0.003    0.183±0.009    0.194±0.026    0.186±0.025    0.190±0.023
+spectral_graph+content      0.523±0.000    0.522±0.004    0.522±0.005    0.515±0.015    0.430±0.061    0.347±0.083
+kmeans_content              0.250±0.003    0.171±0.014    0.127±0.027    0.069±0.039    0.046±0.030    0.029±0.008
+louvain                     0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000    0.313±0.000
+nfmcd_structure_only        0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000    0.217±0.000
+
+=== pheme | removal mode: text | LFK ONMI vs missing rate p ===
+method                            p=0.0          p=0.1          p=0.2          p=0.4          p=0.6          p=0.8
+nfmcd_full                  0.000±0.000    0.000±0.000    0.000±0.000    0.004±0.006    0.006±0.006    0.007±0.007
+nfmcd_all_changes           0.017±0.003    0.014±0.004    0.000±0.000    0.000±0.000    0.001±0.004    0.008±0.006
+nfmcd_rank16                0.000±0.000    0.000±0.000    0.000±0.000    0.004±0.006    0.006±0.006    0.007±0.007
+spectral_graph+content      0.372±0.001    0.358±0.035    0.348±0.039    0.223±0.054    0.024±0.028    0.010±0.005
+kmeans_content              0.098±0.012    0.100±0.022    0.068±0.012    0.015±0.025    0.008±0.020    0.002±0.001
+louvain                     0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000
+nfmcd_structure_only        0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000    0.000±0.000
+
+=== Degradation: retention = ONMI(p)/ONMI(0), absolute drop = ONMI(0)-ONMI(p) ===
+(retention is meaningless when ONMI(0) is ~0, e.g. PHEME; look at the absolute level there)
+dataset/mode                method                    ONMI(0)  ret@0.4  drop@0.4  ret@0.8  drop@0.8  ONMI@0.8
+crisismmd/image             nfmcd_full                  0.610     0.97     0.021     0.92     0.050     0.560
+crisismmd/image             nfmcd_all_changes           0.724     0.92     0.061     0.81     0.138     0.587
+crisismmd/image             nfmcd_rank16                0.727     0.89     0.083     0.81     0.137     0.591
+crisismmd/image             spectral_graph+content      0.879     1.03    -0.027     1.03    -0.031     0.910
+crisismmd/image             kmeans_content              0.400     0.50     0.199     0.89     0.045     0.356
+crisismmd/text              nfmcd_full                  0.610     0.95     0.031     0.92     0.047     0.563
+crisismmd/text              nfmcd_all_changes           0.724     0.91     0.062     0.84     0.117     0.607
+crisismmd/text              nfmcd_rank16                0.727     0.86     0.102     0.82     0.129     0.598
+crisismmd/text              spectral_graph+content      0.879     0.77     0.204     0.34     0.584     0.295
+crisismmd/text              kmeans_content              0.400     0.36     0.256     0.02     0.393     0.007
+crisismmd/both              nfmcd_full                  0.610     0.98     0.010     0.98     0.013     0.597
+crisismmd/both              nfmcd_all_changes           0.724     0.85     0.108     0.83     0.123     0.601
+crisismmd/both              nfmcd_rank16                0.727     0.83     0.126     0.82     0.127     0.600
+crisismmd/both              spectral_graph+content      0.879     0.86     0.120     0.52     0.422     0.457
+crisismmd/both              kmeans_content              0.400     0.19     0.325     0.00     0.399     0.001
+fakeddit/image              nfmcd_full                  0.344     1.68    -0.234     2.34    -0.460     0.804
+fakeddit/image              nfmcd_all_changes           0.759     0.92     0.063     1.05    -0.041     0.800
+fakeddit/image              nfmcd_rank16                0.734     0.97     0.021     1.10    -0.076     0.810
+fakeddit/image              spectral_graph+content      0.557     1.19    -0.105     1.02    -0.009     0.566
+fakeddit/image              kmeans_content              0.067     0.23     0.052     0.31     0.046     0.021
+fakeddit/text               nfmcd_full                  0.344     1.54    -0.185     2.34    -0.460     0.804
+fakeddit/text               nfmcd_all_changes           0.759     0.94     0.046     1.07    -0.055     0.814
+fakeddit/text               nfmcd_rank16                0.734     0.97     0.025     1.11    -0.079     0.813
+fakeddit/text               spectral_graph+content      0.557     0.98     0.012     0.94     0.033     0.524
+fakeddit/text               kmeans_content              0.067     0.65     0.024     0.93     0.005     0.062
+fakeddit/both               nfmcd_full                  0.344     1.96    -0.330     2.37    -0.471     0.815
+fakeddit/both               nfmcd_all_changes           0.759     1.04    -0.030     1.07    -0.053     0.812
+fakeddit/both               nfmcd_rank16                0.734     1.02    -0.015     1.12    -0.091     0.825
+fakeddit/both               spectral_graph+content      0.557     1.25    -0.137     1.21    -0.115     0.672
+fakeddit/both               kmeans_content              0.067     0.23     0.052     0.02     0.066     0.002
+fakeddit_real_lcc/image     nfmcd_full                  0.139     1.26    -0.037     1.39    -0.055     0.194
+fakeddit_real_lcc/image     nfmcd_all_changes           0.183     0.99     0.002     1.10    -0.019     0.202
+fakeddit_real_lcc/image     nfmcd_rank16                0.189     0.97     0.006     0.96     0.008     0.181
+fakeddit_real_lcc/image     spectral_graph+content      0.523     0.98     0.010     0.96     0.023     0.499
+fakeddit_real_lcc/image     kmeans_content              0.250     0.55     0.111     0.66     0.084     0.166
+fakeddit_real_lcc/text      nfmcd_full                  0.139     1.33    -0.046     1.35    -0.049     0.188
+fakeddit_real_lcc/text      nfmcd_all_changes           0.183     1.12    -0.022     1.03    -0.006     0.189
+fakeddit_real_lcc/text      nfmcd_rank16                0.189     0.95     0.010     0.99     0.002     0.186
+fakeddit_real_lcc/text      spectral_graph+content      0.523     1.00     0.000     0.99     0.007     0.515
+fakeddit_real_lcc/text      kmeans_content              0.250     0.66     0.084     0.72     0.070     0.180
+fakeddit_real_lcc/both      nfmcd_full                  0.139     1.38    -0.053     1.41    -0.057     0.196
+fakeddit_real_lcc/both      nfmcd_all_changes           0.183     1.08    -0.015     1.09    -0.016     0.199
+fakeddit_real_lcc/both      nfmcd_rank16                0.189     1.03    -0.006     1.01    -0.002     0.190
+fakeddit_real_lcc/both      spectral_graph+content      0.523     0.99     0.008     0.66     0.176     0.347
+fakeddit_real_lcc/both      kmeans_content              0.250     0.28     0.180     0.11     0.221     0.029
+pheme/text                  nfmcd_full                  0.000      nan    -0.004      nan    -0.007     0.007
+pheme/text                  nfmcd_all_changes           0.017      nan     0.017      nan     0.009     0.008
+pheme/text                  nfmcd_rank16                0.000      nan    -0.004      nan    -0.007     0.007
+pheme/text                  spectral_graph+content      0.372     0.60     0.149     0.03     0.362     0.010
+pheme/text                  kmeans_content              0.098     0.15     0.084     0.02     0.096     0.002
+
+=== Who is most robust? (non-constant methods; smallest absolute drop in ONMI at p=0.8, and best ONMI at p=0.8) ===
+  crisismmd/image: smallest drop = spectral_graph+content (-0.031); best level@0.8 = spectral_graph+content (0.910); drops: NF-MCD 0.050, spectral -0.031, kmeans 0.045
+  crisismmd/text: smallest drop = nfmcd_full (0.047); best level@0.8 = nfmcd_all_changes (0.607); drops: NF-MCD 0.047, spectral 0.584, kmeans 0.393
+  crisismmd/both: smallest drop = nfmcd_full (0.013); best level@0.8 = nfmcd_all_changes (0.601); drops: NF-MCD 0.013, spectral 0.422, kmeans 0.399
+  fakeddit/image: smallest drop = nfmcd_full (-0.460); best level@0.8 = nfmcd_rank16 (0.810); drops: NF-MCD -0.460, spectral -0.009, kmeans 0.046
+  fakeddit/text: smallest drop = nfmcd_full (-0.460); best level@0.8 = nfmcd_all_changes (0.814); drops: NF-MCD -0.460, spectral 0.033, kmeans 0.005
+  fakeddit/both: smallest drop = nfmcd_full (-0.471); best level@0.8 = nfmcd_rank16 (0.825); drops: NF-MCD -0.471, spectral -0.115, kmeans 0.066
+  fakeddit_real_lcc/image: smallest drop = nfmcd_full (-0.055); best level@0.8 = spectral_graph+content (0.499); drops: NF-MCD -0.055, spectral 0.023, kmeans 0.084
+  fakeddit_real_lcc/text: smallest drop = nfmcd_full (-0.049); best level@0.8 = spectral_graph+content (0.515); drops: NF-MCD -0.049, spectral 0.007, kmeans 0.070
+  fakeddit_real_lcc/both: smallest drop = nfmcd_full (-0.057); best level@0.8 = spectral_graph+content (0.347); drops: NF-MCD -0.057, spectral 0.176, kmeans 0.221
+  pheme/text: smallest drop = nfmcd_full (-0.007); best level@0.8 = spectral_graph+content (0.010); drops: NF-MCD -0.007, spectral 0.362, kmeans 0.096
+
+=== Modularity at p = 0, 0.4, 0.8 ===
+dataset/mode                method                        p=0    p=0.4    p=0.8
+crisismmd/image             nfmcd_full                  0.523    0.520    0.511
+crisismmd/image             nfmcd_all_changes           0.413    0.440    0.495
+crisismmd/image             nfmcd_rank16                0.414    0.478    0.496
+crisismmd/image             spectral_graph+content      0.517    0.525    0.526
+crisismmd/image             kmeans_content              0.200    0.082    0.164
+crisismmd/text              nfmcd_full                  0.523    0.523    0.513
+crisismmd/text              nfmcd_all_changes           0.413    0.453    0.485
+crisismmd/text              nfmcd_rank16                0.414    0.500    0.490
+crisismmd/text              spectral_graph+content      0.517    0.455    0.226
+crisismmd/text              kmeans_content              0.200    0.052    0.019
+crisismmd/both              nfmcd_full                  0.523    0.519    0.488
+crisismmd/both              nfmcd_all_changes           0.413    0.483    0.483
+crisismmd/both              nfmcd_rank16                0.414    0.488    0.481
+crisismmd/both              spectral_graph+content      0.517    0.507    0.471
+crisismmd/both              kmeans_content              0.200    0.017    0.002
+fakeddit/image              nfmcd_full                  0.301    0.347    0.359
+fakeddit/image              nfmcd_all_changes           0.331    0.341    0.356
+fakeddit/image              nfmcd_rank16                0.349    0.347    0.373
+fakeddit/image              spectral_graph+content      0.366    0.399    0.375
+fakeddit/image              kmeans_content              0.127    0.075    0.057
+fakeddit/text               nfmcd_full                  0.301    0.346    0.358
+fakeddit/text               nfmcd_all_changes           0.331    0.330    0.371
+fakeddit/text               nfmcd_rank16                0.349    0.346    0.382
+fakeddit/text               spectral_graph+content      0.366    0.365    0.369
+fakeddit/text               kmeans_content              0.127    0.098    0.084
+fakeddit/both               nfmcd_full                  0.301    0.353    0.386
+fakeddit/both               nfmcd_all_changes           0.331    0.351    0.376
+fakeddit/both               nfmcd_rank16                0.349    0.349    0.406
+fakeddit/both               spectral_graph+content      0.366    0.391    0.393
+fakeddit/both               kmeans_content              0.127    0.037    0.002
+fakeddit_real_lcc/image     nfmcd_full                  0.550    0.749    0.753
+fakeddit_real_lcc/image     nfmcd_all_changes           0.772    0.758    0.779
+fakeddit_real_lcc/image     nfmcd_rank16                0.711    0.738    0.759
+fakeddit_real_lcc/image     spectral_graph+content      0.619    0.618    0.677
+fakeddit_real_lcc/image     kmeans_content              0.347    0.156    0.202
+fakeddit_real_lcc/text      nfmcd_full                  0.550    0.744    0.764
+fakeddit_real_lcc/text      nfmcd_all_changes           0.772    0.767    0.769
+fakeddit_real_lcc/text      nfmcd_rank16                0.711    0.740    0.764
+fakeddit_real_lcc/text      spectral_graph+content      0.619    0.618    0.615
+fakeddit_real_lcc/text      kmeans_content              0.347    0.216    0.213
+fakeddit_real_lcc/both      nfmcd_full                  0.550    0.759    0.772
+fakeddit_real_lcc/both      nfmcd_all_changes           0.772    0.766    0.768
+fakeddit_real_lcc/both      nfmcd_rank16                0.711    0.765    0.768
+fakeddit_real_lcc/both      spectral_graph+content      0.619    0.619    0.566
+fakeddit_real_lcc/both      kmeans_content              0.347    0.066    0.008
+pheme/text                  nfmcd_full                  0.861    0.871    0.873
+pheme/text                  nfmcd_all_changes           0.558    0.814    0.870
+pheme/text                  nfmcd_rank16                0.861    0.871    0.873
+pheme/text                  spectral_graph+content      0.374    0.190    0.036
+pheme/text                  kmeans_content              0.279    0.095    0.007
+
+=== Membership F1 at p = 0, 0.4, 0.8 ===
+dataset/mode                method                        p=0    p=0.4    p=0.8
+crisismmd/image             nfmcd_full                  0.632    0.653    0.754
+crisismmd/image             nfmcd_all_changes           0.683    0.695    0.738
+crisismmd/image             nfmcd_rank16                0.672    0.700    0.735
+crisismmd/image             spectral_graph+content      0.956    0.968    0.969
+crisismmd/image             kmeans_content              0.561    0.412    0.537
+crisismmd/text              nfmcd_full                  0.632    0.640    0.759
+crisismmd/text              nfmcd_all_changes           0.683    0.711    0.724
+crisismmd/text              nfmcd_rank16                0.672    0.711    0.731
+crisismmd/text              spectral_graph+content      0.956    0.852    0.542
+crisismmd/text              kmeans_content              0.561    0.384    0.228
+crisismmd/both              nfmcd_full                  0.632    0.716    0.716
+crisismmd/both              nfmcd_all_changes           0.683    0.735    0.716
+crisismmd/both              nfmcd_rank16                0.672    0.745    0.708
+crisismmd/both              spectral_graph+content      0.956    0.890    0.669
+crisismmd/both              kmeans_content              0.561    0.274    0.173
+fakeddit/image              nfmcd_full                  0.231    0.585    0.816
+fakeddit/image              nfmcd_all_changes           0.702    0.690    0.798
+fakeddit/image              nfmcd_rank16                0.690    0.716    0.821
+fakeddit/image              spectral_graph+content      0.711    0.807    0.738
+fakeddit/image              kmeans_content              0.289    0.248    0.239
+fakeddit/text               nfmcd_full                  0.231    0.520    0.817
+fakeddit/text               nfmcd_all_changes           0.702    0.704    0.830
+fakeddit/text               nfmcd_rank16                0.690    0.726    0.836
+fakeddit/text               spectral_graph+content      0.711    0.709    0.705
+fakeddit/text               kmeans_content              0.289    0.254    0.295
+fakeddit/both               nfmcd_full                  0.231    0.737    0.843
+fakeddit/both               nfmcd_all_changes           0.702    0.793    0.828
+fakeddit/both               nfmcd_rank16                0.690    0.753    0.869
+fakeddit/both               spectral_graph+content      0.711    0.821    0.811
+fakeddit/both               kmeans_content              0.289    0.189    0.126
+fakeddit_real_lcc/image     nfmcd_full                  0.286    0.323    0.342
+fakeddit_real_lcc/image     nfmcd_all_changes           0.339    0.341    0.348
+fakeddit_real_lcc/image     nfmcd_rank16                0.341    0.330    0.322
+fakeddit_real_lcc/image     spectral_graph+content      0.619    0.614    0.610
+fakeddit_real_lcc/image     kmeans_content              0.366    0.289    0.316
+fakeddit_real_lcc/text      nfmcd_full                  0.286    0.348    0.337
+fakeddit_real_lcc/text      nfmcd_all_changes           0.339    0.367    0.339
+fakeddit_real_lcc/text      nfmcd_rank16                0.341    0.324    0.332
+fakeddit_real_lcc/text      spectral_graph+content      0.619    0.618    0.616
+fakeddit_real_lcc/text      kmeans_content              0.366    0.309    0.381
+fakeddit_real_lcc/both      nfmcd_full                  0.286    0.338    0.348
+fakeddit_real_lcc/both      nfmcd_all_changes           0.339    0.344    0.347
+fakeddit_real_lcc/both      nfmcd_rank16                0.341    0.336    0.344
+fakeddit_real_lcc/both      spectral_graph+content      0.619    0.615    0.443
+fakeddit_real_lcc/both      kmeans_content              0.366    0.212    0.200
+pheme/text                  nfmcd_full                  0.259    0.236    0.237
+pheme/text                  nfmcd_all_changes           0.109    0.247    0.239
+pheme/text                  nfmcd_rank16                0.259    0.236    0.237
+pheme/text                  spectral_graph+content      0.540    0.310    0.102
+pheme/text                  kmeans_content              0.310    0.237    0.126
+
+=== How the fuzzy layer reacts (nfmcd_full): mean confidence / mean alpha / node share by modality flag ===
+flags: both = paired (CCA space), text/image = single modality, none = no content, unal = both present but CCA not fit
+dataset/mode                    p   conf  alpha   both   text  image   none   unal
+crisismmd/image               0.0   0.65   0.60   1.00   0.00   0.00   0.00   0.00
+crisismmd/image               0.1   0.58   0.56   0.90   0.10   0.00   0.00   0.00
+crisismmd/image               0.2   0.52   0.51   0.80   0.20   0.00   0.00   0.00
+crisismmd/image               0.4   0.38   0.42   0.60   0.40   0.00   0.00   0.00
+crisismmd/image               0.6   0.25   0.32   0.39   0.61   0.00   0.00   0.00
+crisismmd/image               0.8   0.12   0.24   0.20   0.80   0.00   0.00   0.00
+crisismmd/text                0.0   0.65   0.60   1.00   0.00   0.00   0.00   0.00
+crisismmd/text                0.1   0.58   0.56   0.90   0.00   0.10   0.00   0.00
+crisismmd/text                0.2   0.52   0.51   0.80   0.00   0.20   0.00   0.00
+crisismmd/text                0.4   0.38   0.41   0.59   0.00   0.41   0.00   0.00
+crisismmd/text                0.6   0.25   0.32   0.39   0.00   0.61   0.00   0.00
+crisismmd/text                0.8   0.12   0.24   0.20   0.00   0.80   0.00   0.00
+crisismmd/both                0.0   0.65   0.60   1.00   0.00   0.00   0.00   0.00
+crisismmd/both                0.1   0.53   0.52   0.81   0.09   0.09   0.01   0.00
+crisismmd/both                0.2   0.41   0.44   0.64   0.16   0.16   0.04   0.00
+crisismmd/both                0.4   0.22   0.30   0.35   0.24   0.25   0.16   0.00
+crisismmd/both                0.6   0.09   0.21   0.15   0.24   0.24   0.37   0.00
+crisismmd/both                0.8   0.02   0.16   0.04   0.16   0.16   0.64   0.00
+fakeddit/image                0.0   0.61   0.58   0.95   0.05   0.00   0.00   0.00
+fakeddit/image                0.1   0.55   0.54   0.86   0.14   0.00   0.00   0.00
+fakeddit/image                0.2   0.49   0.49   0.76   0.24   0.00   0.00   0.00
+fakeddit/image                0.4   0.37   0.41   0.57   0.43   0.00   0.00   0.00
+fakeddit/image                0.6   0.24   0.32   0.37   0.63   0.00   0.00   0.00
+fakeddit/image                0.8   0.12   0.23   0.19   0.81   0.00   0.00   0.00
+fakeddit/text                 0.0   0.61   0.58   0.95   0.05   0.00   0.00   0.00
+fakeddit/text                 0.1   0.55   0.54   0.86   0.04   0.09   0.01   0.00
+fakeddit/text                 0.2   0.49   0.49   0.76   0.04   0.19   0.01   0.00
+fakeddit/text                 0.4   0.36   0.40   0.57   0.03   0.39   0.02   0.00
+fakeddit/text                 0.6   0.24   0.31   0.37   0.02   0.58   0.03   0.00
+fakeddit/text                 0.8   0.12   0.23   0.19   0.01   0.76   0.04   0.00
+fakeddit/both                 0.0   0.61   0.58   0.95   0.05   0.00   0.00   0.00
+fakeddit/both                 0.1   0.49   0.50   0.77   0.13   0.09   0.01   0.00
+fakeddit/both                 0.2   0.39   0.42   0.61   0.19   0.15   0.05   0.00
+fakeddit/both                 0.4   0.22   0.30   0.34   0.25   0.23   0.18   0.00
+fakeddit/both                 0.6   0.09   0.21   0.15   0.24   0.22   0.39   0.00
+fakeddit/both                 0.8   0.01   0.16   0.04   0.16   0.15   0.65   0.00
+fakeddit_real_lcc/image       0.0   0.60   0.57   0.99   0.01   0.00   0.00   0.00
+fakeddit_real_lcc/image       0.1   0.54   0.53   0.89   0.11   0.00   0.00   0.00
+fakeddit_real_lcc/image       0.2   0.49   0.49   0.80   0.20   0.00   0.00   0.00
+fakeddit_real_lcc/image       0.4   0.36   0.40   0.59   0.41   0.00   0.00   0.00
+fakeddit_real_lcc/image       0.6   0.24   0.32   0.39   0.61   0.00   0.00   0.00
+fakeddit_real_lcc/image       0.8   0.11   0.23   0.20   0.80   0.00   0.00   0.00
+fakeddit_real_lcc/text        0.0   0.60   0.57   0.99   0.01   0.00   0.00   0.00
+fakeddit_real_lcc/text        0.1   0.55   0.53   0.90   0.01   0.09   0.00   0.00
+fakeddit_real_lcc/text        0.2   0.48   0.49   0.79   0.01   0.20   0.00   0.00
+fakeddit_real_lcc/text        0.4   0.35   0.40   0.58   0.01   0.41   0.00   0.00
+fakeddit_real_lcc/text        0.6   0.23   0.31   0.38   0.00   0.61   0.01   0.00
+fakeddit_real_lcc/text        0.8   0.11   0.23   0.20   0.00   0.79   0.01   0.00
+fakeddit_real_lcc/both        0.0   0.60   0.57   0.99   0.01   0.00   0.00   0.00
+fakeddit_real_lcc/both        0.1   0.49   0.49   0.81   0.10   0.08   0.01   0.00
+fakeddit_real_lcc/both        0.2   0.39   0.42   0.64   0.16   0.16   0.04   0.00
+fakeddit_real_lcc/both        0.4   0.21   0.30   0.36   0.23   0.24   0.18   0.00
+fakeddit_real_lcc/both        0.6   0.08   0.21   0.15   0.23   0.23   0.38   0.00
+fakeddit_real_lcc/both        0.8   0.01   0.16   0.04   0.16   0.16   0.64   0.00
+pheme/text                    0.0   0.00   0.15   0.00   1.00   0.00   0.00   0.00
+pheme/text                    0.1   0.00   0.15   0.00   0.90   0.00   0.10   0.00
+pheme/text                    0.2   0.00   0.15   0.00   0.80   0.00   0.20   0.00
+pheme/text                    0.4   0.00   0.15   0.00   0.60   0.00   0.40   0.00
+pheme/text                    0.6   0.00   0.15   0.00   0.39   0.00   0.61   0.00
+pheme/text                    0.8   0.00   0.15   0.00   0.20   0.00   0.80   0.00
+
+crisismmd/nfmcd_full: p=0 mean ONMI 0.610 (sd 0.019, n=2) vs known 0.609
+fakeddit/nfmcd_full: p=0 mean ONMI 0.344 (sd 0.020, n=2) vs known 0.308
+crisismmd/spectral_graph+content: p=0 mean ONMI 0.879 (sd 0.000, n=2) vs known 0.879

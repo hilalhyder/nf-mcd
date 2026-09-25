@@ -1,0 +1,160 @@
+=== fusion diagnosis start 2026-09-21 17:58:54 datasets=['fakeddit', 'crisismmd'] seeds=(0, 1, 2) ===
+
+--- fakeddit: 1200 nodes, k=10, text=1200, image=1143 ---
+[fakeddit] sanity seed=0: NFMCD=0.3240 helper=0.3240 | alpha=0.5 NFMCD=0.3939 helper=0.3939
+[fakeddit] d1 full       seed=0: ONMI=0.324 alpha mean=0.580 q05/50/95=0.24/0.63/0.67 conf mean=0.614 both=1143 single=57
+[fakeddit] d1 full       seed=1: ONMI=0.364 alpha mean=0.581 q05/50/95=0.24/0.63/0.67 conf mean=0.616 both=1143 single=57
+[fakeddit] d1 full       seed=2: ONMI=0.260 alpha mean=0.584 q05/50/95=0.24/0.63/0.67 conf mean=0.620 both=1143 single=57
+[fakeddit] d1 text_only  seed=0: ONMI=0.787 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1200
+[fakeddit] d1 text_only  seed=1: ONMI=0.785 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1200
+[fakeddit] d1 text_only  seed=2: ONMI=0.786 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1200
+[fakeddit] d1 image_only seed=0: ONMI=0.772 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1143
+[fakeddit] d1 image_only seed=1: ONMI=0.822 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1143
+[fakeddit] d1 image_only seed=2: ONMI=0.772 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=1143
+[fakeddit] d2 const alpha=0.02 seed=0: ONMI=0.822
+[fakeddit] d2 const alpha=0.15 seed=0: ONMI=0.791
+[fakeddit] d2 const alpha=0.30 seed=0: ONMI=0.788
+[fakeddit] d2 const alpha=0.50 seed=0: ONMI=0.394
+[fakeddit] d2 const alpha=0.70 seed=0: ONMI=0.230
+[fakeddit] d2 const alpha=0.85 seed=0: ONMI=0.153
+[fakeddit] d2 const alpha=0.98 seed=0: ONMI=0.061
+[fakeddit] d2 const alpha=0.02 seed=1: ONMI=0.822
+[fakeddit] d2 const alpha=0.15 seed=1: ONMI=0.791
+[fakeddit] d2 const alpha=0.30 seed=1: ONMI=0.752
+[fakeddit] d2 const alpha=0.50 seed=1: ONMI=0.411
+[fakeddit] d2 const alpha=0.70 seed=1: ONMI=0.182
+[fakeddit] d2 const alpha=0.85 seed=1: ONMI=0.116
+[fakeddit] d2 const alpha=0.98 seed=1: ONMI=0.034
+[fakeddit] d2 const alpha=0.02 seed=2: ONMI=0.781
+[fakeddit] d2 const alpha=0.15 seed=2: ONMI=0.791
+[fakeddit] d2 const alpha=0.30 seed=2: ONMI=0.751
+[fakeddit] d2 const alpha=0.50 seed=2: ONMI=0.377
+[fakeddit] d2 const alpha=0.70 seed=2: ONMI=0.190
+[fakeddit] d2 const alpha=0.85 seed=2: ONMI=0.140
+[fakeddit] d2 const alpha=0.98 seed=2: ONMI=0.065
+[fakeddit] d3 content-only (paired n=1143) seed=0: cca_fused_kmeans=0.038 cca_fused_fcm=0.058 raw_text_kmeans=0.037 raw_text_fcm=0.039 raw_image_kmeans=0.066 raw_image_fcm=0.065 raw_text+image_kmeans=0.152 raw_text+image_fcm=0.063
+[fakeddit] d3 content-only (paired n=1143) seed=1: cca_fused_kmeans=0.031 cca_fused_fcm=0.033 raw_text_kmeans=0.035 raw_text_fcm=0.032 raw_image_kmeans=0.113 raw_image_fcm=0.062 raw_text+image_kmeans=0.082 raw_text+image_fcm=0.067
+[fakeddit] d3 content-only (paired n=1143) seed=2: cca_fused_kmeans=0.038 cca_fused_fcm=0.069 raw_text_kmeans=0.035 raw_text_fcm=0.052 raw_image_kmeans=0.092 raw_image_fcm=0.027 raw_text+image_kmeans=0.080 raw_text+image_fcm=0.053
+[fakeddit] d4 seed=0: acc overall cca=0.294 raw_text=0.368; spearman(agreement,correct) cca=+0.064 raw_text=+0.129; acc by agreement quartile (cca) 0.24/0.30/0.31/0.32
+[fakeddit] d4 seed=1: acc overall cca=0.281 raw_text=0.369; spearman(agreement,correct) cca=-0.039 raw_text=+0.028; acc by agreement quartile (cca) 0.33/0.24/0.27/0.28
+[fakeddit] d4 seed=2: acc overall cca=0.290 raw_text=0.356; spearman(agreement,correct) cca=+0.009 raw_text=-0.002; acc by agreement quartile (cca) 0.32/0.24/0.28/0.32
+[fakeddit] d6 agreement: mean=0.842 sd=0.137 q05/50/95=0.57/0.88/0.97 BC=0.594 (>0.555 suggests bimodal) BIC gain 2v1 comp=643.8
+[fakeddit] d7 seed=0: 57 single-modality nodes; ONMI as-is=0.324 zeroed=0.369 cca-projected=0.287
+[fakeddit] d7 seed=1: 57 single-modality nodes; ONMI as-is=0.364 zeroed=0.364 cca-projected=0.280
+[fakeddit] d7 seed=2: 57 single-modality nodes; ONMI as-is=0.260 zeroed=0.340 cca-projected=0.336
+[fakeddit] d5 cd=2,div=16 seed=0: ONMI=0.466 agreement mean=0.631 sd=0.516 alpha mean=0.508
+[fakeddit] d5 cd=2,div=8 seed=0: ONMI=0.431 agreement mean=0.699 sd=0.478 alpha mean=0.536
+[fakeddit] d5 cd=2,div=4 seed=0: ONMI=0.225 agreement mean=0.812 sd=0.360 alpha mean=0.578
+[fakeddit] d5 cd=4,div=16 seed=0: ONMI=0.639 agreement mean=0.601 sd=0.381 alpha mean=0.465
+[fakeddit] d5 cd=4,div=8 seed=0: ONMI=0.579 agreement mean=0.688 sd=0.317 alpha mean=0.500
+[fakeddit] d5 cd=4,div=4 seed=0: ONMI=0.180 agreement mean=0.846 sd=0.193 alpha mean=0.582
+[fakeddit] d5 cd=8,div=16 seed=0: ONMI=0.733 agreement mean=0.570 sd=0.291 alpha mean=0.427
+[fakeddit] d5 cd=8,div=8 seed=0: ONMI=0.486 agreement mean=0.684 sd=0.223 alpha mean=0.483
+[fakeddit] d5 cd=8,div=4 seed=0: ONMI=0.324 agreement mean=0.842 sd=0.137 alpha mean=0.580
+[fakeddit] d5 cd=16,div=16 seed=0: ONMI=0.731 agreement mean=0.518 sd=0.231 alpha mean=0.384
+[fakeddit] d5 cd=16,div=8 seed=0: ONMI=0.341 agreement mean=0.658 sd=0.172 alpha mean=0.460
+[fakeddit] d5 cd=16,div=4 seed=0: ONMI=0.177 agreement mean=0.829 sd=0.122 alpha mean=0.573
+[fakeddit] d5 cd=2,div=16 seed=1: ONMI=0.479 agreement mean=0.634 sd=0.516 alpha mean=0.511
+[fakeddit] d5 cd=2,div=8 seed=1: ONMI=0.411 agreement mean=0.703 sd=0.465 alpha mean=0.536
+[fakeddit] d5 cd=2,div=4 seed=1: ONMI=0.197 agreement mean=0.810 sd=0.369 alpha mean=0.577
+[fakeddit] d5 cd=4,div=16 seed=1: ONMI=0.615 agreement mean=0.608 sd=0.366 alpha mean=0.464
+[fakeddit] d5 cd=4,div=8 seed=1: ONMI=0.591 agreement mean=0.688 sd=0.314 alpha mean=0.499
+[fakeddit] d5 cd=4,div=4 seed=1: ONMI=0.134 agreement mean=0.838 sd=0.215 alpha mean=0.579
+[fakeddit] d5 cd=8,div=16 seed=1: ONMI=0.735 agreement mean=0.573 sd=0.291 alpha mean=0.428
+[fakeddit] d5 cd=8,div=8 seed=1: ONMI=0.409 agreement mean=0.686 sd=0.229 alpha mean=0.486
+[fakeddit] d5 cd=8,div=4 seed=1: ONMI=0.364 agreement mean=0.845 sd=0.135 alpha mean=0.581
+[fakeddit] d5 cd=16,div=16 seed=1: ONMI=0.691 agreement mean=0.521 sd=0.228 alpha mean=0.385
+[fakeddit] d5 cd=16,div=8 seed=1: ONMI=0.554 agreement mean=0.655 sd=0.178 alpha mean=0.459
+[fakeddit] d5 cd=16,div=4 seed=1: ONMI=0.207 agreement mean=0.830 sd=0.115 alpha mean=0.574
+[fakeddit] d5 cd=2,div=16 seed=2: ONMI=0.507 agreement mean=0.635 sd=0.506 alpha mean=0.508
+[fakeddit] d5 cd=2,div=8 seed=2: ONMI=0.430 agreement mean=0.701 sd=0.473 alpha mean=0.537
+[fakeddit] d5 cd=2,div=4 seed=2: ONMI=0.176 agreement mean=0.811 sd=0.364 alpha mean=0.577
+[fakeddit] d5 cd=4,div=16 seed=2: ONMI=0.579 agreement mean=0.611 sd=0.363 alpha mean=0.465
+[fakeddit] d5 cd=4,div=8 seed=2: ONMI=0.497 agreement mean=0.684 sd=0.328 alpha mean=0.500
+[fakeddit] d5 cd=4,div=4 seed=2: ONMI=0.157 agreement mean=0.847 sd=0.194 alpha mean=0.582
+[fakeddit] d5 cd=8,div=16 seed=2: ONMI=0.733 agreement mean=0.576 sd=0.284 alpha mean=0.428
+[fakeddit] d5 cd=8,div=8 seed=2: ONMI=0.436 agreement mean=0.680 sd=0.227 alpha mean=0.481
+[fakeddit] d5 cd=8,div=4 seed=2: ONMI=0.260 agreement mean=0.849 sd=0.125 alpha mean=0.584
+[fakeddit] d5 cd=16,div=16 seed=2: ONMI=0.733 agreement mean=0.520 sd=0.231 alpha mean=0.385
+[fakeddit] d5 cd=16,div=8 seed=2: ONMI=0.549 agreement mean=0.655 sd=0.176 alpha mean=0.459
+[fakeddit] d5 cd=16,div=4 seed=2: ONMI=0.209 agreement mean=0.829 sd=0.122 alpha mean=0.573
+
+--- crisismmd: 800 nodes, k=7, text=800, image=800 ---
+[crisismmd] sanity seed=0: NFMCD=0.5909 helper=0.5909 | alpha=0.5 NFMCD=0.6632 helper=0.6632
+[crisismmd] d1 full       seed=0: ONMI=0.591 alpha mean=0.600 q05/50/95=0.39/0.64/0.68 conf mean=0.643 both=800 single=0
+[crisismmd] d1 full       seed=1: ONMI=0.629 alpha mean=0.603 q05/50/95=0.40/0.64/0.68 conf mean=0.647 both=800 single=0
+[crisismmd] d1 full       seed=2: ONMI=0.608 alpha mean=0.601 q05/50/95=0.40/0.64/0.67 conf mean=0.644 both=800 single=0
+[crisismmd] d1 text_only  seed=0: ONMI=0.670 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d1 text_only  seed=1: ONMI=0.670 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d1 text_only  seed=2: ONMI=0.553 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d1 image_only seed=0: ONMI=0.675 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d1 image_only seed=1: ONMI=0.655 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d1 image_only seed=2: ONMI=0.654 alpha mean=0.150 q05/50/95=0.15/0.15/0.15 conf mean=0.000 both=0 single=800
+[crisismmd] d2 const alpha=0.02 seed=0: ONMI=0.604
+[crisismmd] d2 const alpha=0.15 seed=0: ONMI=0.692
+[crisismmd] d2 const alpha=0.30 seed=0: ONMI=0.727
+[crisismmd] d2 const alpha=0.50 seed=0: ONMI=0.663
+[crisismmd] d2 const alpha=0.70 seed=0: ONMI=0.348
+[crisismmd] d2 const alpha=0.85 seed=0: ONMI=0.044
+[crisismmd] d2 const alpha=0.98 seed=0: ONMI=0.148
+[crisismmd] d2 const alpha=0.02 seed=1: ONMI=0.607
+[crisismmd] d2 const alpha=0.15 seed=1: ONMI=0.703
+[crisismmd] d2 const alpha=0.30 seed=1: ONMI=0.645
+[crisismmd] d2 const alpha=0.50 seed=1: ONMI=0.682
+[crisismmd] d2 const alpha=0.70 seed=1: ONMI=0.127
+[crisismmd] d2 const alpha=0.85 seed=1: ONMI=0.173
+[crisismmd] d2 const alpha=0.98 seed=1: ONMI=0.099
+[crisismmd] d2 const alpha=0.02 seed=2: ONMI=0.604
+[crisismmd] d2 const alpha=0.15 seed=2: ONMI=0.559
+[crisismmd] d2 const alpha=0.30 seed=2: ONMI=0.700
+[crisismmd] d2 const alpha=0.50 seed=2: ONMI=0.697
+[crisismmd] d2 const alpha=0.70 seed=2: ONMI=0.179
+[crisismmd] d2 const alpha=0.85 seed=2: ONMI=0.057
+[crisismmd] d2 const alpha=0.98 seed=2: ONMI=0.117
+[crisismmd] d3 content-only (paired n=800) seed=0: cca_fused_kmeans=0.173 cca_fused_fcm=0.088 raw_text_kmeans=0.457 raw_text_fcm=0.146 raw_image_kmeans=0.000 raw_image_fcm=0.002 raw_text+image_kmeans=0.394 raw_text+image_fcm=0.136
+[crisismmd] d3 content-only (paired n=800) seed=1: cca_fused_kmeans=0.145 cca_fused_fcm=0.098 raw_text_kmeans=0.456 raw_text_fcm=0.147 raw_image_kmeans=0.073 raw_image_fcm=0.002 raw_text+image_kmeans=0.406 raw_text+image_fcm=0.066
+[crisismmd] d3 content-only (paired n=800) seed=2: cca_fused_kmeans=0.167 cca_fused_fcm=0.116 raw_text_kmeans=0.450 raw_text_fcm=0.246 raw_image_kmeans=0.072 raw_image_fcm=0.002 raw_text+image_kmeans=0.421 raw_text+image_fcm=0.005
+[crisismmd] d4 seed=0: acc overall cca=0.362 raw_text=0.637; spearman(agreement,correct) cca=+0.050 raw_text=+0.055; acc by agreement quartile (cca) 0.33/0.35/0.39/0.39
+[crisismmd] d4 seed=1: acc overall cca=0.391 raw_text=0.659; spearman(agreement,correct) cca=+0.032 raw_text=+0.017; acc by agreement quartile (cca) 0.36/0.36/0.46/0.39
+[crisismmd] d4 seed=2: acc overall cca=0.356 raw_text=0.636; spearman(agreement,correct) cca=+0.072 raw_text=+0.075; acc by agreement quartile (cca) 0.28/0.35/0.41/0.38
+[crisismmd] d6 agreement: mean=0.842 sd=0.149 q05/50/95=0.56/0.88/0.98 BC=0.628 (>0.555 suggests bimodal) BIC gain 2v1 comp=437.5
+[crisismmd] d7: no single-modality nodes -> n/a
+[crisismmd] d7: no single-modality nodes -> n/a
+[crisismmd] d7: no single-modality nodes -> n/a
+[crisismmd] d5 cd=2,div=16 seed=0: ONMI=0.527 agreement mean=0.584 sd=0.563 alpha mean=0.515
+[crisismmd] d5 cd=2,div=8 seed=0: ONMI=0.448 agreement mean=0.669 sd=0.495 alpha mean=0.542
+[crisismmd] d5 cd=2,div=4 seed=0: ONMI=0.312 agreement mean=0.798 sd=0.401 alpha mean=0.598
+[crisismmd] d5 cd=4,div=16 seed=0: ONMI=0.549 agreement mean=0.639 sd=0.373 alpha mean=0.500
+[crisismmd] d5 cd=4,div=8 seed=0: ONMI=0.545 agreement mean=0.720 sd=0.302 alpha mean=0.535
+[crisismmd] d5 cd=4,div=4 seed=0: ONMI=0.410 agreement mean=0.841 sd=0.215 alpha mean=0.601
+[crisismmd] d5 cd=8,div=16 seed=0: ONMI=0.759 agreement mean=0.615 sd=0.279 alpha mean=0.465
+[crisismmd] d5 cd=8,div=8 seed=0: ONMI=0.704 agreement mean=0.702 sd=0.232 alpha mean=0.513
+[crisismmd] d5 cd=8,div=4 seed=0: ONMI=0.591 agreement mean=0.842 sd=0.149 alpha mean=0.600
+[crisismmd] d5 cd=16,div=16 seed=0: ONMI=0.725 agreement mean=0.546 sd=0.222 alpha mean=0.410
+[crisismmd] d5 cd=16,div=8 seed=0: ONMI=0.614 agreement mean=0.673 sd=0.174 alpha mean=0.486
+[crisismmd] d5 cd=16,div=4 seed=0: ONMI=0.556 agreement mean=0.833 sd=0.113 alpha mean=0.595
+[crisismmd] d5 cd=2,div=16 seed=1: ONMI=0.522 agreement mean=0.584 sd=0.554 alpha mean=0.511
+[crisismmd] d5 cd=2,div=8 seed=1: ONMI=0.445 agreement mean=0.662 sd=0.500 alpha mean=0.540
+[crisismmd] d5 cd=2,div=4 seed=1: ONMI=0.301 agreement mean=0.790 sd=0.407 alpha mean=0.593
+[crisismmd] d5 cd=4,div=16 seed=1: ONMI=0.555 agreement mean=0.636 sd=0.375 alpha mean=0.499
+[crisismmd] d5 cd=4,div=8 seed=1: ONMI=0.549 agreement mean=0.721 sd=0.301 alpha mean=0.534
+[crisismmd] d5 cd=4,div=4 seed=1: ONMI=0.417 agreement mean=0.836 sd=0.233 alpha mean=0.600
+[crisismmd] d5 cd=8,div=16 seed=1: ONMI=0.696 agreement mean=0.613 sd=0.283 alpha mean=0.464
+[crisismmd] d5 cd=8,div=8 seed=1: ONMI=0.681 agreement mean=0.701 sd=0.233 alpha mean=0.512
+[crisismmd] d5 cd=8,div=4 seed=1: ONMI=0.629 agreement mean=0.847 sd=0.141 alpha mean=0.603
+[crisismmd] d5 cd=16,div=16 seed=1: ONMI=0.728 agreement mean=0.549 sd=0.221 alpha mean=0.412
+[crisismmd] d5 cd=16,div=8 seed=1: ONMI=0.692 agreement mean=0.670 sd=0.179 alpha mean=0.484
+[crisismmd] d5 cd=16,div=4 seed=1: ONMI=0.503 agreement mean=0.833 sd=0.111 alpha mean=0.595
+[crisismmd] d5 cd=2,div=16 seed=2: ONMI=0.519 agreement mean=0.582 sd=0.573 alpha mean=0.517
+[crisismmd] d5 cd=2,div=8 seed=2: ONMI=0.465 agreement mean=0.641 sd=0.517 alpha mean=0.532
+[crisismmd] d5 cd=2,div=4 seed=2: ONMI=0.237 agreement mean=0.813 sd=0.386 alpha mean=0.604
+[crisismmd] d5 cd=4,div=16 seed=2: ONMI=0.536 agreement mean=0.639 sd=0.376 alpha mean=0.500
+[crisismmd] d5 cd=4,div=8 seed=2: ONMI=0.552 agreement mean=0.707 sd=0.319 alpha mean=0.529
+[crisismmd] d5 cd=4,div=4 seed=2: ONMI=0.423 agreement mean=0.844 sd=0.218 alpha mean=0.603
+[crisismmd] d5 cd=8,div=16 seed=2: ONMI=0.754 agreement mean=0.612 sd=0.283 alpha mean=0.464
+[crisismmd] d5 cd=8,div=8 seed=2: ONMI=0.740 agreement mean=0.705 sd=0.231 alpha mean=0.515
+[crisismmd] d5 cd=8,div=4 seed=2: ONMI=0.608 agreement mean=0.844 sd=0.148 alpha mean=0.601
+[crisismmd] d5 cd=16,div=16 seed=2: ONMI=0.681 agreement mean=0.546 sd=0.223 alpha mean=0.410
+[crisismmd] d5 cd=16,div=8 seed=2: ONMI=0.723 agreement mean=0.675 sd=0.173 alpha mean=0.487
+[crisismmd] d5 cd=16,div=4 seed=2: ONMI=0.493 agreement mean=0.833 sd=0.113 alpha mean=0.595
+=== done in 157s ===

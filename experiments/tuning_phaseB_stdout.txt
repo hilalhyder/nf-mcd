@@ -1,0 +1,37 @@
+﻿
+==============================================================================
+PHASE B: random search + leave-one-dataset-out (LODO) selection
+==============================================================================
+Searching over: ['m', 'sd', 'cd', 'anfis']
+61 configs (default + 60 random) x 5 datasets x 3 seeds
+  24/915 fits already in CSV; running 891
+  ran 891 fits in 415s with 6 workers (0 errors)
+
+LODO selection (score = mean ONMI over the other non-PHEME datasets; default is config 0)
+held-out    chosen cfg           tuned         default    delta  2*noise  verdict
+---------------------------------------------------------------------------------
+crisismmd           33     0.734+/-0.016     0.609+/-0.019   +0.125    0.050  tuned better
+            cfg 33: {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 16, 'anfis': 'default'}
+fakeddit            35     0.467+/-0.052     0.308+/-0.065   +0.159    0.166  within noise
+            cfg 35: {'m': 1.5, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 8, 'anfis': 'pct'}
+dblp                33     0.643+/-0.054     0.670+/-0.000   -0.027    0.108  within noise
+            cfg 33: {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 16, 'anfis': 'default'}
+amazon              33     0.515+/-0.035     0.554+/-0.000   -0.038    0.071  within noise
+            cfg 33: {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 16, 'anfis': 'default'}
+
+Mean held-out delta (tuned - default) over 4 datasets: +0.0547
+
+PHEME (not used in selection) for each chosen config vs default:
+  chosen for crisismmd : cfg 33: PHEME ONMI 0.008+/-0.007 (default 0.005+/-0.009)
+  chosen for fakeddit  : cfg 35: PHEME ONMI 0.005+/-0.009 (default 0.005+/-0.009)
+  chosen for dblp      : cfg 33: PHEME ONMI 0.008+/-0.007 (default 0.005+/-0.009)
+  chosen for amazon    : cfg 33: PHEME ONMI 0.008+/-0.007 (default 0.005+/-0.009)
+  best PHEME ONMI over all 61 configs: 0.029
+
+Top 5 configs by mean ONMI over the 4 selection datasets (in-sample, NOT held-out):
+  cfg 33: 0.6723  (default 0.5353)  {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 16, 'anfis': 'default'}
+  cfg 47: 0.6174  (default 0.5353)  {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'pct'}
+  cfg 23: 0.6167  (default 0.5353)  {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+  cfg 41: 0.6061  (default 0.5353)  {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 8, 'anfis': 'scale1.5'}
+  cfg 9: 0.5921  (default 0.5353)  {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 1.0, 'cd': 8, 'anfis': 'shift+0.1'}
+[phaseB] total 415s

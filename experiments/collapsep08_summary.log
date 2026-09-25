@@ -1,0 +1,67 @@
+Diagnosis: why does NFMCD.robust() collapse at k=32/n=8000 + 80% missing content?
+1/k = 0.0312. jobs: 77
+============================================================================================
+
+1. Census at p=0/0.4/0.8 (mean over seeds 0-2)
+--------------------------------------------------------------------------------------------
+  p=0.0: flag both=0.853 text_only=0.073 image_only=0.073 none=0.000 | raw-PCA content_dim=16 frac_zero_rows=0.000 effective_rank(nonzero rows)=16.0
+  p=0.4: flag both=0.308 text_only=0.249 image_only=0.249 none=0.195 | raw-PCA content_dim=16 frac_zero_rows=0.195 effective_rank(nonzero rows)=16.0
+  p=0.8: flag both=0.034 text_only=0.149 image_only=0.152 none=0.665 | raw-PCA content_dim=16 frac_zero_rows=0.665 effective_rank(nonzero rows)=16.0
+
+2. Adaptive-m ladder: mean(U.max) at each m, on the SAME fused_features robust() built
+--------------------------------------------------------------------------------------------
+  p=0.0: non-degeneracy floor=0.2734
+      m=1.1: mean(U.max)=0.8828  [PASS]
+      m=1.2: mean(U.max)=0.7633  [PASS]
+      m=1.3: mean(U.max)=0.5145  [PASS]
+      m=1.5: mean(U.max)=0.0313  [fail]
+    -> robust() actually chose m=1.3: mean ONMI=0.7320, mean(U.max)=0.5145
+  p=0.4: non-degeneracy floor=0.2734
+      m=1.1: mean(U.max)=0.3548  [PASS]
+      m=1.2: mean(U.max)=0.0414  [fail]
+      m=1.3: mean(U.max)=0.0313  [fail]
+      m=1.5: mean(U.max)=0.0313  [fail]
+    -> robust() actually chose m=1.1: mean ONMI=0.3449, mean(U.max)=0.3548
+  p=0.8: non-degeneracy floor=0.2734
+      m=1.1: mean(U.max)=0.0313  [fail]
+      m=1.2: mean(U.max)=0.0313  [fail]
+      m=1.3: mean(U.max)=0.0313  [fail]
+      m=1.5: mean(U.max)=0.0313  [fail]
+    -> robust() actually chose m=1.1: mean ONMI=0.0000, mean(U.max)=0.0313
+
+3. Structure-alone ablation (content zeroed, alpha=0; graph independent of p)
+--------------------------------------------------------------------------------------------
+  mean ONMI=0.0000, mean(U.max)=0.0313, n_seeds=3
+  -> if this is already low/collapsed, k=32 structural separability is itself marginal;
+     if it's solid, the p=0.8 collapse comes from adding degenerate content, not from k=32 alone.
+
+4. Content-alone ablation at p=0.8 (structure zeroed, alpha=1)
+--------------------------------------------------------------------------------------------
+  mean ONMI=0.0004, mean(U.max)=0.8882, n_seeds=3  (content-only floor at p=0.8)
+
+5. Fixed-alpha sweep at p=0.8 -- does ANY alpha avoid collapse?
+--------------------------------------------------------------------------------------------
+  alpha=0.05: mean ONMI=0.0000, mean(U.max)=0.0313  [collapsed]
+  alpha=0.15: mean ONMI=0.0000, mean(U.max)=0.0313  [collapsed]
+  alpha=0.3: mean ONMI=0.0000, mean(U.max)=0.0313  [collapsed]
+  alpha=0.5: mean ONMI=0.0000, mean(U.max)=0.2174  [ok]
+  alpha=0.7: mean ONMI=0.0015, mean(U.max)=0.3064  [ok]
+  alpha=0.85: mean ONMI=0.0005, mean(U.max)=0.3734  [ok]
+
+6. Onset curve: robust() as-is, fine-grained p at k=32
+--------------------------------------------------------------------------------------------
+     p      onmi   mean_umax      status
+  0.00    0.7320      0.5145          ok
+  0.20    0.4954      0.3479          ok
+  0.40    0.3449      0.3548          ok
+  0.60    0.0505      0.0667   collapsed
+  0.70    0.0000      0.0313   collapsed
+  0.80    0.0000      0.0313   collapsed
+
+7. k-interaction at p=0.8: does reducing k avoid the collapse? (seeds 0-1)
+--------------------------------------------------------------------------------------------
+     k       n      onmi   mean_umax      status
+     4    1000    0.8441      0.9228          ok
+     8    2000    0.8176      0.8231          ok
+    16    4000    0.6505      0.6435          ok
+    32    8000    0.0000      0.0313   collapsed

@@ -1,0 +1,43 @@
+Loading crisismmd...
+Loaded crisismmd in 288.2s
+==============================================================================
+NF-MCD real-data experiment: crisismmd
+==============================================================================
+
+Graph: 800 nodes, 4889 edges, 2 connected components
+Communities (proxy groups: crisismmd): 7 -> ['california_wildfires', 'hurricane_harvey', 'hurricane_irma', 'hurricane_maria', 'iraq_iran_earthquake', 'mexico_earthquake', 'srilanka_floods']
+Nodes with text: 800/800  |  Nodes with image: 800/800
+
+Encoding real text/image content via nf_mcd.encoders.MultimodalEncoder (sentence-transformers + CLIP)...
+Encoding done in 64.9s (text backend=sentence-transformers, image backend=clip)
+
+Scanning k in [6, 7, 8] (selecting by modularity of the hard partition)...
+  k=6: modularity=0.5288, fcm_iters=25, final_obj=310.598
+  k=7: modularity=0.5198, fcm_iters=34, final_obj=288.503
+  k=8: modularity=0.5238, fcm_iters=73, final_obj=270.697
+
+Selected k=6 (modularity=0.5288)
+
+Evaluation:
+          modularity: 0.5288
+     overlapping_nmi: 0.5987
+       membership_f1: 0.6895
+       rule_fidelity: 0.3050
+
+------------------------------------------------------------------------------
+Example per-node explanations
+------------------------------------------------------------------------------
+
+[both]
+  Node 0: assigned to community 4 with membership 0.68 (secondary memberships: community 0 (0.08), community 3 (0.08)). IF cross-modal agreement is Medium (similarity 0.59, membership 0.95) THEN fusion confidence is ~0.50. Because agreement confidence is 0.38, the fusion trusts content mediumly (alpha=0.41) relative to structure.
+
+------------------------------------------------------------------------------
+Extracted global fuzzy rules
+------------------------------------------------------------------------------
+  IF cross-modal confidence is High AND content-trust (alpha) is Medium THEN dominant community is 4 (support=331 nodes, purity=28%)
+  IF cross-modal confidence is Medium AND content-trust (alpha) is Medium THEN dominant community is 5 (support=267 nodes, purity=35%)
+  IF cross-modal confidence is High AND content-trust (alpha) is High THEN dominant community is 5 (support=164 nodes, purity=26%)
+  IF cross-modal confidence is Low AND content-trust (alpha) is Low THEN dominant community is 2 (support=28 nodes, purity=36%)
+  IF cross-modal confidence is Low AND content-trust (alpha) is Medium THEN dominant community is 5 (support=10 nodes, purity=50%)
+
+Saved visualization to C:\Users\HP\Projects\Paper_SSC\nfmcd_impl\experiments\crisismmd_output.png

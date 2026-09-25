@@ -1,0 +1,243 @@
+Cross-modal misalignment: detection and benefit
+Part A = synthetic (known misaligned nodes); Part B = real embeddings with injected image swaps.
+rows: 3300; seeds per cell up to 5; ± is sd over runs (seeds and, in Part A, n / structure level).
+AUROC uses score = -agreement (or -confidence); positive class = misaligned. 0.5 = chance.
+
+T1a. Part A detection AUROC, content informative (centroid 3.0) (mean over structure levels and n)
+--------------------------------------------------------------------------------------------------
+                                             mis=0.1        mis=0.2        mis=0.4
+agreement (default, CCA rank n/4)        0.924±0.046    0.836±0.069    0.590±0.033
+confidence (default)                     0.924±0.046    0.836±0.069    0.590±0.033
+agreement (rank n/16)                    0.943±0.051    0.949±0.040    0.906±0.065
+confidence (rank n/16)                   0.943±0.051    0.949±0.040    0.906±0.065
+consistency confidence                   0.810±0.117    0.767±0.104    0.627±0.065
+k-means cluster mismatch (baseline)      1.000±0.000    1.000±0.000    1.000±0.000
+random score                             0.497±0.035    0.506±0.050    0.522±0.029
+
+T1b. Part A detection AUROC, content weak (centroid 0.08) (mean over structure levels and n)
+--------------------------------------------------------------------------------------------
+                                             mis=0.1        mis=0.2        mis=0.4
+agreement (default, CCA rank n/4)        0.528±0.055    0.500±0.032    0.504±0.043
+confidence (default)                     0.528±0.055    0.500±0.032    0.504±0.043
+agreement (rank n/16)                    0.503±0.058    0.501±0.032    0.504±0.028
+confidence (rank n/16)                   0.503±0.058    0.501±0.032    0.504±0.028
+consistency confidence                   0.521±0.046    0.518±0.037    0.519±0.034
+k-means cluster mismatch (baseline)      0.487±0.030    0.497±0.033    0.511±0.033
+random score                             0.497±0.035    0.506±0.050    0.522±0.029
+
+T1c. Part A detection at mis=0.2 by size (few pairs vs many): AUROC agreement default / rank n/16 / consistency conf; mean paired nodes
+---------------------------------------------------------------------------------------------------------------------------------------
+                           default      rank n/16    consistency   paired nodes
+content=hi, n=300      0.779±0.052    0.911±0.017    0.750±0.090        270.000
+content=hi, n=600      0.893±0.015    0.987±0.003    0.783±0.115        544.200
+content=lo, n=300      0.514±0.036    0.485±0.037    0.538±0.032        270.000
+content=lo, n=600      0.487±0.019    0.516±0.014    0.499±0.031        544.200
+
+T1d. Part A detection at mis=0.2 by structure informativeness (consistency confidence uses the graph)
+-----------------------------------------------------------------------------------------------------
+                          agreement defaultconsistency conf
+content=hi, structure=hi      0.836±0.069    0.865±0.036
+content=hi, structure=lo      0.836±0.069    0.668±0.030
+content=lo, structure=hi      0.500±0.032    0.530±0.027
+content=lo, structure=lo      0.500±0.032    0.507±0.042
+
+T2. Agreement of clean vs misaligned pairs in the shared (CCA) space; d' = separation in pooled sd; overlap = histogram overlap (1 = identical)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+                                  agree clean      agree bad             d'        overlap     conf clean       conf bad
+A content=hi, default             0.867±0.036    0.718±0.056    1.104±0.650    0.472±0.235    0.668±0.032    0.526±0.054
+A content=hi, rank16              0.668±0.099    0.121±0.046    2.508±0.859    0.218±0.129    0.483±0.087    0.148±0.015
+A content=lo, default             0.796±0.017    0.793±0.025    0.011±0.146    0.757±0.078    0.602±0.016    0.600±0.024
+A content=lo, rank16              0.344±0.038    0.339±0.044    0.013±0.142    0.689±0.098    0.260±0.018    0.260±0.023
+B crisismmd, default              0.826±0.008    0.769±0.017    0.324±0.125    0.768±0.068    0.628±0.007    0.578±0.016
+B crisismmd, rank16               0.585±0.022    0.275±0.042    1.021±0.212    0.547±0.078    0.425±0.017    0.228±0.021
+B fakeddit_real_lcc, default      0.790±0.009    0.782±0.017    0.036±0.083    0.779±0.065    0.602±0.007    0.593±0.014
+B fakeddit_real_lcc, rank16       0.488±0.022    0.300±0.036    0.593±0.178    0.650±0.084    0.357±0.016    0.239±0.020
+B fakeddit, default               0.827±0.007    0.787±0.020    0.224±0.107    0.819±0.044    0.633±0.005    0.597±0.016
+B fakeddit, rank16                0.550±0.019    0.313±0.037    0.779±0.173    0.638±0.073    0.396±0.014    0.247±0.018
+
+T3a. Part A LFK ONMI vs misalignment rate, content informative (mean over structure levels and n)
+-------------------------------------------------------------------------------------------------
+                                    mis=0.0        mis=0.1        mis=0.2        mis=0.4    drop 0->0.4
+NF-MCD default                  0.574±0.354    0.482±0.391    0.466±0.390    0.293±0.327         -0.281
+NF-MCD rank n/16                0.534±0.342    0.526±0.351    0.519±0.353    0.490±0.376         -0.044
+NF-MCD robust preset            0.832±0.063    0.781±0.097    0.747±0.121    0.698±0.177         -0.134
+alpha fixed 0.5                 0.537±0.338    0.513±0.358    0.489±0.377    0.435±0.406         -0.103
+no-fuzzy concat, alpha 0.5      0.850±0.046    0.789±0.088    0.755±0.111    0.575±0.300         -0.274
+NF-MCD text-only                0.491±0.384    0.487±0.388    0.488±0.386    0.488±0.387         -0.003
+NF-MCD image-only               0.487±0.386    0.478±0.393    0.476±0.393    0.463±0.403         -0.024
+NF-MCD structure-only           0.469±0.396    0.469±0.396    0.469±0.396    0.469±0.396         +0.000
+spectral (graph + content)      0.875±0.017    0.830±0.051    0.814±0.062    0.823±0.063         -0.052
+k-means on content              0.875±0.017    0.753±0.109    0.686±0.156    0.626±0.272         -0.249
+
+T3b. Part A LFK ONMI vs misalignment rate, content weak (mean over structure levels and n)
+------------------------------------------------------------------------------------------
+                                    mis=0.0        mis=0.1        mis=0.2        mis=0.4    drop 0->0.4
+NF-MCD default                  0.283±0.294    0.270±0.294    0.295±0.301    0.283±0.307         +0.000
+NF-MCD rank n/16                0.456±0.405    0.457±0.403    0.454±0.402    0.455±0.403         -0.001
+NF-MCD robust preset            0.425±0.352    0.429±0.347    0.422±0.349    0.419±0.351         -0.005
+alpha fixed 0.5                 0.341±0.360    0.326±0.340    0.341±0.358    0.336±0.346         -0.005
+no-fuzzy concat, alpha 0.5      0.301±0.324    0.291±0.322    0.320±0.327    0.288±0.320         -0.013
+NF-MCD text-only                0.458±0.405    0.457±0.406    0.458±0.405    0.457±0.406         -0.001
+NF-MCD image-only               0.458±0.406    0.457±0.407    0.456±0.407    0.458±0.405         +0.000
+NF-MCD structure-only           0.469±0.396    0.469±0.396    0.469±0.396    0.469±0.396         +0.000
+spectral (graph + content)      0.478±0.389    0.465±0.397    0.461±0.397    0.460±0.405         -0.018
+k-means on content              0.001±0.004    0.000±0.000    0.000±0.000    0.000±0.000         -0.001
+
+T4a. Part A node accuracy on aligned vs misaligned paired nodes, content informative
+------------------------------------------------------------------------------------
+                                  clean@0.2        bad@0.2      clean@0.4        bad@0.4
+NF-MCD default                  0.755±0.247    0.707±0.294    0.638±0.242    0.592±0.274
+NF-MCD rank n/16                0.799±0.214    0.734±0.278    0.764±0.242    0.735±0.272
+NF-MCD robust preset            1.000±0.000    0.908±0.099    0.999±0.002    0.923±0.085
+alpha fixed 0.5                 0.772±0.236    0.742±0.266    0.713±0.289    0.692±0.310
+no-fuzzy concat, alpha 0.5      1.000±0.000    0.909±0.102    0.865±0.234    0.797±0.256
+NF-MCD text-only                0.731±0.288    0.719±0.300    0.729±0.287    0.731±0.288
+NF-MCD image-only               0.723±0.293    0.695±0.319    0.701±0.311    0.697±0.318
+NF-MCD structure-only           0.721±0.283    0.721±0.284    0.718±0.285    0.724±0.282
+spectral (graph + content)      1.000±0.000    0.900±0.117    1.000±0.000    0.972±0.039
+k-means on content              1.000±0.000    0.596±0.418    1.000±0.000    0.700±0.458
+
+T4b. Part A node accuracy on aligned vs misaligned paired nodes, content weak
+-----------------------------------------------------------------------------
+                                  clean@0.2        bad@0.2      clean@0.4        bad@0.4
+NF-MCD default                  0.628±0.265    0.607±0.282    0.609±0.281    0.596±0.283
+NF-MCD rank n/16                0.704±0.303    0.694±0.319    0.701±0.309    0.710±0.304
+NF-MCD robust preset            0.733±0.271    0.725±0.279    0.737±0.267    0.736±0.273
+alpha fixed 0.5                 0.639±0.286    0.625±0.304    0.646±0.274    0.618±0.294
+no-fuzzy concat, alpha 0.5      0.643±0.272    0.635±0.290    0.637±0.261    0.616±0.276
+NF-MCD text-only                0.697±0.314    0.689±0.325    0.695±0.313    0.702±0.311
+NF-MCD image-only               0.698±0.313    0.692±0.320    0.693±0.317    0.700±0.317
+NF-MCD structure-only           0.721±0.283    0.721±0.284    0.718±0.285    0.724±0.282
+spectral (graph + content)      0.729±0.270    0.729±0.275    0.729±0.274    0.711±0.287
+k-means on content              0.274±0.051    0.226±0.037    0.257±0.037    0.275±0.077
+
+T5a. Part B crisismmd: detection AUROC of injected swaps
+--------------------------------------------------------
+                                               q=0.1          q=0.2          q=0.4
+agreement (default, CCA rank n/4)        0.644±0.044    0.610±0.019    0.571±0.012
+confidence (default)                     0.644±0.044    0.610±0.019    0.571±0.012
+agreement (rank n/16)                    0.805±0.033    0.783±0.025    0.726±0.017
+confidence (rank n/16)                   0.805±0.033    0.783±0.025    0.726±0.017
+consistency confidence                   0.564±0.008    0.541±0.018    0.532±0.015
+k-means cluster mismatch (baseline)      0.606±0.022    0.597±0.031    0.603±0.026
+random score                             0.486±0.015    0.503±0.019    0.488±0.010
+
+T5b. Part B crisismmd: LFK ONMI vs injected-swap fraction q
+-----------------------------------------------------------
+                                      q=0.0          q=0.1          q=0.2          q=0.4    drop 0->0.4
+NF-MCD default                  0.592±0.026    0.453±0.161    0.596±0.012    0.497±0.101         -0.095
+NF-MCD rank n/16                0.733±0.025    0.728±0.028    0.691±0.027    0.680±0.026         -0.052
+NF-MCD robust preset            0.681±0.017    0.675±0.019    0.666±0.020    0.591±0.063         -0.090
+alpha fixed 0.5                 0.665±0.026    0.579±0.041    0.616±0.033    0.550±0.010         -0.115
+no-fuzzy concat, alpha 0.5      0.692±0.022    0.666±0.019    0.678±0.020    0.663±0.004         -0.029
+NF-MCD text-only                0.632±0.050    0.632±0.050    0.632±0.050    0.632±0.050         +0.000
+NF-MCD image-only               0.659±0.008    0.661±0.009    0.639±0.046    0.613±0.053         -0.045
+NF-MCD structure-only           0.578±0.028    0.578±0.028    0.578±0.028    0.578±0.028         +0.000
+spectral (graph + content)      0.879±0.000    0.868±0.008    0.865±0.010    0.891±0.012         +0.012
+k-means on content              0.405±0.010    0.410±0.010    0.415±0.008    0.417±0.017         +0.012
+
+T5c. Part B crisismmd: node accuracy on the CORRUPTED nodes (last column: accuracy on clean paired nodes at q=0.2)
+------------------------------------------------------------------------------------------------------------------
+                                      q=0.1          q=0.2          q=0.4      clean@0.2
+NF-MCD default                  0.744±0.129    0.812±0.030    0.778±0.053    0.850±0.008
+NF-MCD rank n/16                0.768±0.084    0.843±0.049    0.817±0.017    0.829±0.057
+NF-MCD robust preset            0.876±0.049    0.895±0.043    0.890±0.018    0.918±0.034
+alpha fixed 0.5                 0.815±0.084    0.810±0.064    0.804±0.020    0.856±0.015
+no-fuzzy concat, alpha 0.5      0.694±0.112    0.718±0.106    0.709±0.106    0.718±0.103
+NF-MCD text-only                0.779±0.087    0.811±0.070    0.804±0.072    0.796±0.082
+NF-MCD image-only               0.720±0.057    0.755±0.083    0.799±0.081    0.764±0.080
+NF-MCD structure-only           0.838±0.023    0.855±0.015    0.863±0.015    0.869±0.029
+spectral (graph + content)      0.935±0.025    0.948±0.014    0.972±0.008    0.970±0.005
+k-means on content              0.627±0.045    0.652±0.027    0.648±0.027    0.630±0.016
+
+T5a. Part B fakeddit_real_lcc: detection AUROC of injected swaps
+----------------------------------------------------------------
+                                               q=0.1          q=0.2          q=0.4
+agreement (default, CCA rank n/4)        0.559±0.028    0.532±0.026    0.535±0.017
+confidence (default)                     0.559±0.028    0.532±0.026    0.535±0.017
+agreement (rank n/16)                    0.714±0.028    0.682±0.013    0.619±0.027
+confidence (rank n/16)                   0.714±0.028    0.682±0.013    0.619±0.027
+consistency confidence                   0.651±0.027    0.580±0.021    0.567±0.022
+k-means cluster mismatch (baseline)      0.577±0.015    0.578±0.016    0.595±0.012
+random score                             0.519±0.018    0.512±0.023    0.501±0.007
+
+T5b. Part B fakeddit_real_lcc: LFK ONMI vs injected-swap fraction q
+-------------------------------------------------------------------
+                                      q=0.0          q=0.1          q=0.2          q=0.4    drop 0->0.4
+NF-MCD default                  0.119±0.024    0.104±0.028    0.100±0.017    0.095±0.020         -0.024
+NF-MCD rank n/16                0.188±0.001    0.185±0.005    0.186±0.007    0.184±0.012         -0.005
+NF-MCD robust preset            0.228±0.003    0.214±0.007    0.207±0.004    0.202±0.004         -0.026
+alpha fixed 0.5                 0.176±0.020    0.162±0.006    0.158±0.005    0.129±0.036         -0.047
+no-fuzzy concat, alpha 0.5      0.156±0.019    0.156±0.014    0.136±0.017    0.148±0.024         -0.008
+NF-MCD text-only                0.211±0.000    0.211±0.000    0.211±0.000    0.211±0.000         +0.000
+NF-MCD image-only               0.207±0.010    0.212±0.008    0.211±0.007    0.213±0.003         +0.006
+NF-MCD structure-only           0.197±0.023    0.197±0.023    0.197±0.023    0.197±0.023         +0.000
+spectral (graph + content)      0.523±0.000    0.516±0.006    0.516±0.004    0.503±0.010         -0.020
+k-means on content              0.262±0.024    0.187±0.020    0.159±0.026    0.094±0.040         -0.167
+
+T5c. Part B fakeddit_real_lcc: node accuracy on the CORRUPTED nodes (last column: accuracy on clean paired nodes at q=0.2)
+--------------------------------------------------------------------------------------------------------------------------
+                                      q=0.1          q=0.2          q=0.4      clean@0.2
+NF-MCD default                  0.390±0.033    0.422±0.059    0.455±0.048    0.423±0.031
+NF-MCD rank n/16                0.408±0.029    0.396±0.031    0.397±0.029    0.389±0.008
+NF-MCD robust preset            0.488±0.017    0.498±0.019    0.472±0.031    0.459±0.008
+alpha fixed 0.5                 0.396±0.045    0.435±0.042    0.438±0.058    0.385±0.014
+no-fuzzy concat, alpha 0.5      0.453±0.027    0.489±0.034    0.491±0.016    0.464±0.043
+NF-MCD text-only                0.416±0.035    0.398±0.035    0.398±0.028    0.390±0.008
+NF-MCD image-only               0.423±0.041    0.395±0.036    0.396±0.030    0.391±0.008
+NF-MCD structure-only           0.375±0.067    0.366±0.037    0.362±0.031    0.366±0.033
+spectral (graph + content)      0.753±0.042    0.744±0.030    0.699±0.046    0.722±0.007
+k-means on content              0.402±0.085    0.404±0.069    0.297±0.043    0.531±0.078
+
+T5a. Part B fakeddit: detection AUROC of injected swaps
+-------------------------------------------------------
+                                               q=0.1          q=0.2          q=0.4
+agreement (default, CCA rank n/4)        0.614±0.023    0.587±0.012    0.554±0.012
+confidence (default)                     0.614±0.023    0.587±0.012    0.554±0.012
+agreement (rank n/16)                    0.756±0.025    0.725±0.015    0.667±0.009
+confidence (rank n/16)                   0.756±0.025    0.725±0.015    0.667±0.009
+consistency confidence                   0.614±0.025    0.563±0.019    0.523±0.026
+k-means cluster mismatch (baseline)      0.584±0.017    0.600±0.014    0.595±0.005
+random score                             0.495±0.023    0.496±0.027    0.507±0.017
+
+T5b. Part B fakeddit: LFK ONMI vs injected-swap fraction q
+----------------------------------------------------------
+                                      q=0.0          q=0.1          q=0.2          q=0.4    drop 0->0.4
+NF-MCD default                  0.316±0.045    0.307±0.053    0.267±0.051    0.209±0.035         -0.107
+NF-MCD rank n/16                0.728±0.010    0.679±0.070    0.648±0.080    0.693±0.034         -0.036
+NF-MCD robust preset            0.685±0.019    0.688±0.022    0.677±0.024    0.660±0.029         -0.025
+alpha fixed 0.5                 0.398±0.023    0.340±0.023    0.383±0.039    0.360±0.049         -0.038
+no-fuzzy concat, alpha 0.5      0.355±0.077    0.401±0.040    0.378±0.056    0.343±0.033         -0.013
+NF-MCD text-only                0.784±0.003    0.784±0.003    0.784±0.003    0.784±0.003         +0.000
+NF-MCD image-only               0.796±0.025    0.789±0.017    0.782±0.006    0.781±0.005         -0.015
+NF-MCD structure-only           0.821±0.006    0.821±0.006    0.821±0.006    0.821±0.006         +0.000
+spectral (graph + content)      0.552±0.005    0.640±0.045    0.644±0.031    0.645±0.009         +0.093
+k-means on content              0.088±0.023    0.062±0.022    0.027±0.011    0.009±0.003         -0.079
+
+T5c. Part B fakeddit: node accuracy on the CORRUPTED nodes (last column: accuracy on clean paired nodes at q=0.2)
+-----------------------------------------------------------------------------------------------------------------
+                                      q=0.1          q=0.2          q=0.4      clean@0.2
+NF-MCD default                  0.421±0.049    0.485±0.072    0.507±0.024    0.480±0.040
+NF-MCD rank n/16                0.727±0.048    0.730±0.098    0.753±0.035    0.713±0.052
+NF-MCD robust preset            0.799±0.029    0.820±0.017    0.831±0.017    0.708±0.043
+alpha fixed 0.5                 0.478±0.032    0.541±0.092    0.482±0.073    0.578±0.112
+no-fuzzy concat, alpha 0.5      0.449±0.049    0.439±0.084    0.537±0.068    0.584±0.087
+NF-MCD text-only                0.784±0.030    0.776±0.034    0.788±0.020    0.778±0.033
+NF-MCD image-only               0.748±0.095    0.765±0.041    0.767±0.068    0.768±0.049
+NF-MCD structure-only           0.835±0.051    0.843±0.058    0.846±0.058    0.846±0.059
+spectral (graph + content)      0.856±0.024    0.859±0.017    0.868±0.007    0.886±0.027
+k-means on content              0.183±0.052    0.172±0.036    0.169±0.035    0.450±0.033
+
+T6. Default NF-MCD (fuzzy alpha) wins/ties/losses over settings vs alpha fixed 0.5, no-fuzzy concat (alpha 0.5), and spectral+content; tie = |diff| < max(0.02, sd sum)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                            ONMI vs a=0.5 ONMI vs concatacc_bad vs a=0.5acc_bad vs concatONMI vs spectral
+A content=hi, mis>0                 0/8/4          0/4/8         0/11/1          0/6/6          0/4/8
+A content=lo, mis>0                 0/9/3         0/11/1         0/12/0         0/11/1         0/2/10
+B crisismmd, q>0                    0/3/0          0/0/3          0/3/0          0/3/0          0/0/3
+B fakeddit_real_lcc, q>0            0/1/2          0/1/2          0/3/0          0/3/0          0/0/3
+B fakeddit, q>0                     0/1/2          0/2/1          0/3/0          0/3/0          0/0/3
+
+Sanity check: Part B q=0, b:default ONMI vs known earlier default values (k = truth)
+  crisismmd          this run 0.592±0.026   earlier 0.609
+  fakeddit           this run 0.316±0.045   earlier 0.308
+  fakeddit_real_lcc  this run 0.119±0.024   earlier 0.126

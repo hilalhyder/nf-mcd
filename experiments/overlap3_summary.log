@@ -1,0 +1,97 @@
+Diagnosis: why does primary ONMI RISE with blend_strength (real overlap signal)?
+n_nodes=300, k=5, 5 seeds, NF-MCD default. Conditions: combined (edges+content blended,
+matches run_overlap2.py), edge_only, content_only (ablation; blend=0 has only 'combined',
+identical to both ablations trivially).
+====================================================================================================
+
+
+### Mechanism 2 (scoring/credit) + Mechanism 3 (structural spillover): 'combined' condition
+strict_acc = hard assignment must map to the NOMINAL primary community c1.
+lenient_acc = hard assignment may map to EITHER true community (c1 or c2) -- this is what
+the standard overlapping_nmi metric effectively rewards for overlapping nodes.
+====================================================================================================
+
+overlap_rate=0.1
+  blend    onmi_std  strict_all  lenient_all  strict_ov  lenient_ov  strict_nonov  hard->c1  hard->c2  hard->nei
+  0.0         0.859       1.000        1.000      1.000       1.000         1.000     1.000     0.000      0.000
+  0.3         0.860       0.999        0.999      0.992       1.000         0.999     0.992     0.008      0.000
+  0.5         0.871       0.996        1.000      0.950       1.000         1.000     0.950     0.050      0.000
+  0.7         0.871       0.991        0.999      0.899       1.000         0.999     0.899     0.101      0.000
+  1.0         0.877       0.980        0.997      0.770       0.984         0.999     0.770     0.214      0.016
+
+overlap_rate=0.4
+  blend    onmi_std  strict_all  lenient_all  strict_ov  lenient_ov  strict_nonov  hard->c1  hard->c2  hard->nei
+  0.0         0.644       0.999        0.999      1.000       1.000         0.999     1.000     0.000      0.000
+  0.3         0.644       0.995        0.998      0.989       0.998         0.998     0.989     0.008      0.002
+  0.5         0.651       0.988        0.998      0.967       0.998         0.998     0.967     0.031      0.002
+  0.7         0.683       0.963        0.990      0.911       0.996         0.987     0.911     0.084      0.004
+  1.0         0.711       0.902        0.983      0.731       0.985         0.982     0.731     0.254      0.015
+
+
+### Mechanism 1: degree artifact
+Mean degree by node group, and Spearman(degree, strict-correct) pooled over all nodes.
+====================================================================================================
+
+overlap_rate=0.1
+  blend    deg_overlap  deg_nonoverlap   spearman(deg,strict_ok)
+  0.0            15.41           15.23                       nan
+  0.3            17.45           15.54                    -0.052
+  0.5            18.98           15.77                    -0.059
+  0.7            19.93           15.98                    -0.102
+  1.0            21.81           16.27                    -0.192
+
+overlap_rate=0.4
+  blend    deg_overlap  deg_nonoverlap   spearman(deg,strict_ok)
+  0.0            15.11           15.31                     0.089
+  0.3            18.02           16.55                     0.029
+  0.5            19.99           17.40                    -0.051
+  0.7            22.10           18.23                    -0.115
+  1.0            24.86           19.45                    -0.309
+
+
+### Mechanism 4: edge-only vs. content-only ablation (strict_acc_overlap, lenient_acc_overlap, onmi_standard)
+====================================================================================================
+
+overlap_rate=0.1
+  blend=0.3
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.992       1.000     0.860
+    edge_only           0.992       1.000     0.860
+    content_only        1.000       1.000     0.859
+  blend=0.5
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.950       1.000     0.871
+    edge_only           0.950       1.000     0.865
+    content_only        1.000       1.000     0.859
+  blend=0.7
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.899       1.000     0.871
+    edge_only           0.934       1.000     0.857
+    content_only        1.000       1.000     0.859
+  blend=1.0
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.770       0.984     0.877
+    edge_only           0.926       0.992     0.862
+    content_only        1.000       1.000     0.859
+
+overlap_rate=0.4
+  blend=0.3
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.989       0.998     0.644
+    edge_only           0.992       0.998     0.637
+    content_only        1.000       1.000     0.644
+  blend=0.5
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.967       0.998     0.651
+    edge_only           0.986       0.998     0.640
+    content_only        1.000       1.000     0.644
+  blend=0.7
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.911       0.996     0.683
+    edge_only           0.966       0.996     0.642
+    content_only        1.000       1.000     0.649
+  blend=1.0
+    condition       strict_ov  lenient_ov  onmi_std
+    combined            0.731       0.985     0.711
+    edge_only           0.914       0.993     0.635
+    content_only        1.000       1.000     0.654

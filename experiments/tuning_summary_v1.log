@@ -1,0 +1,96 @@
+[cache] crisismmd: 800 nodes, 4889 edges, k=7, text emb=800, image emb=800, 374s
+[cache] pheme: 2000 nodes, 1841 edges, k=9, text emb=2000, image emb=0, 9s
+[cache] fakeddit: 1200 nodes, 12529 edges, k=10, text emb=1200, image emb=0, 48s
+[cache] dblp: 435 nodes, 1683 edges, k=8, text emb=0, image emb=0, 1s
+[cache] amazon: 345 nodes, 1190 edges, k=8, text emb=0, image emb=0, 1s
+[cache] total 433s
+[cache] crisismmd: already cached, skipping
+[cache] pheme: already cached, skipping
+[cache] fakeddit: 1200 nodes, 12529 edges, k=10, text emb=1200, image emb=1143, 111s
+[cache] dblp: already cached, skipping
+[cache] amazon: already cached, skipping
+[cache] total 117s
+==============================================================================
+PHASE A: one-at-a-time sensitivity around defaults
+==============================================================================
+  0/210 fits already in CSV; running 210
+  ran 210 fits in 129s with 6 workers (0 errors)
+
+Default-config ONMI (mean +/- sd over seeds 0,1,2):
+  crisismmd  0.5581 +/- 0.0403
+  pheme      0.0077 +/- 0.0134
+  fakeddit   0.3526 +/- 0.0696
+  dblp       0.7367 +/- 0.0711
+  amazon     0.5187 +/- 0.0815
+
+--- m ---
+  crisismmd  1.2: 0.562+/-0.011 | 1.3: 0.602+/-0.008 | 1.5*: 0.558+/-0.040 | 1.75: 0.000+/-0.000 | 2.0: 0.000+/-0.000
+  pheme      1.2: 0.004+/-0.007 | 1.3: 0.008+/-0.007 | 1.5*: 0.008+/-0.013 | 1.75: 0.000+/-0.000 | 2.0: 0.000+/-0.000
+  fakeddit   1.2: 0.610+/-0.068 | 1.3: 0.471+/-0.132 | 1.5*: 0.353+/-0.070 | 1.75: 0.063+/-0.109 | 2.0: 0.000+/-0.000
+  dblp       1.2: 0.596+/-0.016 | 1.3: 0.641+/-0.027 | 1.5*: 0.737+/-0.071 | 1.75: 0.722+/-0.037 | 2.0: 0.694+/-0.039
+  amazon     1.2: 0.482+/-0.117 | 1.3: 0.494+/-0.093 | 1.5*: 0.519+/-0.082 | 1.75: 0.598+/-0.073 | 2.0: 0.617+/-0.091
+
+--- alpha ---
+  crisismmd  (0.05, 0.95): 0.490+/-0.042 | (0.15, 0.85)*: 0.558+/-0.040 | (0.25, 0.75): 0.627+/-0.022
+  pheme      (0.05, 0.95): 0.004+/-0.007 | (0.15, 0.85)*: 0.008+/-0.013 | (0.25, 0.75): 0.000+/-0.000
+  fakeddit   (0.05, 0.95): 0.292+/-0.050 | (0.15, 0.85)*: 0.353+/-0.070 | (0.25, 0.75): 0.411+/-0.032
+
+--- sd ---
+  crisismmd  0.5: 0.645+/-0.009 | 1.0*: 0.558+/-0.040 | 1.5: 0.000+/-0.000 | 2.0: 0.000+/-0.000
+  pheme      0.5: 0.000+/-0.000 | 1.0*: 0.008+/-0.013 | 1.5: 0.000+/-0.000 | 2.0: 0.000+/-0.000
+  fakeddit   0.5: 0.489+/-0.002 | 1.0*: 0.353+/-0.070 | 1.5: 0.256+/-0.030 | 2.0: 0.062+/-0.108
+  dblp       0.5: 1.000+/-0.000 | 1.0*: 0.737+/-0.071 | 1.5: 0.515+/-0.081 | 2.0: 0.505+/-0.069
+  amazon     0.5: 1.000+/-0.000 | 1.0*: 0.519+/-0.082 | 1.5: 0.790+/-0.105 | 2.0: 0.620+/-0.084
+
+--- cd ---
+  crisismmd  4: 0.416+/-0.008 | 8*: 0.558+/-0.040 | 16: 0.615+/-0.032 | 32: 0.662+/-0.003
+  pheme      4: 0.008+/-0.013 | 8*: 0.008+/-0.013 | 16: 0.008+/-0.013 | 32: 0.008+/-0.013
+  fakeddit   4: 0.294+/-0.035 | 8*: 0.353+/-0.070 | 16: 0.314+/-0.004 | 32: 0.295+/-0.003
+
+--- anfis ---
+  crisismmd  default*: 0.558+/-0.040 | shift-0.1: 0.172+/-0.297 | shift+0.1: 0.622+/-0.004 | scale0.6: 0.165+/-0.287 | scale1.5: 0.542+/-0.131 | pct: 0.700+/-0.008
+  pheme      default*: 0.008+/-0.013 | shift-0.1: 0.008+/-0.013 | shift+0.1: 0.008+/-0.013 | scale0.6: 0.008+/-0.013 | scale1.5: 0.008+/-0.013 | pct: 0.008+/-0.013
+  fakeddit   default*: 0.353+/-0.070 | shift-0.1: 0.297+/-0.015 | shift+0.1: 0.448+/-0.020 | scale0.6: 0.263+/-0.008 | scale1.5: 0.441+/-0.027 | pct: 0.510+/-0.012
+
+Rule: a parameter 'mattered' if on some non-PHEME dataset a value moved mean ONMI by more than max(0.02, 2*sd) from the default.
+Mattered: m: crisismmd(1.75: -0.558), crisismmd(2.0: -0.558), fakeddit(1.2: +0.257), fakeddit(1.75: -0.290), fakeddit(2.0: -0.353); sd: crisismmd(0.5: +0.086), crisismmd(1.5: -0.558), crisismmd(2.0: -0.558), fakeddit(2.0: -0.290), dblp(0.5: +0.263), dblp(1.5: -0.222), dblp(2.0: -0.232), amazon(0.5: +0.481), amazon(1.5: +0.271); cd: crisismmd(4: -0.142), crisismmd(32: +0.104); anfis: crisismmd(pct: +0.142), fakeddit(pct: +0.157)
+Kept for Phase B: ['m', 'sd', 'cd', 'anfis']
+Saved experiments/tuning_sensitivity_<param>.png
+[phaseA] total 130s
+
+==============================================================================
+PHASE B: random search + leave-one-dataset-out (LODO) selection
+==============================================================================
+Searching over: ['m', 'sd', 'cd', 'anfis']
+61 configs (default + 60 random) x 5 datasets x 3 seeds
+  24/915 fits already in CSV; running 891
+  ran 891 fits in 479s with 6 workers (0 errors)
+
+LODO selection (score = mean ONMI over the other non-PHEME datasets; default is config 0)
+held-out    chosen cfg           tuned         default    delta  2*noise  verdict
+---------------------------------------------------------------------------------
+crisismmd           23     0.689+/-0.008     0.558+/-0.040   +0.131    0.082  tuned better
+            cfg 23: {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+fakeddit            23     0.620+/-0.009     0.353+/-0.070   +0.267    0.140  tuned better
+            cfg 23: {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+dblp                23     1.000+/-0.000     0.737+/-0.071   +0.263    0.142  tuned better
+            cfg 23: {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+amazon              23     1.000+/-0.000     0.519+/-0.082   +0.481    0.163  tuned better
+            cfg 23: {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+
+Mean held-out delta (tuned - default) over 4 datasets: +0.2858
+
+PHEME (not used in selection) for each chosen config vs default:
+  chosen for crisismmd : cfg 23: PHEME ONMI 0.000+/-0.000 (default 0.008+/-0.013)
+  chosen for fakeddit  : cfg 23: PHEME ONMI 0.000+/-0.000 (default 0.008+/-0.013)
+  chosen for dblp      : cfg 23: PHEME ONMI 0.000+/-0.000 (default 0.008+/-0.013)
+  chosen for amazon    : cfg 23: PHEME ONMI 0.000+/-0.000 (default 0.008+/-0.013)
+  best PHEME ONMI over all 61 configs: 0.029
+
+Top 5 configs by mean ONMI over the 4 selection datasets (in-sample, NOT held-out):
+  cfg 23: 0.8273  (default 0.5415)  {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'scale0.6'}
+  cfg 47: 0.8226  (default 0.5415)  {'m': 1.3, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 16, 'anfis': 'pct'}
+  cfg 45: 0.7449  (default 0.5415)  {'m': 2.0, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 4, 'anfis': 'pct'}
+  cfg 24: 0.7415  (default 0.5415)  {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 8, 'anfis': 'scale1.5'}
+  cfg 43: 0.7306  (default 0.5415)  {'m': 1.2, 'alpha': (0.15, 0.85), 'sd': 0.5, 'cd': 4, 'anfis': 'scale1.5'}
+[phaseB] total 479s

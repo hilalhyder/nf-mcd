@@ -1,0 +1,107 @@
+Neighbourhood-based explanations: evaluation (mean over seeds; k = ground-truth count)
+================================================================================================
+
+(a) Global rules: fidelity to the model's hard assignments
+    new = neighbourhood rules; strict fidelity counts no-rule nodes as misses; old = (confidence, alpha) rules;
+    tree = depth-limited decision tree on [degree, neighbour fractions], 5-fold CV accuracy at 6 and 12 leaves
+dataset           variant   majority old_fid new_fid  cover   prec w/fallb #rules tree6cv tree12cv
+--------------------------------------------------------------------------------------------------
+crisismmd         default      0.260   0.298   0.893  0.953  0.937   0.930  5.400   0.931    0.935
+crisismmd         robust       0.252   0.281   0.852  0.920  0.925   0.896  6.200   0.904    0.905
+fakeddit          default      0.349   0.369   0.644  0.872  0.731   0.743  4.800   0.750    0.753
+fakeddit          robust       0.172   0.226   0.716  0.930  0.770   0.751  9.600   0.679    0.755
+fakeddit_real_lcc default      0.448   0.461   0.932  0.997  0.935   0.932  3.200   0.950    0.960
+fakeddit_real_lcc robust       0.286   0.316   0.948  0.998  0.950   0.948  6.000   0.952    0.965
+pheme             default      0.184   0.184   0.969  0.973  0.995   0.991  8.800   0.796    0.991
+pheme             robust       0.190   0.190   0.961  0.971  0.990   0.985  8.200   0.850    0.984
+dblp              default      0.211   0.211   0.990  0.994  0.996   0.990  8.000   0.848    0.992
+dblp              robust       0.210   0.210   0.992  0.994  0.997   0.992  8.000   0.857    0.995
+amazon            default      0.356   0.356   0.986  0.986  1.000   0.986  4.000   0.986    0.986
+amazon            robust       0.356   0.356   0.986  0.986  1.000   0.986  4.000   0.986    0.986
+
+    fidelity vs number of neighbourhood rules (rules ranked by support; default variant)
+dataset               r=1    r=2    r=3    r=4    r=5    r=6    r=7    r=8    r=9   r=10
+crisismmd           0.260  0.503  0.745  0.873  0.864  0.870  0.860    nan    nan    nan
+fakeddit            0.250  0.381  0.574  0.637  0.651  0.701    nan    nan    nan    nan
+fakeddit_real_lcc   0.444  0.827  0.930  0.923    nan    nan    nan    nan    nan    nan
+pheme               0.184  0.333  0.461  0.581  0.688  0.789  0.879  0.952  0.968    nan
+dblp                0.211  0.384  0.534  0.665  0.764  0.848  0.922  0.990    nan    nan
+amazon              0.356  0.644  0.870  0.986    nan    nan    nan    nan    nan    nan
+
+(b) Faithfulness of content_sensitivity(): does it predict which nodes change when the model is actually refit WITHOUT content?
+    flip = node's aligned community differs between the full model and the content-less refit;
+    noise = same comparison between two seeds of the full model (what flips anyway). AUC 0.5 = chance.
+dataset           variant     flip  noise AUC_sens AUC_alpha AUC_norm rho_sens rho_alpha iv_prec iv_rec
+-------------------------------------------------------------------------------------------------------
+crisismmd         default    0.173  0.134    0.212     0.586    0.589   -0.378     0.112   0.712  0.257
+crisismmd         robust     0.135  0.058    0.473     0.607    0.614   -0.029     0.128   0.531  0.478
+fakeddit          default    0.537  0.274    0.406     0.536    0.536   -0.162     0.062   0.643  0.355
+fakeddit          robust     0.253  0.074    0.469     0.558    0.558   -0.043     0.088   0.797  0.716
+fakeddit_real_lcc default    0.407  0.191    0.327     0.479    0.479   -0.290    -0.036   0.688  0.122
+fakeddit_real_lcc robust     0.275  0.004    0.736     0.585    0.584    0.365     0.131   0.907  0.394
+pheme             default    0.188  0.660    0.243       nan    0.442   -0.337       nan   0.938  0.040
+pheme             robust     0.252  0.657    0.276       nan    0.468   -0.316       nan   0.827  0.060
+dblp              default    (no content in this dataset: sensitivity is 0 by construction)
+dblp              robust     (no content in this dataset: sensitivity is 0 by construction)
+amazon            default    (no content in this dataset: sensitivity is 0 by construction)
+amazon            robust     (no content in this dataset: sensitivity is 0 by construction)
+
+(c) Stability across seeds 0-4 (mean over seed pairs): same node, same explanation?
+dataset           variant      ARI old_type new_share new_agree new_flip new_type rule_pred thr_diff old_rule
+-------------------------------------------------------------------------------------------------------------
+crisismmd         default    0.895    0.699     0.903     0.810    0.917    0.716     0.913    0.010    0.400
+crisismmd         robust     0.945    0.699     0.900     0.929    0.920    0.817     0.874    0.050    0.620
+fakeddit          default    0.576    0.767     0.591     0.778    0.712    0.384     0.650    0.116    0.760
+fakeddit          robust     0.925    0.767     0.897     0.915    0.935    0.822     0.887    0.019    0.720
+fakeddit_real_lcc default    0.646    0.650     0.859     0.826    0.907    0.723     0.843    0.000    0.480
+fakeddit_real_lcc robust     0.988    0.650     0.984     0.967    0.991    0.948     0.995    0.000    0.640
+pheme             default    0.144    1.000     0.982     0.937    0.985    0.917     0.330    0.010    0.100
+pheme             robust     0.148    1.000     0.968     0.938    0.974    0.904     0.347    0.005    0.000
+dblp              default    0.918    1.000     0.990     1.000    1.000    0.990     0.933    0.000    1.000
+dblp              robust     1.000    1.000     1.000     1.000    1.000    1.000     1.000    0.000    1.000
+amazon            default    1.000    1.000     1.000     1.000    1.000    1.000     1.000    0.000    1.000
+amazon            robust     1.000    1.000     1.000     1.000    1.000    1.000     1.000    0.000    1.000
+
+(d) Missing modalities ('both' mode): is the explanation text consistent with what was removed, and does sensitivity respond?
+dataset           variant      p     status      n text_ok content_sens struct_sens  sens=0
+-------------------------------------------------------------------------------------------
+crisismmd         default    0.2       both    513   1.000        0.338       0.249   0.000
+crisismmd         default    0.2  text_only    125   1.000        0.003       0.696   0.000
+crisismmd         default    0.2 image_only    129   1.000        0.001       0.679   0.000
+crisismmd         default    0.2       none     33   1.000        0.000       0.691   1.000
+crisismmd         default    0.6       both    114   1.000        0.353       0.394   0.000
+crisismmd         default    0.6  text_only    193   1.000        0.001       0.763   0.000
+crisismmd         default    0.6 image_only    192   1.000        0.001       0.758   0.000
+crisismmd         default    0.6       none    301   1.000        0.000       0.788   1.000
+crisismmd         robust     0.2       both    513   1.000        0.305       0.282   0.000
+crisismmd         robust     0.2  text_only    125   1.000        0.065       0.610   0.000
+crisismmd         robust     0.2 image_only    129   1.000        0.096       0.577   0.000
+crisismmd         robust     0.2       none     33   1.000        0.000       0.748   1.000
+crisismmd         robust     0.6       both    114   1.000        0.367       0.358   0.000
+crisismmd         robust     0.6  text_only    193   1.000        0.080       0.674   0.000
+crisismmd         robust     0.6 image_only    192   1.000        0.090       0.666   0.000
+crisismmd         robust     0.6       none    301   1.000        0.000       0.834   1.000
+fakeddit_real_lcc default    0.2       both    375   1.000        0.337       0.376   0.000
+fakeddit_real_lcc default    0.2  text_only     96   1.000        0.002       0.757   0.000
+fakeddit_real_lcc default    0.2 image_only     97   1.000        0.001       0.759   0.000
+fakeddit_real_lcc default    0.2       none     24   1.000        0.000       0.769   1.000
+fakeddit_real_lcc default    0.6       both     89   1.000        0.246       0.472   0.000
+fakeddit_real_lcc default    0.6  text_only    139   1.000        0.001       0.726   0.000
+fakeddit_real_lcc default    0.6 image_only    134   1.000        0.000       0.721   0.000
+fakeddit_real_lcc default    0.6       none    230   1.000        0.000       0.736   1.000
+fakeddit_real_lcc robust     0.2       both    375   1.000        0.326       0.280   0.000
+fakeddit_real_lcc robust     0.2  text_only     96   1.000        0.095       0.572   0.000
+fakeddit_real_lcc robust     0.2 image_only     97   1.000        0.072       0.623   0.000
+fakeddit_real_lcc robust     0.2       none     24   1.000        0.000       0.769   1.000
+fakeddit_real_lcc robust     0.6       both     89   1.000        0.273       0.460   0.000
+fakeddit_real_lcc robust     0.6  text_only    139   1.000        0.049       0.679   0.000
+fakeddit_real_lcc robust     0.6 image_only    134   1.000        0.040       0.688   0.000
+fakeddit_real_lcc robust     0.6       none    230   1.000        0.000       0.734   1.000
+
+What these explanations do not claim:
+  - On structure-dominated assignments (all datasets with informative graphs, and especially the leaky CrisisMMD/Fakeddit graphs)
+    the neighbourhood rule mostly restates homophily: high fidelity here reflects that the clustering is structure-driven,
+    not that the assignment is correct.
+  - Neighbour shares are computed from the model's own assignments (self-referential).
+  - Zeroing a feature block is off-distribution. content_sensitivity is an intervention measure, not a causal effect on the truth.
+  - No human study: usefulness to a person is untested. 5 seeds (3 for missing-modality).

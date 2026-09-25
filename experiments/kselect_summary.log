@@ -1,0 +1,257 @@
+k-selection sensitivity and unsupervised heuristics for NF-MCD
+
+Part A: ONMI/modularity/F1 vs k (mean +- sd over seeds 0,1,2), k in range(2, k_true+8) capped at 20.
+structural_dim tracks k (NFMCD's own default), so a real user sweeping k gets this too.
+
+=== crisismmd  (k_true = 7) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.083±0.007  mod=0.332±0.013  f1=0.453±0.005
+     3  onmi=0.281±0.002  mod=0.489±0.002  f1=0.679±0.002
+     4  onmi=0.433±0.006  mod=0.527±0.001  f1=0.763±0.003
+     5  onmi=0.608±0.002  mod=0.530±0.001  f1=0.800±0.002
+     6  onmi=0.579±0.031  mod=0.523±0.008  f1=0.720±0.024
+     7  onmi=0.609±0.016  mod=0.520±0.006  f1=0.667±0.114 <-k_true
+     8  onmi=0.475±0.114  mod=0.495±0.023  f1=0.561±0.121
+     9  onmi=0.417±0.202  mod=0.425±0.081  f1=0.413±0.169
+    10  onmi=0.331±0.117  mod=0.400±0.068  f1=0.323±0.054
+    11  onmi=0.358±0.042  mod=0.406±0.054  f1=0.378±0.012
+    12  onmi=0.246±0.064  mod=0.366±0.058  f1=0.314±0.051
+    13  onmi=0.267±0.016  mod=0.371±0.050  f1=0.359±0.016
+    14  onmi=0.221±0.043  mod=0.301±0.080  f1=0.352±0.058
+    peak ONMI at k=7 (0.609); peak modularity at k=5 (0.530)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.149±0.001  mod=0.351±0.000  f1=0.546±0.001
+     3  onmi=0.316±0.001  mod=0.497±0.000  f1=0.721±0.001
+     4  onmi=0.508±0.001  mod=0.534±0.000  f1=0.823±0.001
+     5  onmi=0.691±0.001  mod=0.533±0.000  f1=0.873±0.001
+     6  onmi=0.674±0.002  mod=0.526±0.000  f1=0.804±0.001
+     7  onmi=0.707±0.002  mod=0.458±0.001  f1=0.702±0.003 <-k_true
+     8  onmi=0.773±0.002  mod=0.302±0.000  f1=0.654±0.000
+     9  onmi=0.742±0.002  mod=0.300±0.000  f1=0.726±0.001
+    10  onmi=0.663±0.025  mod=0.299±0.007  f1=0.790±0.051
+    11  onmi=0.659±0.023  mod=0.290±0.008  f1=0.798±0.056
+    12  onmi=0.586±0.008  mod=0.276±0.001  f1=0.701±0.003
+    13  onmi=0.560±0.045  mod=0.255±0.019  f1=0.692±0.012
+    14  onmi=0.542±0.013  mod=0.248±0.009  f1=0.678±0.004
+    peak ONMI at k=8 (0.773); peak modularity at k=4 (0.534)
+
+=== fakeddit  (k_true = 10) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.207±0.001  mod=0.389±0.000  f1=0.581±0.002
+     3  onmi=0.291±0.001  mod=0.425±0.001  f1=0.573±0.000
+     4  onmi=0.322±0.003  mod=0.426±0.002  f1=0.556±0.001
+     5  onmi=0.348±0.002  mod=0.412±0.016  f1=0.552±0.001
+     6  onmi=0.423±0.002  mod=0.319±0.001  f1=0.478±0.000
+     7  onmi=0.397±0.008  mod=0.306±0.005  f1=0.468±0.003
+     8  onmi=0.332±0.022  mod=0.286±0.008  f1=0.420±0.003
+     9  onmi=0.358±0.028  mod=0.308±0.024  f1=0.306±0.083
+    10  onmi=0.308±0.053  mod=0.297±0.014  f1=0.253±0.043 <-k_true
+    11  onmi=0.281±0.026  mod=0.293±0.014  f1=0.245±0.038
+    12  onmi=0.283±0.020  mod=0.300±0.003  f1=0.189±0.003
+    13  onmi=0.216±0.004  mod=0.285±0.004  f1=0.187±0.002
+    14  onmi=0.171±0.025  mod=0.273±0.001  f1=0.181±0.006
+    15  onmi=0.156±0.019  mod=0.268±0.010  f1=0.167±0.009
+    16  onmi=0.163±0.009  mod=0.281±0.006  f1=0.169±0.002
+    17  onmi=0.144±0.018  mod=0.262±0.005  f1=0.160±0.003
+    peak ONMI at k=6 (0.423); peak modularity at k=4 (0.426)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.219±0.000  mod=0.389±0.000  f1=0.599±0.000
+     3  onmi=0.351±0.002  mod=0.428±0.000  f1=0.640±0.001
+     4  onmi=0.373±0.001  mod=0.442±0.000  f1=0.651±0.001
+     5  onmi=0.422±0.001  mod=0.432±0.001  f1=0.700±0.002
+     6  onmi=0.601±0.005  mod=0.448±0.001  f1=0.836±0.005
+     7  onmi=0.666±0.001  mod=0.446±0.000  f1=0.881±0.001
+     8  onmi=0.745±0.001  mod=0.351±0.001  f1=0.789±0.000
+     9  onmi=0.617±0.000  mod=0.361±0.005  f1=0.607±0.001
+    10  onmi=0.836±0.018  mod=0.367±0.019  f1=0.845±0.004 <-k_true
+    11  onmi=0.822±0.002  mod=0.296±0.001  f1=0.849±0.001
+    12  onmi=0.830±0.036  mod=0.290±0.008  f1=0.901±0.044
+    13  onmi=0.807±0.032  mod=0.283±0.008  f1=0.908±0.021
+    14  onmi=0.704±0.059  mod=0.289±0.001  f1=0.759±0.042
+    15  onmi=0.698±0.022  mod=0.279±0.009  f1=0.773±0.006
+    16  onmi=0.764±0.017  mod=0.261±0.004  f1=0.888±0.006
+    17  onmi=0.755±0.008  mod=0.247±0.006  f1=0.879±0.005
+    peak ONMI at k=10 (0.836); peak modularity at k=6 (0.448)
+
+=== fakeddit_real_lcc  (k_true = 6) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.083±0.002  mod=0.377±0.000  f1=0.550±0.002
+     3  onmi=0.059±0.001  mod=0.489±0.018  f1=0.391±0.002
+     4  onmi=0.093±0.003  mod=0.521±0.018  f1=0.333±0.002
+     5  onmi=0.133±0.002  mod=0.578±0.012  f1=0.281±0.001
+     6  onmi=0.126±0.019  mod=0.546±0.005  f1=0.264±0.032 <-k_true
+     7  onmi=0.104±0.005  mod=0.546±0.051  f1=0.161±0.009
+     8  onmi=0.104±0.002  mod=0.558±0.037  f1=0.151±0.003
+     9  onmi=0.114±0.010  mod=0.559±0.077  f1=0.172±0.037
+    10  onmi=0.137±0.005  mod=0.531±0.054  f1=0.246±0.005
+    11  onmi=0.100±0.026  mod=0.408±0.079  f1=0.204±0.051
+    12  onmi=0.129±0.030  mod=0.390±0.082  f1=0.248±0.053
+    13  onmi=0.145±0.061  mod=0.475±0.039  f1=0.265±0.129
+    peak ONMI at k=13 (0.145); peak modularity at k=5 (0.578)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.087±0.000  mod=0.377±0.000  f1=0.556±0.000
+     3  onmi=0.063±0.000  mod=0.628±0.001  f1=0.390±0.000
+     4  onmi=0.107±0.001  mod=0.580±0.001  f1=0.336±0.001
+     5  onmi=0.141±0.001  mod=0.666±0.001  f1=0.311±0.002
+     6  onmi=0.195±0.000  mod=0.727±0.002  f1=0.351±0.000 <-k_true
+     7  onmi=0.176±0.002  mod=0.690±0.006  f1=0.354±0.004
+     8  onmi=0.259±0.002  mod=0.733±0.002  f1=0.490±0.002
+     9  onmi=0.235±0.001  mod=0.844±0.000  f1=0.398±0.001
+    10  onmi=0.256±0.000  mod=0.862±0.001  f1=0.504±0.001
+    11  onmi=0.311±0.001  mod=0.838±0.000  f1=0.578±0.002
+    12  onmi=0.311±0.000  mod=0.840±0.003  f1=0.597±0.000
+    13  onmi=0.329±0.000  mod=0.839±0.001  f1=0.603±0.000
+    peak ONMI at k=13 (0.329); peak modularity at k=10 (0.862)
+
+=== pheme  (k_true = 9) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.012±0.009  mod=0.337±0.227  f1=0.330±0.015
+     3  onmi=0.023±0.009  mod=0.662±0.003  f1=0.322±0.016
+     4  onmi=0.016±0.005  mod=0.732±0.005  f1=0.339±0.021
+     5  onmi=0.017±0.005  mod=0.781±0.004  f1=0.322±0.019
+     6  onmi=0.000±0.000  mod=0.824±0.003  f1=0.288±0.027
+     7  onmi=0.000±0.000  mod=0.847±0.004  f1=0.275±0.021
+     8  onmi=0.014±0.011  mod=0.861±0.009  f1=0.269±0.019
+     9  onmi=0.005±0.007  mod=0.859±0.005  f1=0.267±0.013 <-k_true
+    10  onmi=0.000±0.000  mod=0.875±0.016  f1=0.273±0.023
+    11  onmi=0.017±0.007  mod=0.793±0.069  f1=0.217±0.030
+    12  onmi=0.003±0.005  mod=0.742±0.089  f1=0.194±0.041
+    13  onmi=0.000±0.000  mod=0.890±0.016  f1=0.255±0.037
+    14  onmi=0.011±0.009  mod=0.877±0.015  f1=0.265±0.029
+    15  onmi=0.018±0.017  mod=0.782±0.059  f1=0.217±0.017
+    16  onmi=0.005±0.008  mod=0.856±0.011  f1=0.229±0.020
+    peak ONMI at k=3 (0.023); peak modularity at k=13 (0.890)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.051±0.047  mod=0.352±0.206  f1=0.333±0.018
+     3  onmi=0.027±0.014  mod=0.653±0.009  f1=0.330±0.021
+     4  onmi=0.020±0.011  mod=0.729±0.003  f1=0.343±0.026
+     5  onmi=0.017±0.007  mod=0.781±0.004  f1=0.324±0.025
+     6  onmi=0.003±0.005  mod=0.818±0.002  f1=0.298±0.030
+     7  onmi=0.007±0.005  mod=0.841±0.002  f1=0.270±0.016
+     8  onmi=0.013±0.010  mod=0.854±0.011  f1=0.271±0.021
+     9  onmi=0.004±0.006  mod=0.844±0.012  f1=0.289±0.014 <-k_true
+    10  onmi=0.004±0.006  mod=0.853±0.005  f1=0.269±0.034
+    11  onmi=0.016±0.013  mod=0.881±0.005  f1=0.270±0.016
+    12  onmi=0.005±0.007  mod=0.878±0.017  f1=0.226±0.014
+    13  onmi=0.005±0.007  mod=0.881±0.018  f1=0.273±0.038
+    14  onmi=0.017±0.012  mod=0.878±0.010  f1=0.275±0.005
+    15  onmi=0.009±0.007  mod=0.873±0.021  f1=0.271±0.023
+    16  onmi=0.000±0.000  mod=0.890±0.020  f1=0.241±0.024
+    peak ONMI at k=2 (0.051); peak modularity at k=16 (0.890)
+
+=== dblp  (k_true = 8) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.175±0.000  mod=0.496±0.000  f1=0.513±0.000
+     3  onmi=0.439±0.000  mod=0.614±0.000  f1=0.765±0.000
+     4  onmi=0.440±0.000  mod=0.736±0.000  f1=0.754±0.000
+     5  onmi=0.471±0.000  mod=0.787±0.000  f1=0.777±0.000
+     6  onmi=0.525±0.014  mod=0.808±0.005  f1=0.790±0.009
+     7  onmi=0.550±0.031  mod=0.823±0.004  f1=0.756±0.022
+     8  onmi=0.670±0.000  mod=0.848±0.000  f1=0.733±0.000 <-k_true
+     9  onmi=0.619±0.034  mod=0.856±0.003  f1=0.737±0.056
+    10  onmi=0.543±0.006  mod=0.863±0.003  f1=0.728±0.007
+    11  onmi=0.613±0.027  mod=0.867±0.008  f1=0.801±0.023
+    12  onmi=0.511±0.011  mod=0.882±0.003  f1=0.731±0.020
+    13  onmi=0.466±0.038  mod=0.885±0.001  f1=0.700±0.034
+    14  onmi=0.485±0.007  mod=0.893±0.004  f1=0.730±0.014
+    15  onmi=0.422±0.052  mod=0.895±0.001  f1=0.678±0.056
+    peak ONMI at k=8 (0.670); peak modularity at k=15 (0.895)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.175±0.000  mod=0.496±0.000  f1=0.513±0.000
+     3  onmi=0.439±0.000  mod=0.614±0.000  f1=0.765±0.000
+     4  onmi=0.440±0.000  mod=0.736±0.000  f1=0.754±0.000
+     5  onmi=0.471±0.000  mod=0.787±0.000  f1=0.777±0.000
+     6  onmi=0.545±0.000  mod=0.815±0.000  f1=0.802±0.000
+     7  onmi=0.610±0.000  mod=0.827±0.000  f1=0.729±0.000
+     8  onmi=0.670±0.000  mod=0.848±0.000  f1=0.733±0.000 <-k_true
+     9  onmi=0.662±0.000  mod=0.860±0.000  f1=0.814±0.000
+    10  onmi=0.646±0.000  mod=0.864±0.000  f1=0.813±0.000
+    11  onmi=0.650±0.000  mod=0.864±0.000  f1=0.832±0.000
+    12  onmi=0.602±0.000  mod=0.878±0.000  f1=0.804±0.000
+    13  onmi=0.517±0.000  mod=0.889±0.000  f1=0.755±0.000
+    14  onmi=0.501±0.018  mod=0.892±0.003  f1=0.752±0.027
+    15  onmi=0.485±0.008  mod=0.895±0.001  f1=0.744±0.018
+    peak ONMI at k=8 (0.670); peak modularity at k=15 (0.895)
+
+=== amazon  (k_true = 4) ===
+  [default]     k        ONMI       Mod        F1
+     2  onmi=0.839±0.000  mod=0.482±0.000  f1=1.000±0.000
+     3  onmi=0.682±0.000  mod=0.643±0.000  f1=0.890±0.000
+     4  onmi=0.554±0.000  mod=0.717±0.000  f1=0.797±0.000 <-k_true
+     5  onmi=0.357±0.000  mod=0.734±0.000  f1=0.690±0.000
+     6  onmi=0.404±0.000  mod=0.744±0.000  f1=0.712±0.000
+     7  onmi=0.370±0.012  mod=0.739±0.010  f1=0.673±0.017
+     8  onmi=0.351±0.000  mod=0.744±0.000  f1=0.657±0.000
+     9  onmi=0.320±0.010  mod=0.714±0.014  f1=0.595±0.012
+    10  onmi=0.302±0.006  mod=0.698±0.006  f1=0.556±0.010
+    11  onmi=0.288±0.008  mod=0.675±0.014  f1=0.550±0.003
+    peak ONMI at k=2 (0.839); peak modularity at k=6 (0.744)
+  [robust]     k        ONMI       Mod        F1
+     2  onmi=0.839±0.000  mod=0.482±0.000  f1=1.000±0.000
+     3  onmi=0.682±0.000  mod=0.643±0.000  f1=0.890±0.000
+     4  onmi=0.554±0.000  mod=0.717±0.000  f1=0.797±0.000 <-k_true
+     5  onmi=0.357±0.000  mod=0.734±0.000  f1=0.690±0.000
+     6  onmi=0.404±0.000  mod=0.744±0.000  f1=0.712±0.000
+     7  onmi=0.379±0.000  mod=0.746±0.000  f1=0.685±0.000
+     8  onmi=0.351±0.000  mod=0.744±0.000  f1=0.657±0.000
+     9  onmi=0.314±0.000  mod=0.733±0.000  f1=0.580±0.000
+    10  onmi=0.307±0.000  mod=0.702±0.000  f1=0.553±0.000
+    11  onmi=0.300±0.001  mod=0.689±0.003  f1=0.556±0.005
+    peak ONMI at k=2 (0.839); peak modularity at k=7 (0.746)
+
+Part B: label-free heuristic k, vs k_true, vs the cost (ONMI at k_hat vs ONMI at k_true)
+----------------------------------------------------------------------------------------------------
+crisismmd  (k_true=7)
+    fpc                      k_hat=  2  off_by=-5  onmi@k_hat=0.083  onmi@k_true=0.609  cost=+0.526
+    eigengap                 k_hat=  3  off_by=-4  onmi@k_hat=0.281  onmi@k_true=0.609  cost=+0.328
+    silhouette               k_hat=  5  off_by=-2  onmi@k_hat=0.608  onmi@k_true=0.609  cost=+0.001
+    modularity_scan[default] k_hat=  5  off_by=-2  onmi@k_hat=0.608  onmi@k_true=0.609  cost=+0.001
+    modularity_scan[robust]  k_hat=  4  off_by=-3  onmi@k_hat=0.508  onmi@k_true=0.707  cost=+0.200
+
+fakeddit  (k_true=10)
+    fpc                      k_hat=  2  off_by=-8  onmi@k_hat=0.207  onmi@k_true=0.308  cost=+0.101
+    eigengap                 k_hat=  2  off_by=-8  onmi@k_hat=0.207  onmi@k_true=0.308  cost=+0.101
+    silhouette               k_hat=  6  off_by=-4  onmi@k_hat=0.423  onmi@k_true=0.308  cost=-0.115
+    modularity_scan[default] k_hat=  4  off_by=-6  onmi@k_hat=0.322  onmi@k_true=0.308  cost=-0.013
+    modularity_scan[robust]  k_hat=  6  off_by=-4  onmi@k_hat=0.601  onmi@k_true=0.836  cost=+0.235
+
+fakeddit_real_lcc  (k_true=6)
+    fpc                      k_hat=  2  off_by=-4  onmi@k_hat=0.083  onmi@k_true=0.126  cost=+0.043
+    eigengap                 k_hat= 13  off_by=+7  onmi@k_hat=0.145  onmi@k_true=0.126  cost=-0.020
+    silhouette               k_hat= 13  off_by=+7  onmi@k_hat=0.145  onmi@k_true=0.126  cost=-0.020
+    modularity_scan[default] k_hat=  5  off_by=-1  onmi@k_hat=0.133  onmi@k_true=0.126  cost=-0.008
+    modularity_scan[robust]  k_hat= 10  off_by=+4  onmi@k_hat=0.256  onmi@k_true=0.195  cost=-0.061
+
+pheme  (k_true=9)
+    fpc                      k_hat=  2  off_by=-7  onmi@k_hat=0.012  onmi@k_true=0.005  cost=-0.007
+    eigengap                 k_hat= 16  off_by=+7  onmi@k_hat=0.005  onmi@k_true=0.005  cost=-0.000
+    silhouette               k_hat= 16  off_by=+7  onmi@k_hat=0.005  onmi@k_true=0.005  cost=-0.000
+    modularity_scan[default] k_hat= 13  off_by=+4  onmi@k_hat=0.000  onmi@k_true=0.005  cost=+0.005
+    modularity_scan[robust]  k_hat= 16  off_by=+7  onmi@k_hat=0.000  onmi@k_true=0.004  cost=+0.004
+
+dblp  (k_true=8)
+    fpc                      k_hat= 15  off_by=+7  onmi@k_hat=0.422  onmi@k_true=0.670  cost=+0.248
+    eigengap                 k_hat= 14  off_by=+6  onmi@k_hat=0.485  onmi@k_true=0.670  cost=+0.185
+    silhouette               k_hat= 15  off_by=+7  onmi@k_hat=0.422  onmi@k_true=0.670  cost=+0.248
+    modularity_scan[default] k_hat= 15  off_by=+7  onmi@k_hat=0.422  onmi@k_true=0.670  cost=+0.248
+    modularity_scan[robust]  k_hat= 15  off_by=+7  onmi@k_hat=0.485  onmi@k_true=0.670  cost=+0.185
+
+amazon  (k_true=4)
+    fpc                      k_hat=  2  off_by=-2  onmi@k_hat=0.839  onmi@k_true=0.554  cost=-0.286
+    eigengap                 k_hat=  9  off_by=+5  onmi@k_hat=0.320  onmi@k_true=0.554  cost=+0.234
+    silhouette               k_hat= 11  off_by=+7  onmi@k_hat=0.288  onmi@k_true=0.554  cost=+0.265
+    modularity_scan[default] k_hat=  6  off_by=+2  onmi@k_hat=0.404  onmi@k_true=0.554  cost=+0.149
+    modularity_scan[robust]  k_hat=  7  off_by=+3  onmi@k_hat=0.379  onmi@k_true=0.554  cost=+0.175
+
+Part C: does k-selection get harder as structure gets noisier? (crisismmd, NF-MCD default only)
+----------------------------------------------------------------------------------------------------
+  p_out/p_in=0.02:
+    modularity_scan    k_hat=  5  off_by=-2  onmi@k_hat=0.644  onmi@k_true=0.718  cost=+0.074
+    eigengap           k_hat=  5  off_by=-2  onmi@k_hat=0.644  onmi@k_true=0.718  cost=+0.074
+  p_out/p_in=0.25:
+    modularity_scan    k_hat=  4  off_by=-3  onmi@k_hat=0.000  onmi@k_true=0.079  cost=+0.079
+    eigengap           k_hat=  3  off_by=-4  onmi@k_hat=0.000  onmi@k_true=0.079  cost=+0.079
+  p_out/p_in=1.0:
+    modularity_scan    k_hat=  4  off_by=-3  onmi@k_hat=0.000  onmi@k_true=0.034  cost=+0.034
+    eigengap           k_hat=  3  off_by=-4  onmi@k_hat=0.000  onmi@k_true=0.034  cost=+0.034
+

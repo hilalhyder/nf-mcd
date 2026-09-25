@@ -1,0 +1,66 @@
+== LFK ONMI (k = ground-truth count, original graph; mean +- sd over seeds 0,1,2) ==
+variant                crisismmd           pheme        fakeddit            dblp          amazon
+default             0.609+-0.016    0.005+-0.007    0.308+-0.053    0.670+-0.000    0.554+-0.000
+cons_a60            0.711+-0.023    0.015+-0.003    0.715+-0.070    0.670+-0.000    0.554+-0.000
+cons_a50            0.715+-0.021    0.011+-0.011    0.735+-0.028    0.670+-0.000    0.554+-0.000
+blend_a60           0.683+-0.038    0.006+-0.008    0.541+-0.060    0.670+-0.000    0.554+-0.000
+agree_a50           0.701+-0.034    0.005+-0.007    0.602+-0.023    0.670+-0.000    0.554+-0.000
+default_rank16      0.736+-0.029    0.005+-0.007    0.734+-0.001    0.670+-0.000    0.554+-0.000
+all_changes         0.733+-0.022    0.015+-0.003    0.758+-0.025    0.670+-0.000    0.554+-0.000
+
+== Modularity (k = ground-truth count, original graph; mean +- sd over seeds 0,1,2) ==
+variant                crisismmd           pheme        fakeddit            dblp          amazon
+default             0.520+-0.006    0.859+-0.005    0.297+-0.014    0.848+-0.000    0.717+-0.000
+cons_a60            0.408+-0.021    0.538+-0.062    0.338+-0.013    0.848+-0.000    0.717+-0.000
+cons_a50            0.416+-0.026    0.693+-0.050    0.334+-0.024    0.848+-0.000    0.717+-0.000
+blend_a60           0.366+-0.027    0.772+-0.030    0.359+-0.032    0.848+-0.000    0.717+-0.000
+agree_a50           0.373+-0.023    0.859+-0.005    0.332+-0.007    0.848+-0.000    0.717+-0.000
+default_rank16      0.403+-0.037    0.859+-0.005    0.349+-0.002    0.848+-0.000    0.717+-0.000
+all_changes         0.401+-0.034    0.538+-0.062    0.322+-0.022    0.848+-0.000    0.717+-0.000
+
+== Membership F1 (k = ground-truth count, original graph; mean +- sd over seeds 0,1,2) ==
+variant                crisismmd           pheme        fakeddit            dblp          amazon
+default             0.667+-0.114    0.267+-0.013    0.253+-0.043    0.733+-0.000    0.797+-0.000
+cons_a60            0.659+-0.023    0.097+-0.017    0.629+-0.057    0.733+-0.000    0.797+-0.000
+cons_a50            0.657+-0.025    0.155+-0.030    0.683+-0.021    0.733+-0.000    0.797+-0.000
+blend_a60           0.605+-0.025    0.187+-0.007    0.455+-0.073    0.733+-0.000    0.797+-0.000
+agree_a50           0.613+-0.025    0.267+-0.013    0.471+-0.058    0.733+-0.000    0.797+-0.000
+default_rank16      0.667+-0.025    0.267+-0.013    0.689+-0.002    0.733+-0.000    0.797+-0.000
+all_changes         0.670+-0.038    0.097+-0.017    0.700+-0.048    0.733+-0.000    0.797+-0.000
+
+== Win / tie / loss vs default (ONMI; tie if |diff| < max(0.02, sd_variant + sd_default)) ==
+variant                crisismmd           pheme        fakeddit            dblp          amazon     W/T/L
+cons_a60              +0.101 WIN      +0.010 tie      +0.407 WIN      +0.000 tie      +0.000 tie     2/3/0
+cons_a50              +0.106 WIN      +0.006 tie      +0.427 WIN      +0.000 tie      +0.000 tie     2/3/0
+blend_a60             +0.074 WIN      +0.001 tie      +0.232 WIN      +0.000 tie      +0.000 tie     2/3/0
+agree_a50             +0.092 WIN      +0.000 tie      +0.294 WIN      +0.000 tie      +0.000 tie     2/3/0
+default_rank16        +0.127 WIN      +0.000 tie      +0.425 WIN      +0.000 tie      +0.000 tie     2/3/0
+all_changes           +0.124 WIN      +0.010 tie      +0.450 WIN      +0.000 tie      +0.000 tie     2/3/0
+
+== ROBUSTNESS CHECK (not a headline result): ~50% of edges degree-preservingly rewired ==
+ONMI mean+-sd, original graph -> rewired50 graph
+variant                            crisismmd                    fakeddit
+default                0.609 -> 0.274+-0.028       0.308 -> 0.198+-0.038
+cons_a60               0.711 -> 0.257+-0.019       0.715 -> 0.217+-0.047
+cons_a50               0.715 -> 0.299+-0.053       0.735 -> 0.288+-0.017
+blend_a60              0.683 -> 0.244+-0.013       0.541 -> 0.206+-0.060
+agree_a50              0.701 -> 0.267+-0.036       0.602 -> 0.217+-0.067
+default_rank16         0.736 -> 0.326+-0.030       0.734 -> 0.225+-0.043
+all_changes            0.733 -> 0.328+-0.073       0.758 -> 0.294+-0.031
+
+Win/tie/loss vs default on the rewired50 graphs:
+variant                    crisismmd            fakeddit
+cons_a60                  -0.017 tie          +0.018 tie
+cons_a50                  +0.025 tie          +0.089 WIN
+blend_a60                 -0.030 tie          +0.007 tie
+agree_a50                 -0.007 tie          +0.018 tie
+default_rank16            +0.052 tie          +0.027 tie
+all_changes               +0.054 tie          +0.095 WIN
+
+== Consistency confidence vs content-cluster correctness (Spearman) ==
+crisismmd agreement     n=  800 mean_conf=0.643 content-cluster accuracy=0.362 spearman(conf, correct)=+0.050
+crisismmd consistency   n=  800 mean_conf=0.499 content-cluster accuracy=0.362 spearman(conf, correct)=+0.388
+fakeddit  agreement     n= 1200 mean_conf=0.614 content-cluster accuracy=0.293 spearman(conf, correct)=-0.011
+fakeddit  consistency   n= 1200 mean_conf=0.476 content-cluster accuracy=0.293 spearman(conf, correct)=+0.356
+pheme     agreement     n= 2000 mean_conf=0.000 content-cluster accuracy=0.336 spearman(conf, correct)=+nan
+pheme     consistency   n= 2000 mean_conf=0.489 content-cluster accuracy=0.336 spearman(conf, correct)=+0.215

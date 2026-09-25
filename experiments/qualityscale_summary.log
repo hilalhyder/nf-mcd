@@ -1,0 +1,63 @@
+Clustering quality vs. graph size (synthetic, demo.py-realistic content injection)
+========================================================================================
+
+Part A: LFK ONMI / modularity / F1 vs n_nodes
+----------------------------------------------------------------------------------------
+method                   n_nodes      onmi  modularity        f1   avg_deg
+nfmcd_default                300    0.8669      0.4305    0.9542      17.7
+nfmcd_default               1000    0.8707      0.4373    0.9590      18.1
+nfmcd_default               3000    0.8632      0.4382    0.9550      18.0
+nfmcd_default              10000    0.8606      0.4381    0.9543      18.0
+nfmcd_default              20000    0.8601      0.4380    0.9542      18.0
+  -> nfmcd_default: ONMI at smallest=0.8669, at largest=0.8601, delta=-0.0068
+nfmcd_robust                 300    0.8717      0.4307    0.9551      17.7
+nfmcd_robust                1000    0.8840      0.4374    0.9624      18.1
+nfmcd_robust                3000    0.8716      0.4383    0.9572      18.0
+nfmcd_robust               10000    0.8666      0.4381    0.9560      18.0
+nfmcd_robust               20000    0.8667      0.4381    0.9560      18.0
+  -> nfmcd_robust: ONMI at smallest=0.8717, at largest=0.8667, delta=-0.0050
+louvain                      300    0.8584      0.4294    0.9509      17.7
+louvain                     1000    0.8693      0.4376    0.9575      18.1
+louvain                     3000    0.7013      0.4149    0.8791      18.0
+louvain                    10000    0.4405      0.3091    0.7408      18.0
+louvain                    20000    0.3844      0.2873    0.7084      18.0
+  -> louvain: ONMI at smallest=0.8584, at largest=0.3844, delta=-0.4741
+spectral_graph_content       300    0.7928      0.4079    0.9264      17.7
+spectral_graph_content      1000    0.8482      0.4267    0.9505      18.1
+spectral_graph_content      3000    0.8530      0.4327    0.9513      18.0
+spectral_graph_content     10000    0.8507      0.4317    0.9506      18.0
+spectral_graph_content     20000        --          --        --  memory_guard: dense n*n affinity alone would need 
+  -> spectral_graph_content: ONMI at smallest=0.7928, at largest=0.8507, delta=+0.0579
+
+Part B: LFK ONMI / modularity / F1 vs n_nodes
+----------------------------------------------------------------------------------------
+method                   n_nodes      onmi  modularity        f1   avg_deg
+nfmcd_default               1000    0.8395      0.4992    0.9608      18.0
+nfmcd_default               2000    0.8558      0.4367    0.9533      17.9
+nfmcd_default               4000    0.4705      0.2282    0.5034      18.1
+nfmcd_default               8000    0.0233      0.0581    0.0275      17.9
+nfmcd_default              12500    0.0168      0.0443    0.0272      17.9
+  -> nfmcd_default: ONMI at smallest=0.8395, at largest=0.0168, delta=-0.8227
+nfmcd_robust                1000    0.8710      0.4994    0.9672      18.0
+nfmcd_robust                2000    0.8715      0.4369    0.9575      17.9
+nfmcd_robust                4000    0.8649      0.3094    0.9476      18.1
+nfmcd_robust                8000    0.7161      0.1707    0.8140      17.9
+nfmcd_robust               12500    0.7391      0.1131    0.8475      17.9
+  -> nfmcd_robust: ONMI at smallest=0.8710, at largest=0.7391, delta=-0.1319
+louvain                     1000    0.8756      0.4990    0.9678      18.0
+louvain                     2000    0.8516      0.4342    0.9510      17.9
+louvain                     4000    0.0234      0.1294    0.2560      18.1
+louvain                     8000    0.0000      0.0661    0.0832      17.9
+louvain                    12500    0.0000      0.0623    0.0550      17.9
+  -> louvain: ONMI at smallest=0.8756, at largest=0.0000, delta=-0.8756
+spectral_graph_content      1000    0.8696      0.4977    0.9665      18.0
+spectral_graph_content      2000    0.8514      0.4295    0.9510      17.9
+spectral_graph_content      4000    0.8251      0.2973    0.9312      18.1
+spectral_graph_content      8000    0.7559      0.1583    0.8734      17.9
+spectral_graph_content     12500    0.7586      0.1071    0.8690      17.9
+  -> spectral_graph_content: ONMI at smallest=0.8696, at largest=0.7586, delta=-0.1111
+
+Part C: spectral_graph+content quality at its largest COMPLETED size (read off A/B, no new fits)
+----------------------------------------------------------------------------------------
+  Part A: completes up to n=10000 (ONMI=0.8507, vs ONMI=0.7928 at n=300); first failure at n=20000
+  Part B: completes up to n=12500 (ONMI=0.7586, vs ONMI=0.8696 at n=1000); no failure recorded

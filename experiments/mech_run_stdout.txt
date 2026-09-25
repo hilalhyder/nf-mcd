@@ -1,0 +1,24 @@
+﻿220 jobs pending (of 220); workers=4
+  10/220 jobs  errors=0  7s
+  20/220 jobs  errors=0  13s
+  30/220 jobs  errors=0  23s
+  40/220 jobs  errors=0  36s
+  50/220 jobs  errors=0  54s
+  60/220 jobs  errors=0  58s
+  70/220 jobs  errors=0  68s
+  80/220 jobs  errors=0  81s
+  90/220 jobs  errors=0  101s
+  100/220 jobs  errors=0  105s
+  110/220 jobs  errors=0  113s
+  120/220 jobs  errors=0  122s
+  130/220 jobs  errors=0  150s
+  140/220 jobs  errors=0  153s
+  150/220 jobs  errors=0  159s
+  160/220 jobs  errors=0  169s
+  170/220 jobs  errors=0  181s
+  180/220 jobs  errors=0  203s
+  190/220 jobs  errors=0  207s
+  200/220 jobs  errors=0  215s
+  210/220 jobs  errors=0  229s
+  220/220 jobs  errors=0  252s
+done: 0 error rows

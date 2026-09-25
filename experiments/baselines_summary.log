@@ -1,0 +1,92 @@
+Baselines and ablations (mean±sd over seeds 0,1,2)
+k = ground-truth community count for methods that take k; Louvain/DEMON/SLPA pick their own;
+nfmcd_scan_k picks k by modularity over {k-1,k,k+1}. Overlap threshold 0.2.
+
+Table 1: LFK overlapping NMI
+----------------------------
+method                         crisismmd           pheme        fakeddit            dblp          amazon
+nfmcd_full                   0.609±0.016     0.005±0.007     0.308±0.053     0.670±0.000     0.554±0.000
+nfmcd_scan_k                 0.581±0.034     0.004±0.006     0.355±0.039     0.619±0.034     0.357±0.000
+nfmcd_text_only              0.631±0.055     0.005±0.007     0.786±0.001             n/a             n/a
+nfmcd_image_only             0.661±0.010             n/a     0.789±0.024             n/a             n/a
+nfmcd_alpha_0.5              0.681±0.014     0.017±0.003     0.394±0.014             n/a             n/a
+nfmcd_structure_only         0.589±0.030     0.004±0.006     0.823±0.007     0.670±0.000     0.554±0.000
+nfmcd_linear_confidence      0.118±0.058             n/a     0.169±0.022             n/a             n/a
+kmeans_content               0.407±0.011     0.109±0.018     0.072±0.013             n/a             n/a
+fcm_content                  0.069±0.053     0.007±0.000     0.062±0.002             n/a             n/a
+louvain                      0.556±0.018     0.000±0.000     0.665±0.026     0.355±0.005     0.373±0.000
+spectral_graph+content       0.879±0.000     0.373±0.001     0.554±0.004     0.630±0.019     0.619±0.000
+fcm_structure_only           0.589±0.030     0.004±0.006     0.823±0.007     0.670±0.000     0.554±0.000
+demon                        0.141±0.008     0.000±0.000     0.271±0.004     0.159±0.002     0.370±0.006
+slpa                         0.189±0.024     0.000±0.000     0.151±0.019     0.094±0.020     0.329±0.018
+
+Table 2a: modularity of the hard partition
+------------------------------------------
+method                         crisismmd           pheme        fakeddit            dblp          amazon
+nfmcd_full                   0.520±0.006     0.859±0.005     0.297±0.014     0.848±0.000     0.717±0.000
+nfmcd_scan_k                 0.528±0.001     0.880±0.009     0.324±0.013     0.856±0.003     0.734±0.000
+nfmcd_text_only              0.459±0.040     0.859±0.005     0.353±0.017             n/a             n/a
+nfmcd_image_only             0.430±0.002             n/a     0.337±0.030             n/a             n/a
+nfmcd_alpha_0.5              0.414±0.032     0.489±0.005     0.299±0.010             n/a             n/a
+nfmcd_structure_only         0.491±0.018     0.879±0.003     0.395±0.031     0.848±0.000     0.717±0.000
+nfmcd_linear_confidence      0.100±0.028             n/a     0.288±0.008             n/a             n/a
+kmeans_content               0.207±0.009     0.283±0.011     0.128±0.008             n/a             n/a
+fcm_content                  0.048±0.013     0.006±0.003     0.160±0.025             n/a             n/a
+louvain                      0.536±0.001     0.984±0.000     0.450±0.001     0.920±0.000     0.757±0.000
+spectral_graph+content       0.517±0.000     0.375±0.002     0.365±0.002     0.826±0.002     0.714±0.000
+fcm_structure_only           0.491±0.018     0.879±0.003     0.395±0.031     0.848±0.000     0.717±0.000
+demon                        0.157±0.003    -0.001±0.000     0.234±0.001     0.710±0.007     0.579±0.008
+slpa                         0.425±0.036     0.931±0.002     0.190±0.002     0.838±0.009     0.707±0.022
+
+Table 2b: membership F1
+-----------------------
+method                         crisismmd           pheme        fakeddit            dblp          amazon
+nfmcd_full                   0.667±0.114     0.267±0.013     0.253±0.043     0.733±0.000     0.797±0.000
+nfmcd_scan_k                 0.637±0.092     0.268±0.016     0.219±0.035     0.737±0.056     0.690±0.000
+nfmcd_text_only              0.673±0.064     0.267±0.013     0.706±0.045             n/a             n/a
+nfmcd_image_only             0.623±0.001             n/a     0.704±0.091             n/a             n/a
+nfmcd_alpha_0.5              0.643±0.042     0.082±0.008     0.360±0.034             n/a             n/a
+nfmcd_structure_only         0.727±0.021     0.238±0.012     0.857±0.037     0.733±0.000     0.797±0.000
+nfmcd_linear_confidence      0.279±0.024             n/a     0.160±0.003             n/a             n/a
+kmeans_content               0.575±0.020     0.321±0.017     0.285±0.017             n/a             n/a
+fcm_content                  0.276±0.028     0.075±0.007     0.202±0.011             n/a             n/a
+louvain                      0.710±0.014     0.264±0.003     0.900±0.013     0.642±0.009     0.694±0.000
+spectral_graph+content       0.956±0.000     0.540±0.001     0.710±0.003     0.736±0.010     0.834±0.000
+fcm_structure_only           0.727±0.021     0.238±0.012     0.857±0.037     0.733±0.000     0.797±0.000
+demon                        0.243±0.008     0.000±0.000     0.461±0.014     0.476±0.002     0.616±0.011
+slpa                         0.532±0.048     0.228±0.008     0.271±0.045     0.429±0.021     0.644±0.019
+
+Communities found (mean count) by methods that choose their own k
+  louvain       crisismmd=6.3  pheme=162.3  fakeddit=6.3  dblp=27.3  amazon=8.0
+  demon         crisismmd=47.7  pheme=0.0  fakeddit=73.0  dblp=82.7  amazon=12.0
+  slpa          crisismmd=44.3  pheme=221.0  fakeddit=6.7  dblp=97.7  amazon=13.0
+  nfmcd_scan_k  crisismmd=6.3  pheme=9.3  fakeddit=10.0  dblp=9.0  amazon=5.0
+
+Full NF-MCD (nfmcd_full, defaults, k=truth) vs. every other method, by LFK ONMI
+tie if |diff| < max(0.02, sd_a + sd_b); W/T/L = NF-MCD wins/ties/loses
+  crisismmd  NF-MCD 0.609:  W=6 T=4 L=3
+      loses to: nfmcd_image_only, nfmcd_alpha_0.5, spectral_graph+content
+      ties:     nfmcd_scan_k, nfmcd_text_only, nfmcd_structure_only, fcm_structure_only
+      beats:    nfmcd_linear_confidence, kmeans_content, fcm_content, louvain, demon, slpa
+  pheme      NF-MCD 0.005:  W=0 T=9 L=2
+      loses to: kmeans_content, spectral_graph+content
+      ties:     nfmcd_scan_k, nfmcd_text_only, nfmcd_alpha_0.5, nfmcd_structure_only, fcm_content, louvain, fcm_structure_only, demon, slpa
+      beats:    -
+  fakeddit   NF-MCD 0.308:  W=4 T=2 L=7
+      loses to: nfmcd_text_only, nfmcd_image_only, nfmcd_alpha_0.5, nfmcd_structure_only, louvain, spectral_graph+content, fcm_structure_only
+      ties:     nfmcd_scan_k, demon
+      beats:    nfmcd_linear_confidence, kmeans_content, fcm_content, slpa
+  dblp       NF-MCD 0.670:  W=5 T=2 L=0
+      loses to: -
+      ties:     nfmcd_structure_only, fcm_structure_only
+      beats:    nfmcd_scan_k, louvain, spectral_graph+content, demon, slpa
+  amazon     NF-MCD 0.554:  W=4 T=2 L=1
+      loses to: spectral_graph+content
+      ties:     nfmcd_structure_only, fcm_structure_only
+      beats:    nfmcd_scan_k, louvain, demon, slpa
+  TOTAL W=19 T=19 L=13
+
+Best method per dataset
+  ONMI       crisismmd: spectral_graph+content (0.879); pheme: spectral_graph+content (0.373); fakeddit: nfmcd_structure_only (0.823); dblp: nfmcd_structure_only (0.670); amazon: spectral_graph+content (0.619)
+  modularity crisismmd: louvain (0.536); pheme: louvain (0.984); fakeddit: louvain (0.450); dblp: louvain (0.920); amazon: louvain (0.757)
+  F1         crisismmd: spectral_graph+content (0.956); pheme: spectral_graph+content (0.540); fakeddit: louvain (0.900); dblp: nfmcd_scan_k (0.737); amazon: spectral_graph+content (0.834)
