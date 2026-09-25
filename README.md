@@ -1,6 +1,6 @@
 # NF-MCD: Neuro-Fuzzy Multimodal Community Detection
 
-[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](https://zenodo.org/account/settings/github/repository/hilalhyder/nf-mcd)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22959565.svg)](https://doi.org/10.5281/zenodo.22959565)
 
 Reference implementation accompanying the draft paper *"Neuro-Fuzzy
 Multimodal Community Detection: Fusing Visual-Textual Semantics with
@@ -150,4 +150,4 @@ All are resumable and crash-safe (results appended to CSV, fsynced per job).
 
 If you use this code, please cite the accompanying manuscript (full
 reference list, including this software, is in the manuscript itself) and
-this repository's DOI once minted (see the badge above).
+this repository's archived release, DOI: 10.5281/zenodo.22959565.
