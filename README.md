@@ -1,60 +1,83 @@
 # NF-MCD: Neuro-Fuzzy Multimodal Community Detection
 
+[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey)](https://zenodo.org/account/settings/github/repository/hilalhyder/nf-mcd)
+
 Reference implementation accompanying the draft paper *"Neuro-Fuzzy
 Multimodal Community Detection: Fusing Visual-Textual Semantics with
 Network Topology for Explainable Social Network Analysis."*
 
-## What this is (and isn't)
+## What this is
 
-This is a **working, tested prototype** of the four-stage NF-MCD architecture
-described in Section 4 of the paper, runnable end-to-end on synthetic data.
-It is **not** yet plugged into real datasets or real pretrained encoders —
-see "Next steps" below for exactly what's left to do before this produces
-publishable results.
+A working, five-stage NF-MCD pipeline, evaluated end-to-end on five real
+social-network datasets (CrisisMMD, PHEME, Fakeddit, SNAP DBLP, SNAP Amazon),
+a real relational (non-label-sampled) Fakeddit graph, and a controllable
+synthetic generator, backed by close to two dozen targeted stress tests
+(missing modalities, structural noise, cross-modal mismatch, scale up to
+20,000 nodes, statistical significance re-analysis, and more). Every number
+reported in the accompanying manuscript is traceable to a run recorded under
+`experiments/` in this repository.
+
+The `data/` directory (raw downloaded datasets) and `experiments/cache/`
+(regeneratable fitted-model pickles) are not tracked in git — see "Quick
+start" below to reproduce them.
 
 ## Package layout
 
-Each module corresponds directly to a subsection of Section 4, so you can
-cite specific files/functions in your Methods section:
+Each module corresponds directly to a subsection of the paper's Section 4,
+so you can cite specific files/functions in your Methods section:
 
 | Module | Paper section | What it does |
 |---|---|---|
-| `nf_mcd/encoders.py` | 4.1 | Text + image (CLIP) encoders, with a deterministic fallback when pretrained models aren't available |
-| `nf_mcd/fuzzy_fusion.py` | 4.2 | ANFIS-style neuro-fuzzy layer: cross-modal agreement score, fuzzy confidence, fused content embedding |
-| `nf_mcd/topology.py` | 4.3 | Spectral structural embedding + fuzzy content/structure integration (per-node alpha) |
-| `nf_mcd/community_detection.py` | 4.4 | Fuzzy c-means soft/overlapping community detection |
-| `nf_mcd/explain.py` | 4.5 / 5.4 | Per-node explanations + global IF-THEN fuzzy rule extraction, rule fidelity |
-| `nf_mcd/metrics.py` | 5.3 | Modularity, overlapping NMI (approximate), membership F1 |
-| `nf_mcd/datasets.py` | 5.1 | Synthetic multimodal graph generator + stubs for MMCas/CrisisMMD/Fakeddit/PHEME loaders |
-| `nf_mcd/pipeline.py` | 4 (all) | `NFMCD` class: the scikit-learn-style `fit`/`predict` interface tying everything together |
+| `nf_mcd/encoders.py` | 4.1 | Text (sentence-transformers) + image (CLIP) encoders, with a deterministic fallback when pretrained models aren't reachable |
+| `nf_mcd/fuzzy_fusion.py` | 4.2 | PCA-whitened CCA cross-modal alignment, three-term ANFIS fuzzy confidence, fused content embedding |
+| `nf_mcd/topology.py` | 4.3 | Spectral structural embedding + fuzzy content/structure integration (per-node trust weight alpha) |
+| `nf_mcd/community_detection.py` | 4.4 | Fuzzy c-means soft/overlapping community detection, from scratch |
+| `nf_mcd/explain.py` | 4.5 / 5.4 | Per-node explanations, global IF-THEN fuzzy rules, and the neighborhood-based explanation alternative developed in the paper |
+| `nf_mcd/metrics.py` | 5.3 | Modularity, LFK overlapping NMI (via `cdlib`), membership F1 |
+| `nf_mcd/datasets.py` | 5.1 | Synthetic multimodal graph generator + real dataset loaders (CrisisMMD, PHEME, Fakeddit; SNAP DBLP/Amazon) |
+| `nf_mcd/baselines.py` | 5.2 | Every baseline and NF-MCD ablation used in the evaluation, behind one registry |
+| `nf_mcd/clusterers.py` | — | Alternative clustering back-ends (`fcm_adaptive_m`, `gmm`, `kmeans_softmax`, `spectral_soft`) used by `NFMCD.robust()` and other configurations |
+| `nf_mcd/pipeline.py` | 4 (all) | `NFMCD` class: the scikit-learn-style `fit`/`predict` interface tying everything together, plus the `NFMCD.robust()` preset |
+
+`run_*.py` at the repo root are the individual evaluation experiments (baselines,
+missing-modality robustness, structural-noise sweep, CCA rank-cap sweep, scale,
+significance testing, overlap-threshold sensitivity, explainability, and more);
+each writes its results, a progress log, and a summary log under `experiments/`.
 
 ## Quick start
 
 ```bash
-pip install -r requirements.txt
-python demo.py
+py -m pip install -r requirements.txt
+py demo.py
 ```
 
-`demo.py` generates a synthetic 120-node graph with 4 (mildly overlapping)
-communities, injects missing modalities and cross-modal misalignment,
-fits NF-MCD, evaluates it against the known ground truth, prints a couple
-of per-node explanations and the extracted global fuzzy rules, and saves a
-plot of the graph colored by predicted community to `demo_output.png`.
+`demo.py` runs the pipeline on synthetic data (no model downloads needed) —
+a fast, dependency-light sanity check of the fusion → topology → clustering
+→ explanation flow. For real experiments with real CLIP/sentence-transformer
+encoders and real datasets:
+
+```bash
+py run_real_experiments.py            # all five datasets
+py run_real_experiments.py crisismmd  # just one
+```
+
+Raw downloaded data lands in `data/`; per-dataset logs and community plots in
+`experiments/`. Without `sentence-transformers`/`transformers`/`torch`
+installed *and* network access to download pretrained weights,
+`nf_mcd.encoders` silently falls back to deterministic pseudo-random
+embeddings (logged via `UserWarning`) — fine for pipeline development, not
+valid for real results.
 
 ## Minimal usage example
 
 ```python
 from nf_mcd import NFMCD
-from nf_mcd.datasets import generate_synthetic_multimodal_graph, node_sets_to_community_view
+from nf_mcd.datasets import generate_synthetic_multimodal_graph
 
 data = generate_synthetic_multimodal_graph(n_nodes=120, n_communities=4, seed=0)
 
 model = NFMCD(n_communities=4, seed=0)
-model.fit(
-    data.G,
-    text_embeddings=data.text_embeddings,
-    image_embeddings=data.image_embeddings,
-)
+model.fit(data.G, text_embeddings=data.text_embeddings, image_embeddings=data.image_embeddings)
 
 hard_labels = model.predict_hard()
 print(model.explain_node(node_id=0).text)
@@ -71,81 +94,60 @@ To use real text/images instead of precomputed embeddings:
 model.fit(G, texts=list_of_captions, images=list_of_PIL_images)
 ```
 
-This routes through `nf_mcd.encoders.MultimodalEncoder`, which uses
-`sentence-transformers` + CLIP if installed and reachable, or otherwise
-falls back to deterministic pseudo-embeddings (clearly logged via a
-`UserWarning` — do not use the fallback for real experiments).
+For the more robust preset (adaptive fuzziness, unsupervised content
+features, a tighter CCA rank cap — see the manuscript, Section 3):
 
-## Validation performed while building this
+```python
+model = NFMCD.robust(n_communities=4, seed=0)
+```
 
-Three non-obvious bugs surfaced during development and were fixed and
-empirically verified before this code was delivered — worth knowing about
-since they'll matter again if you change the defaults substantially:
+## Key calibration choices (validated, not defaults you should casually change)
 
-1. **Cross-modal projection.** An early version projected text/image
-   embeddings into a shared space with independent fixed random matrices.
-   This is mathematically incapable of recovering cross-modal alignment —
-   verified directly: even a perfectly shared underlying signal produced
-   ~0 cosine similarity after two unrelated random projections. Fixed by
-   fitting a PCA-whitened CCA on the paired (both-modalities-present)
-   nodes instead (`nf_mcd/fuzzy_fusion.py`), which correctly separates
-   aligned from misaligned pairs (validated: ~0.7–0.9 vs ~0.5–0.6 cosine
-   agreement on synthetic data with known ground truth).
-2. **Structural embedding dimensionality.** Requesting far more spectral
-   eigenvectors than the true number of communities (e.g. 32 for a
-   4-community graph) dilutes the real signal across mostly-noise
-   dimensions once row-normalized — standalone k-means accuracy dropped
-   from 92% (at dim≈4–8) to 40% (chance level, at dim=32) on identical
-   data. Fixed by defaulting `structural_dim` to `n_communities`
-   (`nf_mcd/pipeline.py`, `nf_mcd/topology.py`).
-3. **FCM fuzziness exponent.** The generic-FCM textbook default `m=2.0`
-   produced mathematically-valid but practically useless memberships
-   pinned at ~1/k for every node (correct *ranking*, zero usable
-   confidence signal) on this pipeline's unit-norm-ish feature scale.
-   `m=1.5` was found to preserve both a correct hard partition and
-   genuinely graded soft memberships (`nf_mcd/community_detection.py`).
+Three defaults deliberately depart from textbook choices, each backed by an
+ablation reported in the manuscript:
 
-With all three fixes, `demo.py` recovers the synthetic ground truth at
-modularity ≈0.47, overlapping NMI ≈0.69, and membership F1 ≈0.91 — treat
-these as a sanity-check baseline, not a claim about real-dataset
-performance, which still needs to be established per "Next steps" below.
+1. **Cross-modal fusion uses PCA-whitened CCA fit on paired nodes**, not a
+   fixed random projection (`fuzzy_fusion.py`) — a random projection cannot
+   recover cross-modal alignment that was never linearly present.
+2. **`structural_dim` defaults to `n_communities`**, not a larger "safe"
+   eigenspace (`topology.py`) — requesting far more spectral eigenvectors
+   than the true community count dilutes signal once row-normalized.
+3. **Fuzzy c-means uses `m=1.5`**, not the textbook `m=2.0`
+   (`community_detection.py`) — at `m=2.0`, memberships on this pipeline's
+   feature scale collapse to ~1/k for every node.
 
-## Next steps to get from this prototype to paper results
+The ANFIS confidence layer's own parameters (three Gaussian membership
+functions, centers 0.35/0.65/0.88) are likewise fixed by hand rather than
+learned by gradient descent — see `fuzzy_fusion.py`'s `ANFISAgreement` and
+the manuscript's Section 3 for why, and what happens if you swap it for a
+simpler linear mapping instead (Section 6.4).
 
-1. **Real encoders.** Install `sentence-transformers`, `transformers`, and
-   `torch` (already in `requirements.txt`), and make sure the machine you
-   run this on has internet access to download pretrained weights
-   (`all-MiniLM-L6-v2`, `openai/clip-vit-base-patch32` by default —
-   configurable via `TextEncoder(model_name=...)` / `ImageEncoder(model_name=...)`).
-2. **Real datasets.** Fill in the loader stubs in `nf_mcd/datasets.py`
-   (`load_mmcas_twitter`, `load_crisismmd`, `load_fakeddit`, `load_pheme`)
-   once you've downloaded each dataset — see the docstrings for access
-   notes and expected return shapes.
-3. **Baselines.** Section 5.2's ablation grid needs: (i) a text-only fuzzy
-   community detector (set `image_embeddings=None` for every node — NF-MCD
-   already degrades gracefully to this case), (ii) a non-fuzzy multimodal
-   baseline (e.g. CLIP embeddings + Louvain/spectral clustering — not
-   included here, since it's a different method, not a variant of NF-MCD),
-   and (iii) FCGL or another fuzzy topology-only baseline.
-4. **Hyperparameter tuning.** `alpha_min`/`alpha_max`, the ANFIS
-   centers/widths, `common_dim`, `structural_dim`, and the FCM fuzziness
-   `m` are all currently fixed/defaulted; tune these (or make the ANFIS
-   parameters trainable via gradient descent against a validation
-   objective) once real data is available.
-5. **k selection.** `NFMCD(n_communities=k)` currently requires k up
-   front. Use `nf_mcd.community_detection.select_k_by_fpc` as a quick
-   unsupervised starting point, or a modularity scan, before committing to
-   a final k for each dataset.
-6. **Overlapping-NMI validation.** `nf_mcd.metrics.overlapping_nmi` is a
-   documented approximation — cross-check final reported numbers against
-   a reference ONMI implementation before submission.
+If you change `common_dim`, `structural_dim`, or the feature scale
+substantially, re-check `m`: inspect `U.max(axis=1)` after fitting — pinned
+near `1/k` for nearly every node means `m` is too high for the current
+feature scale.
 
-## A note on the demo's synthetic data
+## Reproducing the manuscript's results
 
-`generate_synthetic_multimodal_graph` synthesizes embeddings directly
-(rather than routing realistic-looking text/images through the actual
-encoders), so the demo can meaningfully exercise the fusion → topology →
-clustering → explanation pipeline without needing pretrained model
-downloads. This is a testing/demonstration convenience only — real
-experiments should use `nf_mcd.encoders` on genuine text/image content, or
-precomputed embeddings from a real dataset.
+Every table and figure in the manuscript traces to a specific script and a
+specific file under `experiments/`; the most load-bearing ones:
+
+| Result | Script | Output |
+|---|---|---|
+| Table 2 (overall accuracy) | `run_baselines.py` | `experiments/baselines_summary.log` |
+| Robust-preset numbers | `run_robust_refresh.py` | `experiments/robust_refresh_summary.log` |
+| CCA rank-cap sweep | `run_rank.py` | `experiments/rank_summary.log` |
+| Missing-modality robustness | `run_missing.py` | `experiments/missing_summary.log` |
+| Structural-noise / collapse | `run_collapse_p08_diagnosis.py` | `experiments/collapsep08_summary.log` |
+| Scale (up to 20,000 nodes) | `run_scale.py` | `experiments/scale_summary.log` |
+| Statistical validation (n=20 seeds) | `run_sigtest.py` | `experiments/sigtest_summary.log` |
+| Overlap-threshold sensitivity | `run_threshold_sweep.py` | `experiments/threshold_sweep_summary.log` |
+| Explainability (alpha-based and neighborhood-based) | `run_explain.py`, `run_nbr_explain.py` | `experiments/explain_summary.log`, `experiments/nbr_explain_summary.log` |
+
+All are resumable and crash-safe (results appended to CSV, fsynced per job).
+
+## Citation
+
+If you use this code, please cite the accompanying manuscript (full
+reference list, including this software, is in the manuscript itself) and
+this repository's DOI once minted (see the badge above).
