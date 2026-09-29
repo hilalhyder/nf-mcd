@@ -1,0 +1,18 @@
+GNN baseline: untrained 2-layer GCN embedding (Kipf-Welling propagation, random frozen
+weights, ReLU) + FuzzyCMeans(m=1.5) clustering. k = ground-truth community count.
+Mean±sd over seeds 0,1,2. Scored identically to experiments/baselines_summary.log:
+modularity (hard partition), LFK overlapping NMI (cdlib, threshold 0.2), membership F1.
+
+dataset                 onmi      modularity              f1    n_pred(mean)
+crisismmd        0.672±0.032     0.444±0.030     0.687±0.040             7.0
+pheme            0.024±0.009     0.416±0.032     0.127±0.022             9.0
+fakeddit         0.504±0.085     0.380±0.025     0.609±0.035            10.0
+dblp             0.539±0.051     0.839±0.004     0.679±0.064             8.0
+amazon           0.480±0.045     0.703±0.020     0.733±0.014             4.0
+
+Node feature source per dataset:
+  crisismmd   content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  pheme       content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  fakeddit    content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  dblp        spectral_structural_embedding(dim=8) -- dataset ships no per-node content
+  amazon      spectral_structural_embedding(dim=4) -- dataset ships no per-node content

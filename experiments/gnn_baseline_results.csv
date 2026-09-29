@@ -1,0 +1,31 @@
+method,dataset,seed,k_used,n_pred,modularity,onmi,f1,feature_source,note,error,secs
+gcn_embed_fcm,crisismmd,0,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.13
+gcn_embed_fcm,crisismmd,1,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.02
+gcn_embed_fcm,crisismmd,2,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,pheme,0,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,pheme,1,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,pheme,2,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,fakeddit,0,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,fakeddit,1,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,fakeddit,2,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,dblp,0,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,dblp,1,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,dblp,2,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,amazon,0,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,amazon,1,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,amazon,2,,,nan,nan,nan,,,ModuleNotFoundError: No module named 'sklearn',0.0
+gcn_embed_fcm,crisismmd,0,7,7,0.48451359598090915,0.7097752180421198,0.7377740581072161,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,11.7
+gcn_embed_fcm,crisismmd,1,7,7,0.43403897889246823,0.6740749854463866,0.6839984707642012,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.07
+gcn_embed_fcm,crisismmd,2,7,7,0.41406322005298146,0.6316057059215994,0.6396958160324714,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.09
+gcn_embed_fcm,pheme,0,9,9,0.43259986410097,0.03624653982644621,0.14857197746853726,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.22
+gcn_embed_fcm,pheme,1,9,9,0.4444669828202501,0.017737244540950048,0.1353225832022368,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.18
+gcn_embed_fcm,pheme,2,9,9,0.3722652385564962,0.0167667552917814,0.0973652265324138,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.17
+gcn_embed_fcm,fakeddit,0,10,10,0.3500227592346519,0.6112841178720996,0.6590607692547368,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.17
+gcn_embed_fcm,fakeddit,1,10,10,0.37963064010595104,0.49758757360375305,0.5856668163738565,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.14
+gcn_embed_fcm,fakeddit,2,10,10,0.4106180039513215,0.40220065197806365,0.5823197285194955,"content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)","untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.23
+gcn_embed_fcm,dblp,0,8,8,0.8410138815039978,0.6077940997408927,0.7678088613299779,spectral_structural_embedding(dim=8) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.1
+gcn_embed_fcm,dblp,1,8,8,0.8425637283426631,0.5228492729574736,0.647214306835582,spectral_structural_embedding(dim=8) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.09
+gcn_embed_fcm,dblp,2,8,8,0.8337068258352508,0.48583456924617385,0.6219688420078407,spectral_structural_embedding(dim=8) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.11
+gcn_embed_fcm,amazon,0,4,4,0.6743261012491781,0.4347378618620783,0.7166365418953411,spectral_structural_embedding(dim=4) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.01
+gcn_embed_fcm,amazon,1,4,4,0.7160913872452335,0.5409630700253814,0.750323835466748,spectral_structural_embedding(dim=4) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.01
+gcn_embed_fcm,amazon,2,4,4,0.7180900723208414,0.46550959662632574,0.7328597308488614,spectral_structural_embedding(dim=4) -- dataset ships no per-node content,"untrained 2-layer GCN (hidden=64,out=32) + FuzzyCMeans(m=1.5)",,0.01

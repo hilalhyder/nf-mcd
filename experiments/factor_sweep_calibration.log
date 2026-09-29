@@ -1,0 +1,10 @@
+Factor-sweep regime calibration (agreement=0.9, missingness=0.0, 5 seeds)
+==============================================================================
+
+strong_struct_weak_content  (cfg={'p_in': 0.22, 'p_out': 0.02, 'text_scale': 0.35, 'image_scale': 0.35, 'noise_scale': 1.0})
+  structure_only   ONMI=0.986+-0.008  modularity=0.530+-0.006
+  content_only     ONMI=0.000+-0.000  modularity=0.383+-0.053
+
+weak_struct_strong_content  (cfg={'p_in': 0.055, 'p_out': 0.045, 'text_scale': 4.0, 'image_scale': 4.0, 'noise_scale': 1.0})
+  structure_only   ONMI=0.003+-0.004  modularity=0.205+-0.006
+  content_only     ONMI=0.829+-0.016  modularity=0.032+-0.006

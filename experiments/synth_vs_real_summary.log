@@ -1,0 +1,56 @@
+Synthetic-vs-real structural comparison (reviewer-requested calibration of the
+20,000-node scale claim). 5 real datasets (cached objects run_baselines.py scores)
++ 2 synthetic configurations: 'synthetic_typical' (generator defaults, matches
+demo.py/README) and 'synthetic_stress20k' (literal run_scale.py Part A 20k-node config).
+
+1) Degree distribution
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+n_nodes                        800          2000          1200          1072           146           120         20000
+n_edges                       4889          1841         12529          2766           390           416        179460
+mean                        12.223         1.841        20.882         5.160         5.342         6.933        17.946
+median                      12.000         1.000        17.000         4.000         5.000         7.000        18.000
+max                             26            28            58            38            15            14            37
+p99                         23.000        15.000        47.000        22.000        12.000        12.810        28.000
+max/p99                      1.130         1.867         1.234         1.727         1.250         1.093         1.321
+
+2) Clustering coefficient (nx.average_clustering)
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+avg_clustering               0.037         0.000         0.049         0.687         0.386         0.115         0.002
+
+3) Community-size distribution (ground truth)
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+n_communities                    7             9            10             8             4             4             8
+mean                         114.3         222.2         120.0         135.4          53.5          32.5        2500.0
+median                          87           221           100           140            48            32          2500
+min                             25            21            35            34            22            31          2500
+max                            211           462           401           229            96            34          2500
+
+4) Modularity of ground-truth partition (primary/first community per node)
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+modularity_gt                0.534         0.830         0.450         0.821         0.712         0.418         0.434
+
+5) Overlap distribution (fraction of nodes in >1 ground-truth community)
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+overlap_frac                 0.000         0.000         0.000         0.010         0.466         0.083         0.000
+
+6) Content-similarity distribution (cosine sim, sampled <=1500 nodes; 'n/a' = no content)
+------------------------------------------------------------------------------------------------------------------------------
+dataset                  crisismmd         pheme      fakeddit          dblp        amazonsynthetic_typicalsynthetic_stress20k
+n_sampled                      800          1500          1200             0             0           120          1500
+within-comm mean            0.3907        0.2770        0.2866           nan           nan        0.5957        0.8999
+between-comm mean           0.3222        0.2188        0.2313           nan           nan        0.0474       -0.0015
+within-between delta        0.0685        0.0583        0.0554           nan           nan        0.5482        0.9014
+
+Notes per row:
+  crisismmd: real dataset (cached, same object run_baselines.py scores)
+  pheme: real dataset (cached, same object run_baselines.py scores)
+  fakeddit: real dataset (cached, same object run_baselines.py scores)
+  dblp: real dataset (cached, same object run_baselines.py scores); content: no per-node content in this dataset
+  amazon: real dataset (cached, same object run_baselines.py scores); content: no per-node content in this dataset
+  synthetic_typical: synthetic generator's OWN defaults (n_nodes=120, n_communities=4, p_in=0.18, p_out=0.02, missing_modality_rate=0.15, misalignment_rate=0.15, overlap_rate=0.10) -- the configuration demo.py/README.md/validate_onmi.py all use
+  synthetic_stress20k: LITERAL run_scale.py Part A config for its 20,000-node headline result: n_communities=8, p_in=0.00405, p_out=0.00045 (target avg degree ~18), missing/misalignment/overlap all forced to 0
