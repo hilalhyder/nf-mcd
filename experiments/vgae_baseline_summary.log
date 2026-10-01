@@ -1,0 +1,20 @@
+VGAE baseline: TRAINED 2-layer GCN encoder (Kipf & Welling 2016), inner-product
+decoder, Adam optimizer, 200 epochs, weighted BCE + KL loss (standard VGAE objective).
+mu at inference, L2-row-normalized, + FuzzyCMeans(m=1.5) clustering. k = ground-truth count.
+Mean±sd over seeds 0,1,2. Scored identically to experiments/baselines_summary.log and
+experiments/gnn_baseline_summary.log (the untrained-GCN baseline): modularity (hard partition),
+LFK overlapping NMI (cdlib, threshold 0.2), membership F1.
+
+dataset                 onmi      modularity              f1    n_pred(mean)
+crisismmd        0.534±0.073     0.497±0.035     0.691±0.080             7.0
+pheme            0.253±0.007     0.671±0.041     0.391±0.023             9.0
+fakeddit         0.175±0.001     0.299±0.027     0.415±0.013            10.0
+dblp             0.536±0.030     0.841±0.009     0.688±0.039             8.0
+amazon           0.512±0.002     0.716±0.000     0.745±0.003             4.0
+
+Node feature source per dataset (identical to the untrained-GCN baseline):
+  crisismmd   content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  pheme       content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  fakeddit    content_matrix (raw concatenated L2-normalized text+image, zero-block if a modality is missing)
+  dblp        spectral_structural_embedding(dim=8) -- dataset ships no per-node content
+  amazon      spectral_structural_embedding(dim=4) -- dataset ships no per-node content
