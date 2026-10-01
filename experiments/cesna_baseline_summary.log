@@ -1,0 +1,18 @@
+CESNA baseline (Yang, McAuley & Leskovec 2013): BigCLAM edge model + logistic
+attribute model, joint gradient ascent, 300 iterations. k = ground-truth community count.
+Mean±sd over seeds 0,1,2. Scored identically to every other Table 2 baseline:
+modularity (argmax-F hard partition), LFK overlapping NMI (cdlib), membership F1.
+
+dataset                 onmi      modularity              f1    n_pred(mean)
+crisismmd        0.254±0.007     0.446±0.001     0.469±0.008             7.0
+pheme            0.000±0.000     0.783±0.003     0.178±0.007             9.0
+fakeddit         0.260±0.023     0.353±0.006     0.358±0.021            10.0
+dblp             0.022±0.010     0.749±0.010     0.332±0.005             8.0
+amazon           0.325±0.094     0.673±0.031     0.666±0.044             4.0
+
+Node attribute source per dataset:
+  crisismmd   content_matrix (raw concatenated text+image), PCA-reduced to 32 dims, median-binarized per dimension
+  pheme       content_matrix (raw concatenated text+image), PCA-reduced to 32 dims, median-binarized per dimension
+  fakeddit    content_matrix (raw concatenated text+image), PCA-reduced to 32 dims, median-binarized per dimension
+  dblp        spectral_structural_embedding(dim=8) -- dataset ships no per-node content, PCA-reduced to 8 dims, median-binarized per dimension
+  amazon      spectral_structural_embedding(dim=4) -- dataset ships no per-node content, PCA-reduced to 4 dims, median-binarized per dimension
